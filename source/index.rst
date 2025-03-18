@@ -49,6 +49,7 @@
     示例教程  <https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/example/hal/index.html>
     SDK文档  <https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/>
     API文档  <https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/api/index.html>
+    faq/index
 
 .. toctree::
     :caption: 硬件开发
