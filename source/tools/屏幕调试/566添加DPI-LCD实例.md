@@ -174,6 +174,48 @@ void BSP_LCD_PowerUp(void)
 可以看到上电`BSP_LCD_PowerUp`在屏驱动初始化`LCD_drv.LCD_Init`之前<br>
 所以需要在初始化LCD前，确保BSP_LCD_PowerUp中已经打开LCD供电<br>
 ![alt text](./assets/em-lb566-io-power.png)<br>
+#### 5.1.3 背光PWM配置
+pwm软件中有一个默认配置，配置在文件`customer\boards\sf32lb5x-lcd\Kconfig.board`中，此`Kconfig.board`的配置会编译后在`rtconfig.h`中生成下面3个宏<br>
+```c
+//PWM4需要打开GPTIM3，PWM和TIMER对应关系，可以查看FAQ的PWM部分或者文件`pwm_config.h`<br>
+#define LCD_PWM_BACKLIGHT_INTERFACE_NAME "pwm3" 
+#define LCD_PWM_BACKLIGHT_CHANEL_NUM 4 //Channel 4
+#define LCD_BACKLIGHT_CONTROL_PIN 119 //PB23: 96+23 
+```
+用PWM4需要打开GPTIM3，Lcpu中也需要打开（否则Lcpu可能会关掉GPTIM3），还需确认`rtconfig.h`下面宏是否生效<br>
+```c
+#define BSP_USING_GPTIM3 1 //如果用PWM3，需要menuconfig --board=em-lb566打开
+#define RT_USING_PWM 1
+#define BSP_USING_PWM 1
+#define BSP_USING_PWM4 1 //如果没有，需要menuconfig --board=em-lb566打开
+```
+如下文件`pwm_config.h`中`pwm4`和`GPTIM3`（位于Lcpu）的对应关系<br>
+```c
+#ifdef BSP_USING_PWM4
+#define PWM4_CONFIG                             \
+    {                                           \
+       .tim_handle.Instance     = GPTIM3,         \
+       .tim_handle.core         = PWM4_CORE,    \
+       .name                    = "pwm4",       \
+       .channel                 = 0             \
+    }
+#endif /* BSP_USING_PWM4 */
+```
+![alt text](./assets/em-lb566-pwm1.png)<br>
+软件默认PB23从`GPTIM3`的`"pwm4"`设备输出PWM波形，默认配置在<br>
+![alt text](./assets/em-lb566-pwm2.png)<br>
+```c
+HAL_PIN_Set(PAD_PB23, GPTIM3_CH4, PIN_NOPULL, 0);   // LCDC1_BL_PWM_CTRL, LCD backlight PWM
+```
+**备注：**<br>
+通过函数`HAL_PIN_Set`配置后，GPTIM3_CH4跟PB23的对应关系就会建立起来，具体体现在寄存器配置`hwp_lpsys_cfg->GPTIM3_PINR`中，如下图：<br>
+![alt text](./assets/em-lb566-pwm3.png)<br>
+可以看到可以配置为CH1-CH4输出，而且必须是PB00-PB31口，另外Hcpu用Lcpu的TIMER资源，Lcpu也需要打开`#define BSP_USING_GPTIM3 1`,否则在早期的SDK代码`drv_common.c`中会关闭`RCC_MOD_GPTIM3`导致PWM4无输出<br>
+```c
+#if !defined(BSP_USING_GPTIM3) && !defined(BSP_USING_PWM4)
+    HAL_RCC_DisableModule(RCC_MOD_GPTIM3); //关闭GPTIM3的时钟
+#endif /* !BSP_USING_GPTIM3 */
+```
 ### 5.2 屏驱复位时序
 nv3052c.c中LCD_Init函数中下面几个延时比较关键，需要参照屏驱IC相关文档的初始化时序，谨慎修改
 ```c
