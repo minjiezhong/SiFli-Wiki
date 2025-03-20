@@ -31,7 +31,7 @@ please input the serial port num:7 #然后选择em-lb525模块连接的串口号
 #### 2.2 Menuconfig添加NV3041A
 1） 修改Kconfig在menuconfig中生成该屏的选项<br>
 文本编辑器打开sdk\customer\boards\Kconfig_lcd，添加qspi的该屏的选项和分辨率，如下<br>
-![alt text](./assets/nv3041a-kconfig0.png)<br>
+![alt text](./assets/NV3041A-kconfig0.png)<br>
 ```
 # menuconfig 生成菜单呈现的选项
         config LCD_USING_TFT_NV3041A
@@ -104,6 +104,43 @@ LCD和TP的RESET脚都是采用GPIO模式，则默认已经配置为GPIO模式
 可以看到上电`BSP_LCD_PowerUp`在屏驱动初始化`LCD_drv.LCD_Init`之前<br>
 所以需要在初始化LCD前，确保BSP_LCD_PowerUp中已经打开LCD供电<br>
 ![alt text](./assets/nv3041a-io-powerup.png)<br>
+##### 5.1.3 背光PWM配置
+pwm软件中有一个默认配置，配置在文件`customer\boards\em-lb525\Kconfig.board`中，此`Kconfig.board`的配置会编译后在`rtconfig.h`中生成下面3个宏<br>
+```c
+//PWM3需要打开GPTIM2，PWM和TIMER对应关系，可以查看FAQ的PWM部分或者文件`pwm_config.h`
+#define LCD_PWM_BACKLIGHT_INTERFACE_NAME "pwm3" //pwm设备名
+#define LCD_PWM_BACKLIGHT_CHANEL_NUM 4 //Channel 4
+#define LCD_BACKLIGHT_CONTROL_PIN 1 //PA01
+```
+用PWM3需要用到GPTIM2（位于Hcpu）输出，还需确认`rtconfig.h`下面宏是否生效<br>
+```c
+#define BSP_USING_GPTIM2 1 //如果用PWM3，需要menuconfig --board=em-lb525打开
+#define RT_USING_PWM 1
+#define BSP_USING_PWM 1
+#define BSP_USING_PWM3 1 //如果没有，需要menuconfig --board=em-lb525打开
+```
+如下文件`pwm_config.h`中`pwm3`和`GPTIM2`的对应关系<br>
+```c
+#ifdef BSP_USING_PWM3
+#define PWM3_CONFIG                             \
+    {                                           \
+       .tim_handle.Instance     = GPTIM2,         \
+       .tim_handle.core         = PWM3_CORE,    \
+       .name                    = "pwm3",       \
+       .channel                 = 0             \
+    }
+#endif /* BSP_USING_PWM3 */
+```
+![alt text](./assets/em-lb525-pwm1.png)<br>
+软件默认PA01从`GPTIM2`的`"pwm3"`设备输出PWM波形，默认配置在<br>
+![alt text](./assets/em-lb525-pwm2.png)<br>
+```c
+HAL_PIN_Set(PAD_PA01, GPTIM2_CH4, PIN_NOPULL, 1);   // LCDC1_BL_PWM_CTRL, LCD backlight PWM
+```
+**备注：**<br>
+通过函数`HAL_PIN_Set`配置后，GPTIM2_CH4跟PA01的对应关系就会建立起来，具体体现在寄存器配置`hwp_hpsys_cfg->GPTIM2_PINR`中，如下图：<br>
+![alt text](./assets/em-lb525-pwm3.png)<br>
+可以看到可以配置为CH1-CH4输出，而且必须是PA00-PA44口<br>
 #### 5.2 屏驱复位时序
 下面几个延时比较关键，需要参照屏驱IC相关文档的初始化时序，谨慎修改
 ```c
