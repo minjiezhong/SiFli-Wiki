@@ -40,7 +40,7 @@ w4  0x40055018  0x58ab99fc
 g
 exit
 ```
-## 4.2 在哪里清WDT
+## 4.3 清WDT位置在哪
 1，rt_hw_watchdog_init初始化函数会通过rt_hw_watchdog_hook把rt_hw_watchdog_pet注册为一个钩子函数；<br> 
 2，当系统无任务处理进入idle线程rt_thread_idle_entry后，里面就会执行上面注册在idle_hook_list中的钩子函数；<br> 
 ```c
