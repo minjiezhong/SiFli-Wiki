@@ -108,5 +108,4 @@ static LCDC_InitTypeDef lcdc_int_cfg_spi =
 
 };
 ```
-***
 

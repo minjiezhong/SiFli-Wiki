@@ -52,11 +52,11 @@ rt_device_open((rt_device_t)i2c_bus, RT_DEVICE_FLAG_RDWR);
 ## 7.3 I2C概率性出错
 1，rt_i2c_configure 初始化的timeout时间设置比较短，由于线程切换的原因，I2C线程得不到执行，容易导致超时，建议150ms比较合适，设置过长，当I2C出现ERR时，会导致系统卡死在I2C线程里面，如下图1000为1秒：
 <br>![alt text](./assets/i2c/i2c005.png)<br>   
-2，I2C速率和上拉电阻不匹配，I2C波形上升下降沿过缓，400Kbps推荐1.5K-2.2K上拉电阻。
-3，I2C飞线调试，飞线调试I2C设备Touch等芯片，过长总线，会出现I2C波形出现干扰毛刺，导致I2C波形识别错误。
-4，某些I2C设备出现Error情况下，可能SDA会被I2C外设拉低不放的情形，当SDA被拉低时，I2C控制器识别到总线忙，SDA就发不出波形，log会打印ERR，此时可以通过复位外设，通常复位方法：
-A，开关外设供电或者复位脚。
-B，发送I2C bus reset(9个空clock)复位外设，（SDK中在I2C ERR时，在HAL层已经做了复位I2C控制器和发9个空clock的操作）。
+2，I2C速率和上拉电阻不匹配，I2C波形上升下降沿过缓，400Kbps推荐1.5K-2.2K上拉电阻。<br>
+3，I2C飞线调试，飞线调试I2C设备Touch等芯片，过长总线，会出现I2C波形出现干扰毛刺，导致I2C波形识别错误。<br>
+4，某些I2C设备出现Error情况下，可能SDA会被I2C外设拉低不放的情形，当SDA被拉低时，I2C控制器识别到总线忙，SDA就发不出波形，log会打印ERR，此时可以复位外设，通常复位方法：<br>
+A，开关外设供电或者复位脚。<br>
+B，发送I2C bus reset(9个空clock)复位外设I2C总线，（SDK中在I2C ERR时，在HAL层已经做了复位I2C控制器和发9个空clock的操作）。<br>
 
 ## 7.4 当I2C设备地址为0x12时I2C波形无法发出
 SDA被拉低后，I2C控制器再也发不出波形，如下图：
