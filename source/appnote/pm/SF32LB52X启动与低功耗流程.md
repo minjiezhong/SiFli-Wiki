@@ -1,13 +1,14 @@
-# 1	应用程序启动流程
+# SF32LB52X启动与低功耗流程
+## 1	应用程序启动流程
 SF32LB52X为双核芯片，有内置和外置多个存储接口，MPI1为内置存储接口，可接PSRAM与NOR Flash，MPI2和SDMMC为外置存储，MPI2可接NOR/PSRAM/NAND，SDMMC可接SD-NAND或SD-eMMC。应用程序运行在大核，蓝牙Controller协议栈运行在小核，小核不对用户开放，小核的启动由大核的蓝牙Host协议栈控制，用户无需关心。<br>
 大核上的应用程序启动流程分为三个阶段：<br>
 * 1)	一级Bootloader：固化在SF32LB52X内部的ROM中，加载Flash中的二级Bootloader到RAM中跳转运行
 * 2)	二级Bootloader：加载Flash中的应用程序并跳转执行
 * 3)	应用程序：用户程序
-## 1.1	 一级Bootloader
+### 1.1	 一级Bootloader
 一级Bootloader固化在了芯片的ROM中，其中断向量表地址为0。上电后会首先运行一级Bootloader，根据芯片封装类型，确定Flash分区表的位置（内部或者外部Flash，下文称为启动Flash），根据Flash分区表指示的二级Bootloader地址（必须在启动Flash上），拷贝二级Bootloader代码到RAM中并跳转运行。<br>
 一级Bootloader阶段大核以上电默认的时钟频率运行，初始化启动Flash的IO配置。<br>
-## 1.2	 二级Bootloader
+### 1.2	 二级Bootloader
 二级Bootloader根据芯片封装类型以及Flash分区表，加载应用程序并跳转执行。根据芯片封装类型，应用程序分为以下几种启动方式，运行方式分为XIP（直接以NOR Flash地址执行代码，代码的存储地址与执行地址相同）和非XIP（从Flash拷贝代码到RAM中执行，即代码的存储地址与执行地址不同）两种，不论是哪种启动方式，应用程序与二级Bootloader均存放在同一个启动Flash上，区别只是应用程序代码的运行方式不同：<br>
 * 1. 内置NOR Flash（MPI1）：启动Flash为内置NOR Flash，应用程序存储在内置NOR Flash上，以XIP方式运行<br>
 * 2. 无内置NOR Flash：<br>
@@ -32,7 +33,7 @@ SF32LB52X为双核芯片，有内置和外置多个存储接口，MPI1为内置�
 
 二级Bootloader不加载PMU的校准参数，仅修改所使用的存储相关的IO设置。<br>
 Cache未使能，MPU未使能<br>
-## 1.3	 应用程序
+### 1.3	 应用程序
 应用程序的入口函数为ResetHandler（位于drivers\cmsis\sf32lb52x\Templates\arm\startup_bf0_hcpu.S），其执行流程如图1所示，用户主函数main则由rt_application_init创建的main线程调用，见图5 main_thread_entry流程。<br>![alt text](./assets/52001.png)<br>   
 Figure 1 ResetHandler流程<br>
 SystemInit（drivers/cmsis/sf32lb52x/Templates/system_bf0_ap.c）在变量初始化之前执行（因此这期间不能使用带初值的变量，零段变量也要避免依赖于初值0），更新VTOR寄存器重定向中断向量表，调用mpu_config和cache_enable初始化MPU并使能Cache，这两个函数为weak函数，应用程序中可以重新实现来替换默认的实现。<br>
@@ -75,7 +76,7 @@ rt_application_init中创建main线程，线程入口函数为main_thread_entry�
 Figure 5 main_thread_entry流程<br>
 对于使用外置NOR的SF32LB523手表方案，可以认为存在两个应用程序，一个是OTA Manager，另一个是User App，二级bootloader先跳转到OTA Manager执行完上述的应用程序启动流程，再跳转到User App中再执行一遍相同的启动流程，区别是一些应用程序自定义的模块初始化会有所不同
 
-## 1.4	 板级驱动接口
+### 1.4	 板级驱动接口
 每块板子需要实现如下板级驱动函数，可参考customer/boards/eh-lb52xu，
 函数名|	必选|	说明
 :--|:--|:--
@@ -94,7 +95,7 @@ BSP_IO_Init|NO(?)|由HAL_MspInit决定是否调用，现在HAL_MspInit默认实�
 BSP_PIN_Init|NO(?)|	由BSP_IO_Init调用，IO配置函数
 		
 
-## 1.5	应用程序自定义驱动接口
+### 1.5	应用程序自定义驱动接口
 如果同一块板子的不同应用程序需要实现不同的HAL_MspInit功能，建议将HAL_MspInit的实现置于应用程序目录下，否则可以放在板子目录下。<br> 
 函数名|	必选|	说明
 :--|:--|:--
@@ -102,8 +103,8 @@ HAL_MspInit|NO|
 HAL_PostMspInit|NO| 	
 
 
-# 2	低功耗流程
-## 2.1	睡眠流程
+## 2 低功耗流程
+### 2.1	睡眠流程
 建议使用deepsleep低功耗模式（睡眠模式），该模式下所有RAM数据和硬件配置都能保持，从睡眠模式回到工作状态所需的恢复时间也较短，睡眠期间IO电平可以保持在工作时的状态，但睡眠模式下外设停止工作，CPU只能被有限几个唤醒源唤醒，包括GPIO中断、RTC中断、LPTIM中断以及核间通信中断。对应用程序而言，睡眠模式与工作模式间的切换是透明的，是否进入睡眠模式由最低优先级的IDLE线程控制，当所有高优先级线程都没有任务执行，IDLE线程得到调度后，IDLE线程会检查是否满足睡眠条件，当满足以下所有条件后，即可进入睡眠模式：<br> 
 * 1. 没有禁止睡眠模式<br>
 * 2. 操作系统最近一个将要超时的定时器时间大于门限，默认门限为100ms<br>
@@ -137,7 +138,7 @@ RT_WEAK const pm_policy_t pm_policy[] =
 };
 ```
 进入睡眠时如果有外设需要掉电降低功耗，可以在BSP_IO_Power_Down中修改配置，相应的可以在BSP_Power_Up中给外设上电，该函数在睡眠醒来后会被调用。<br>
-## 2.2	WFI自动降频
+### 2.2	WFI自动降频
 进入IDLE线程，但不满足睡眠条件时，大核可以通过降频来降低WFI期间的电流，降频的条件为高速外设不在工作，高速外设包括：
 -	EPIC
 -	EZIP
@@ -147,7 +148,7 @@ RT_WEAK const pm_policy_t pm_policy[] =
 检查EPIC/EZIP是否在工作并未置于HAL驱动中，而是集成在LVGL图形库中，如果没有使用SDK自带的LVGL实现，需要调用rt_pm_hw_device_start指示高速外设开始工作，避免降频执行WFI，外设结束工作后调用rt_pm_hw_device_stop。<br>
 LCDC/USB/SD是否工作的判断集成在了RT_Thread的LCD Device驱动中。<br>
 降频后的WFI频率由函数HAL_RCC_HCPU_SetDeepWFIDiv配置，需要注意当有音频外设在工作时，只能降频到48MHz，除此以外可以降频到4MHz，同时要把hwp_hpsys_rcc->DBGR的HPSYS_RCC_DBGR_FORCE_HP比特置1。<br>
-## 2.3	场景化动态调频
+### 2.3	场景化动态调频
 对于无需高性能计算的场景，大核还可以通过降频降压来降低工作功耗，比如手表灭屏后运行抬腕算法，可以将系统频率降到48MHz，虽然随着CPU频率变慢，算法执行时间也会变长，但总功耗（即电流与时间的乘积）仍旧会更低，可以实测不同运行模式的场景功耗，选择功耗最优的模式。<br>
 使用rt_pm_run_enter函数配置当前的运行模式，大核支持下表四个运行模式，推荐使用HIGH_SPEED和MEDIUM_SPEED两个模式。应用程序启动后默认工作在HIGH_SPEED模式。<br>往高速模式切换为立即生效，即当rt_pm_run_enter退出后已切换到高速模式，往低速模式切会延迟到IDLE线程完成，即退出函数后仍旧在原模式，需要等到IDLE得到调度后才会完成切换。<br>
  模式|系统时钟（MHz）
