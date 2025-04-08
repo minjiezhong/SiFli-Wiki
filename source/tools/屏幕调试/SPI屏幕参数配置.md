@@ -1,5 +1,26 @@
 # SPI屏幕参数配置
 
+## 接口说明
+软件上首先根据SPI接口是否有物理的D/CX线分成2大类：`LCDC_INTF_SPI_DCX_xxx`和`LCDC_INTF_SPI_NODCX_xxx`, 然后再根据批量送数据时（即0x2C/0x3C指令）,用到的数据线分成1~4DATA，最后再根据是否DDR、是否需要PTC辅助，加上DDR, AUX的字样。
+
+一般来说3线SPI都是指没有物理D/CX线的，4线SPI是有物理D/CX线的。
+
+D/CX线的pinmux 一般都是LCDC_SPI_DIO1。
+
+SPI接口的命令读写都是单线模式，只是批量送数时（0x2c/0x3c指令）数据可以支持1~4线并行。
+
+|接口名称| 接口是否有物理的D/CX线| 0x2C/0X3C批量送数并行的数据线数 | 其他 |
+| ---- | ----  | ----  | ----  |
+|    LCDC_INTF_SPI_DCX_1DATA     | 是 | 1 | - |
+|    LCDC_INTF_SPI_DCX_2DATA     | 是 | 2 | - |
+|    LCDC_INTF_SPI_DCX_4DATA     | 是 | 4 | - |
+|    LCDC_INTF_SPI_DCX_4DATA_AUX | 是 | 4 | ramless屏幕 |
+|    LCDC_INTF_SPI_DCX_DDR_4DATA | 是 | 4 | DDR模式 |
+|    LCDC_INTF_SPI_NODCX_1DATA   | 否 | 1 | - |
+|    LCDC_INTF_SPI_NODCX_2DATA   | 否 | 1 | - |
+|    LCDC_INTF_SPI_NODCX_4DATA   | 否 | 1 | - |
+
+
 
 ## 屏幕参数配置讲解
 
@@ -8,9 +29,7 @@
 static LCDC_InitTypeDef lcdc_int_cfg =
 {
 /*
-1. LCDC_INTF_SPI_NODCX_2DATA：SPI四线模式，QSPI的DO发数据，D1读数据模式
-2. LCDC_INTF_SPI_NODCX_1DATA：SPI三线模式，收发数据都在QSPI的D0 
-3. LCDC_INTF_SPI_DCX_1DATA：多一条D/CX的线，当D/CX为低时，用来传输指令，当D/CX为高时，用来传输数据
+    3线SPI模式，批量送数2根数据线
 */
     .lcd_itf = LCDC_INTF_SPI_NODCX_2DATA,
 /*  QSPI的clk频率选择，频率为hcpu主频分频后的频率，比如hcpu主频240Mhz，能够得到的频率只能为40/48/60/80,如果设置62Mhz，实际会设置为60Mhz */
@@ -32,7 +51,7 @@ static LCDC_InitTypeDef lcdc_int_cfg =
 */
             .vsyn_polarity = 0,
             .vsyn_delay_us = 1000,/* 该配置在选择HAL_LCDC_SYNC_VER后，才有意义，用于配置TE信号高电平延时多少us后，再给RAM送数*/
-            .hsyn_num = 0,/* 该配置在选择HAL_LCDC_SYNC_VER后，才有意义，用于配置TE信号高电平几个clk脉冲后，再给RAM送数 */
+            .hsyn_num = 0,/* 该配置在.syn_mode设置为HAL_LCDC_SYNC_VERHOR后才有意义，用于配置TE信号高电平几个clk脉冲后，再给RAM送数 */
 /*
 1. 在QSPI读数据的时候，CMD都会从D0输出，但是读回的数据，不同屏驱IC，会从D0-D3进行输出，为了兼容不同的屏驱IC，才有此配置
 2. 可以配置为0-3，参考屏驱IC的规格书，选择QSPI对应read时从D0 - D3进行读取信号 
@@ -94,7 +113,7 @@ static LCDC_InitTypeDef lcdc_int_cfg_spi =
 /* 该配置在选择HAL_LCDC_SYNC_VER后，才有意义，用于配置TE（Vsync）信号来时的信号极性 */
             .vsyn_polarity = 1, /*  配置1，TE平常是低电平，TE为高电平时可以给RAM送数 */
             .vsyn_delay_us = 0, /* 该配置在选择HAL_LCDC_SYNC_VER后，才有意义，用于配置TE信号高电平延时多少us后，再给RAM送数 */
-            .hsyn_num = 0, /* 该配置在选择HAL_LCDC_SYNC_VER后，才有意义，用于配置TE信号高电平几个clk脉冲后，再给RAM送数 */
+            .hsyn_num = 0, /* 该配置在.syn_mode设置为HAL_LCDC_SYNC_VERHOR后才有意义，用于配置TE信号高电平几个clk脉冲后，再给RAM送数 */
  /*
  1. 在QSPI读数据的时候，CMD都会从D0输出，但是读回的数据，不同屏驱IC，会从D0-D3进行输出，为了兼容不同的屏驱IC，才有此配置
 2. 可以配置为0-3，参考屏驱IC的规格书，选择QSPI对应read时从D0 - D3进行读取信号
