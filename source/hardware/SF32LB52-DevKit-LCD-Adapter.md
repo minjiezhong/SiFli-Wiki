@@ -51,7 +51,7 @@ SF32LB52-DevKit-LCD开发板的22pin FPC座子，支持MIPI-DBI(8080)和SPI(3/4w
 ```{figure} assets/52Kit-LED-driver.png
 :align: center
 :scale: 50%
-:name: sf32lb5x-lcd-board-back
+:name: sf32lb5x-lcd-board-back1
 SF32LB52-DevKit-LCD板22p FPC座LED driver电路
 ```
 
@@ -70,7 +70,7 @@ SF32LB52-DevKit-LCD开发板提供一路LED驱动，默认驱动电流40mA，可
 ```{figure} assets/52Kit-2x20p-pin-define.png
 :align: center
 :scale: 60%
-:name: sf32lb5x-lcd-board-back
+:name: sf32lb5x-lcd-board-back2
 SF32LB52-DevKit-LCD板40pin 双排针信号定义
 ```
 ```{table} SF32LB56-DevKit-LCD-40P信号定义

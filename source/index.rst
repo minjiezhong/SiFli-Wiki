@@ -39,16 +39,15 @@
     :hidden:
 
     docs/index
-    board/index
+    docs/docs
+    .. board/index
+
 
 .. toctree::
     :caption: 软件开发
     :hidden:
 
-    快速入门  <https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/quickstart/get-started.html>
-    示例教程  <https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/example/hal/index.html>
-    SDK文档  <https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/>
-    API文档  <https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/api/index.html>
+    软件开发文档  <https://docs.sifli.com/projects/sdk/latest/sf32lb52x/index.html>
     faq/index
     appnote/index
 

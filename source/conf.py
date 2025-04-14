@@ -86,31 +86,14 @@ html_theme_options = {
         {
             "title": "用户指南",
             "url": "docs/index",
-            "children": [
-                {
-                    "title": "SDK入门指南",
-                    "url": "sdk/index",
-                    "summary":"上手使用开发板和SDK",
-                },
-                {
-                    "title": "硬件设计指南",
-                    "url": "hardware/index",
-                    "summary":"硬件工程师设计板子需要注意的事项",
-                },
-                {
-                    "title": "选项指南",
-                    "url": "silicon/index",
-                    "summary":"芯片介绍和对比，方便选项",
-                },
-            ]
         },
         {
             "title": "示例",
-            "url": "sdk/index",
+            "url": "https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/example/hal/index.html",
         },
         {
             "title": "API文档",
-            "url": "https://wiki.sifli.com/sdk/sf32lb52x/api",
+            "url": "https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/api/index.html",
         },
         {
             "title": "关于我们",
