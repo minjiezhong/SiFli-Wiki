@@ -1,37 +1,40 @@
-# SF32LB52芯片硬件设计指南
+# 芯片硬件设计指南
 
-（本开发板目前供内部试用，未来将经修改完善后将对外发布）
+## SF32LB52N系列
+
+后缀为数字0、3、5、7的芯片，属于SF32LB52N系列,使用锂电池供电，支持USB充电。
+
+[硬件设计指南](/hardware/SF32LB520-3-5-7-HW-Application)
+
+## SF32LB52X系列
+后缀为字母E、G、J、H的芯片，属于SF32LB52x系列,使用3.3V电源供电。
+
+[硬件设计指南](/hardware/SF32LB52B-E-G-J-HW-Application)
 
 
-```{include} ./SF32LB52/SF32LB52-Overview-B3.md
-```
-## 原理图设计指导
+## SF32LB56XU系列
 
-### 电源
+后缀为U的为QFN68L封装
 
-```{include} ./SF32LB52/Electrical Specification-B3.md
-```
+[硬件设计指南](/hardware/SF32LB56xU-HW-Application)
 
-```{include} ./SF32LB52/SF32LB52x-SCH-design-guide.md
-```
+## SF32LB56XV系列
 
-```{include} ./SF32LB52/SF32LB52x-PCB-layout-guide.md
-```
+后缀为V的是BGA封装，引脚更多
 
-## 修订历史
+[硬件设计指南](/hardware/SF32LB56xV-HW-Application)
 
-```{table}
-:align: left
-:name: sf32lb52x-B-history
+## SF32LB58X系列
 
-|版本 |日期   |发布说明 |
-|:---|:---|:---|
-|0.0.1 |01/2025 |初始版本 |
-| | | |
-| | | |
-```
+[硬件设计指南](/hardware/SF32LB58x-HW-Application)
 
 ```{toctree}
 :hidden:
-SF32LB52-DevKit-LCD-Adapter
+
+SF32LB520-3-5-7-HW-Application
+SF32LB52B-E-G-J-HW-Application
+SF32LB56xU-HW-Application
+SF32LB56xV-HW-Application
+SF32LB58x-HW-Application
+
 ```

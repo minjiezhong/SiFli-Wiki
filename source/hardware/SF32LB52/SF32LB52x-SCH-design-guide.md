@@ -14,11 +14,10 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 
 ### 处理器工作模式及唤醒源
 
+<div align="center"> CPU Mode Table </div>
 
-```{table} CPU Mode Table
+```{table}
 :align: center
-:name: sf32lb52x-B-CPU-run-mode
-
 |工作模式|CPU |外设  |SRAM |IO   |LPTIM |唤醒源 |唤醒时间 |
 |:--|:-------|:----|:----|:----|:---- |:---- |:----   |
 |Active |Run |Run |可访问 |可翻转 |Run |- |- |
@@ -26,13 +25,12 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 |DeepSleep |Stop |Stop |不可访问，全保留 |电平保持 |Run |RTC，唤醒IO，GPIO，LPTIM，蓝牙 |250us |
 |Standby |Reset |Reset |不可访问，全保留 |电平保持 |Run |RTC，唤醒IO，LPTIM，蓝牙 |1ms |
 |Hibernate |Reset |Reset |不可访问，不保留 |高阻 |Reset |RTC，唤醒IO |>2ms |
-
 ```
 
-```{table} Interrupt wake up source Table
-:align: center
-:name: sf32lb52x-B-WKUP-table
+<div align="center"> Interrupt wake up source Table </div>
 
+```{table}
+:align: center
 |中断源|管脚   |详细描述  |
 |:--|:-------|:--------|
 |LWKUP_PIN0 |PA24 |中断信号0 |
@@ -58,20 +56,20 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 
 :::{important}
 
-```{table} 晶体规格要求
-:align: center
-:name: sf32lb52x-B-WKUP-table
+<div align="center"> 晶体规格要求 </div>
 
+```{table}
+:align: center
 |晶体|晶体规格要求   |详细描述  |
 |:--|:-------|:--------|
 |48MHz |CL≦12pF（推荐值7pF）△F/F0≦±10ppmESR≦30 ohms（推荐值22ohms）|晶振功耗和CL,ESR相关,CL和ESR越小功耗越低，为了最佳功耗性能，建议采用推荐值CL≦7pF，ESR≦22 ohms.晶体旁边预留并联匹配电容,当CL<9pF时，无需焊接电容|
 |32.768KHz |CL≦12.5pF（推荐值7pF）△F/F0≦±20ppm ESR≦80k ohms（推荐值38Kohms）|晶振功耗和CL,ESR相关,CL和ESR越小功耗越低，为了最佳功耗性能，建议采用推荐值CL≦9pF，ESR≦40K ohms.晶体旁边预留并联匹配电容,当CL<12.5pF时，无需焊接电容|
 ```
 
-```{table} 推荐晶体列表
-:align: center
-:name: sf32lb52x-B-WKUP-table
+<div align="center"> 推荐晶体列表 </div>
 
+```{table}
+:align: center
 |型号|厂家   |参数  |
 |:---|:-------|:--------|
 |E1SB48E001G00E  |Hosonic     |F0 = 48.000000MHz，△F/F0 = -6 ~ 8 ppm，CL = 8.8 pF，ESR = 22 ohms Max TOPR = -30 ~ 85℃，Package =（2016 公制）|
@@ -83,14 +81,13 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 
 ### 射频
 
-射频走线要求为50ohms特征阻抗。如果天线是匹配好的，射频上无需再增加额外器件。设计时建议预留π型匹配网络用来杂散滤波或天线匹配。请参考{numref}`图 {number} <sf32lb52X-B-Ant>`所示。
+射频走线要求为50ohms特征阻抗。如果天线是匹配好的，射频上无需再增加额外器件。设计时建议预留π型匹配网络用来杂散滤波或天线匹配。
 
-```{figure} assets/sf32lb52X-B-rf-diagram.png
-:align: center
-:scale: 80%
-:name: sf32lb52X-B-Ant
-射频电路图
-```
+<img src="assets/52xB/sf32lb52X-B-rf-diagram.png" width="80%" align="center" />  
+
+<div align="center"> 射频电路图 </div>
+
+
 
 ### 显示
 
@@ -98,12 +95,12 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 
 #### SPI/QSPI显示接口
 
-芯片支持 3/4-wire SPI和Quad-SPI 接口来连接LCD显示屏，各信号描述如{numref}`表 {number} <sf32lb52x-B-QSPI-LCD-table>`所示。
+芯片支持 3/4-wire SPI和Quad-SPI 接口来连接LCD显示屏，各信号描述如下表所示。
 
-```{table} SPI/QSPI 信号连接方式
+<div align="center"> SPI/QSPI 信号连接方式 </div>
+
+```{table}
 :align: center
-:name: sf32lb52x-B-QSPI-LCD-table
-
 |spi信号|管脚   |详细描述  |
 |:--|:-------|:--------|
 |CSx |PA03 |使能信号 |
@@ -115,17 +112,16 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 |D[1] |PA08 |Quad-SPI 模式下的数据3 |
 |RESET |PA00 |复位显示屏信号 |
 |TE |PA02 |Tearing effect to MCU frame signal |
-
 ```
 
 #### JDI显示接口
 
-芯片支持并行JDI接口来连接LCD显示屏，如{numref}`表 {number} <sf32lb52x-B-P-JDI-LCD-table>`所示。
+芯片支持并行JDI接口来连接LCD显示屏，如下表所示。
 
-```{table} 并行JDI屏信号连接方式
+<div align="center"> 并行JDI屏信号连接方式 </div>
+
+```{table}
 :align: center
-:name: sf32lb52x-B-P-JDI-LCD-table
-
 |spi信号|管脚   |详细描述  |
 |:--|:-------|:--------|
 |CSx |PA03 |使能信号 |
@@ -137,17 +133,16 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 |D[1] |PA08 |Quad-SPI 模式下的数据3 |
 |RESET |PA00 |复位显示屏信号 |
 |TE |PA02 |Tearing effect to MCU frame signal |
-
 ```
 
 #### 触摸和背光接口
 
-芯片支持I2C格式的触摸屏控制接口和触摸状态中断输入，同时支持1路PWM信号来控制背光电源的使能和亮度，如{numref}`表 {number} <sf32lb52x-B-P-CTP-I2C-table>`所示。
+芯片支持I2C格式的触摸屏控制接口和触摸状态中断输入，同时支持1路PWM信号来控制背光电源的使能和亮度，如下表所示。
 
-```{table} 触摸和背光控制连接方式
+<div align="center"> 触摸和背光控制连接方式 </div>
+
+```{table}
 :align: center
-:name: sf32lb52x-B-CTP-I2C-table
-
 |spi信号|管脚   |详细描述  |
 |:--|:-------|:--------|
 |CSx |PA03 |使能信号 |
@@ -159,17 +154,16 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 |D[1] |PA08 |Quad-SPI 模式下的数据3 |
 |RESET |PA00 |复位显示屏信号 |
 |TE |PA02 |Tearing effect to MCU frame signal |
-
 ```
 
 ### 存储
 #### 存储器连接接口描述
-芯片支持外挂SPI Nor Flash、SPI NAND Flash、SD NAND Flash和eMMC 四种存储介质。SPI Nor Flash和SPI NAND Flash的接口定义如{numref}`表 {number} <sf32lb52x-B-MPI2-table>`所示，SD NAND Flash和eMMC的接口定义如{numref}`表 {number} <sf32lb52x-B-SD1-table>`所示
+芯片支持外挂SPI Nor Flash、SPI NAND Flash、SD NAND Flash和eMMC 四种存储介质。
 
-```{table} SPI Nor/Nand Flash信号连接
+<div align="center"> SPI Nor/Nand Flash信号连接 </div>
+
+```{table}
 :align: center
-:name: sf32lb52x-B-MPI2-table
-
 |spi信号|管脚   |详细描述  |
 |:--|:-------|:--------|
 |CSx |PA03 |使能信号 |
@@ -181,12 +175,12 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 |D[1] |PA08 |Quad-SPI 模式下的数据3 |
 |RESET |PA00 |复位显示屏信号 |
 |TE |PA02 |Tearing effect to MCU frame signal |
-
 ```
-```{table} SD Nand Flash和eMMC信号连接
-:align: center
-:name: sf32lb52x-B-SD1-table
 
+<div align="center"> SD Nand Flash和eMMC信号连接 </div>
+
+```{table}
+:align: center
 |spi信号|管脚   |详细描述  |
 |:--|:-------|:--------|
 |CSx |PA03 |使能信号 |
@@ -198,24 +192,26 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 |D[1] |PA08 |Quad-SPI 模式下的数据3 |
 |RESET |PA00 |复位显示屏信号 |
 |TE |PA02 |Tearing effect to MCU frame signal |
-
 ```
+
+
 #### 启动设置
+
 芯片支持内部合封Spi Nor Flash、外挂Spi Nor Flash、外挂Spi Nand Flash、外挂SD Nand Flash和外挂eMMC启动。其中：
 - SF32LB52AUx6 内部合封有flash，默认从内部合封flash启动
 - SF32LB52D/F/HUx6 内部合封psram，必须从外挂的存储介质启动
 
-```{table} 启动选项设置
-:align: center
-:name: sf32lb52x-B-Boot-Strap-table
 
+<div align="center"> 启动选项设置 </div>
+
+```{table}
+:align: center
 |Bootstrap[1] (PA13) |Bootstrap[0] (PA17)    |Boot From ext memory  |
 |:----:|:----:|:---|
 |L |L |Spi Nor Flash  |
 |L |H |Spi Nand Flash |
 |H |L |SD Nand Flash  |
 |H |H |eMMC           |
-
 ```
 
 #### 启动存储介质电源控制
@@ -232,12 +228,11 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 #### 开关机按键
 芯片的PA34支持长按复位功能，可以设计成按键，实现开关机+长按复位功能。PA34的长按复位功能要求高电平有效，所以设计成默认下拉为低，按键按下后电平为高，如{numref}`图 {number} <sf32lb52X-B-PWKEY>`所示。
 
-```{figure} assets/sf32lb52X-B-PWKEY.png
-:align: center
-:scale: 80%
-:name: sf32lb52X-B-PWKEY
-开关机按键电路图
-```
+<img src="assets/52xB/sf32lb52X-B-PWKEY.png" width="80%" align="center" />  
+
+<div align="center"> 开关机按键电路图 </div>
+
+
 #### 普通GPIO按键
 
 #### 机械旋钮按键
@@ -245,24 +240,24 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 
 ### 振动马达
 
-芯片支持PWM输出来控制振动马达。推荐电路如{numref}`图 {number} <sf32lb52X-B-VIB>`所示。
+芯片支持PWM输出来控制振动马达。
 
-```{figure} assets/sf32lb52X-B-VIB.png
-:align: center
-:scale: 70%
-:name: sf32lb52X-B-VIB
-振动马达电路图
-```
+
+<img src="assets/52xB/sf32lb52X-B-VIB.png" width="80%" align="center" />  
+
+<div align="center"> 振动马达电路图 </div>
+
+
 ### 音频接口
 
 芯片的音频相关接口，如表4-16所示，音频接口信号有以下特点：
 1.	支持一路单端ADC输入，外接模拟MIC，中间需要加容值至少2.2uF的隔直电容，模拟MIC的电源接芯片MIC_BIAS电源输出脚；
 2.	支持一路差分DAC输出，外接模拟音频PA， DAC输出的走线，按照差分线走线，做好包地屏蔽处理，还需要注意：Trace Capacitor < 10pF, Length < 2cm。
 
-```{table} 音频信号连接方式
-:align: center
-:name: sf32lb52x-B-Audio-table
+<div align="center"> 音频信号连接方式 </div>
 
+```{table}
+:align: center
 |音频信号 |管脚   |详细描述 |
 |:---|:---|:---|
 |BIAS |MIC_BIAS |麦克风电源       |
@@ -273,26 +268,25 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 
 模拟MEMS MIC推荐电路如{numref}`图 {number} <sf32lb52X-B-MEMS-MIC>`所示，模拟ECM MIC 单端推荐电路如{numref}`图 {number} <sf32lb52X-B-ECM-MIC>`所示，其中MEMS_MIC_ADC_IN和ECM_MIC_ADC_IN连接到SF32LB52X的ADCP输入管脚。
 
-```{figure} assets/sf32lb52X-B-MEMS-MIC.png
-:align: center
-:scale: 75%
-:name: sf32lb52X-B-MEMS-MIC
-模拟MEMS MIC单端输入电路图
-```
-```{figure} assets/sf32lb52X-B-ECM-MIC.png
-:align: center
-:scale: 70%
-:name: sf32lb52X-B-ECM-MIC
-模拟ECM单端输入电路图
-```
+
+<img src="assets/52xB/sf32lb52X-B-MEMS-MIC.png" width="80%" align="center" />  
+
+<div align="center"> 模拟MEMS MIC单端输入电路图 </div>
+
+
+<img src="assets/52xB/sf32lb52X-B-ECM-MIC.png" width="80%" align="center" />  
+
+<div align="center"> 模拟ECM单端输入电路图 </div>
+
+
 模拟音频输出推荐电路如{numref}`图 {number} <sf32lb52X-B-DAC-PA>`所示，注意虚线框内的差分低通滤波器要靠近芯片端放置。
 
-```{figure} assets/sf32lb52X-B-DAC-PA.png
-:align: center
-:scale: 60%
-:name: sf32lb52X-B-DAC-PA
-模拟音频PA电路图
-```
+
+<img src="assets/52xB/sf32lb52X-B-DAC-PA.png" width="80%" align="center" />  
+
+<div align="center"> 模拟音频PA电路图 </div>
+
+
 
 ### 传感器
 
@@ -310,15 +304,16 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 
 芯片支持DBG_UART接口用于下载和调试，通过3.3V接口的UART转USB Dongle板接PC机。芯片可以通过DBG_UART进行调试信息输出，具体请参考表`{number} <sf32lb52x-B-P-JDI-LCD-table>`
 
-```{table} 调试口连接方式
-:align: center
-:name: sf32lb52x-B-DBG-table
+<div align="center"> 调试口连接方式 </div>
 
+```{table}
+:align: center
 |DBG信号 |管脚   |详细描述 |
 |:---|:---|:---|
 |DBG_UART_RXD |PA18 |Debug UART 接收 |
 |DBG_UART_TXD |PA19 |Debug UART 发送 |
 ```
+
 ### 产线烧录和晶体校准
 
 思澈科技提供脱机下载器来完成产线程序的烧录和晶体校准，硬件设计时，请注意至少预留测试点：PVDD、GND、AVDD33、DB_UART_RXD、DB_UART_RXD，PA01。

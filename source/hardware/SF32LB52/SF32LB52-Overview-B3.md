@@ -32,37 +32,30 @@ SF32LB52JUD6，合封16MB OPI-PSRAM
 ## 封装
 
 
+<div align="center"> 封装信息表 </div>
 
-```{table} 封装信息表
+```{table}
 :align: center
-:name: sf32lb52x-B-package-info
-
-|封装名称|	尺寸           	   |   管脚间距  |
-|:--|:-----------------------|:-----------|
-|QFN68L      | 7x7x0.85 mm       | 0.35 mm       |
-
+|封装名称|尺寸|管脚间距|
+|:--|:-|:-|
+|QFN68L | 7x7x0.85 mm | 0.35 mm |
 ```
 
 
+<img src="assets/52xB/sf32lb52X-B-package-layout.png" width="80%" align="center" />  
 
-```{figure} assets/sf32lb52X-B-package-layout.png
-:align: center
-:scale: 60%
-:name: sf32lb52X-B-package-layout
-SF32LB52X QFN68L 管脚分布
-```
+<div align="center"> SF32LB52X QFN68L 管脚分布 </div>
+
 
 
 ## 典型应用方案
 
-{numref}`图 {number} <sf32lb52X-B-watch-app-diagram-52X>`是典型的SF32LB52A/52D运动手表组成框图，主要功能有显示、存储、传感器、震动马达和音频输入和输出。
+下图是典型的SF32LB52A/52D运动手表组成框图，主要功能有显示、存储、传感器、震动马达和音频输入和输出。
 
-```{figure} assets/sf32lb52X-B-watch-app-diagram-52X.png
-:align: center
-:scale: 60%
-:name: sf32lb52X-B-watch-app-diagram-52X
-SF32LB52A/52D运动手表组成框图
-```
+<img src="assets/52xB/sf32lb52X-B-watch-app-diagram-52X.png" width="80%" align="center" />  
+
+<div align="center"> SF32LB52B/52E运动手表组成框图 </div>
+
 
 :::{Note} 
    - 大小核双CPU架构，同时兼顾高性能和低功耗设计要求
