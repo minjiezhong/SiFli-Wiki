@@ -148,13 +148,13 @@ uint32_t mem_size; // flash 存储大小，单位（Byte）
 
 Ext_flags的8个bit的含有，比如：
 
-`{0xE5, 0x74, 0xE5, 0x**2**2, 0x20000000}, //DS35X4GMXXX_RDID`
+`{0xE5, 0x74, 0xE5, 0x22, 0x20000000}, //DS35X4GMXXX_RDID`
 
 `0x22`的二进制为`0b0010 0010`
 
 Bit4-7为0b0010，ECC标识位为2，
 
-Bit3为0：每个block为64个page，
+Bit3为0：每个block为64个page，大小为64x2KB=128KB
 
 Bit2为0：每个page为2048个byte
 
@@ -174,13 +174,13 @@ NAND会利用多Plane设计以提升性能。如上图，一颗NAND分成2个pla
 
 NAND FLASH中page（页）block（块）的概念
 
-Nand flash中page（页）是读写的最小单位，block（块）是擦除的最小单位。每个Nand地址精确到字节（地址编排）但依然以page为最小单位R/W（读写），操作要求page（页）对齐。
+Nand flash中page（页）是读写的最小单位，block（块）是擦除的最小单位。每个Nand地址可以精确到字节（地址编排）但依然以page为最小单位R/W（读写），操作要求page（页）对齐。
 
 页（Page）：
 
 页是 NAND Flash 存储器中的最小可编程单位，通常大小为 2KB、4KB 或 8KB。
 
-写入数据时，需要先将整个页擦除为全 1，然后逐个字节或字写入数据。
+写入数据时，需要先将整个页擦除为0xFF，然后整页数据进行写入；
 
 读取数据时，可以按页或者按字节进行读取。
 
@@ -262,7 +262,7 @@ BIT2_IN_C0_T3 = 6 // 有2位状态位, bit 4-5：00：ECC无错误; 01：出现�
 
 ![alt text](./assets/flash15.png)<br>
 
-`{0xE5, 0x74, 0xE5, 0x**2**2, 0x20000000}, //DS35X4GMXXX_RDID`
+`{0xE5, 0x74, 0xE5, 0x22, 0x20000000}, //DS35X4GMXXX_RDID`
 
 如上图，C0H有3个bit状态位ECC_S0-S2，符合2的描述（010有错误且不能纠正），ECC参数位在ext_flags中0x22,其中 bit4-7为2。
 
@@ -272,7 +272,7 @@ BIT2_IN_C0_T3 = 6 // 有2位状态位, bit 4-5：00：ECC无错误; 01：出现�
 
 ![alt text](./assets/flash17.png)<br>
 
-`{0xc8, 0xd9, 0xc8, 0x**1**0, 0x8000000}, //GD5F1GQ4UxxH_RDID`
+`{0xc8, 0xd9, 0xc8, 0x10, 0x8000000}, //GD5F1GQ4UxxH_RDID`
 
 如上图，C0H有2个bit状态位ECCS0-S1（ECCSE0-1在F0H寄存器，代码没有处理），符合1的描述（10有错误且不能纠正），ECC参数位在ext_flags中0x10,其中 bit4-7为1。
 
@@ -280,7 +280,7 @@ BIT2_IN_C0_T3 = 6 // 有2位状态位, bit 4-5：00：ECC无错误; 01：出现�
 
 ![alt text](./assets/flash18.png)<br>
 
-`{0x0B, 0x11, 0X00, 0x**5**0, 0x8000000}, //XT26G01CXXX_RDID`
+`{0x0B, 0x11, 0X00, 0x50, 0x8000000}, //XT26G01CXXX_RDID`
 
 如上图，C0H有4个bit状态位`ECCS0-S3`，符合5的描述（大于1000：有错误且不能纠正），ECC参数位在`ext_flags`中0x50,其中 bit4-7为5。
 
@@ -569,8 +569,9 @@ Fail
 ```
 **常见原因**
 
-1. 芯片D2-D3焊接不良
-2. QSPI的走线太长或者飞线导致的干扰导致个别bit错误
+1. 芯片D2-D3焊接不良<br>
+因为读取Flash ID只需要D0-D1数据线，能读到ID不代表所有IO都接触好，所以在能读取到ID但出现校验失败时，如果Flash芯片不是SMT机贴的情况下，特别要检查D2-D3是否焊接或者接触正常（常发生在手动焊接或者Flash插座接触不良）<br>
+2. QSPI的走线太长或者飞线导致的干扰导致个别bit错误<br>
 
 #### 5.2.4 Uart串口端收到乱码
 
