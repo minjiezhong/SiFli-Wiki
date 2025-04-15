@@ -1,13 +1,13 @@
 # 芯片硬件设计指南
 
-## SF32LB52N系列
+## SF32LB52x系列
 
-后缀为数字0、3、5、7的芯片，属于SF32LB52N系列,使用锂电池供电，支持USB充电。
+后缀为数字0、3、5、7的芯片，属于SF32LB52x系列,使用锂电池供电，支持USB充电。
 
 [硬件设计指南](/hardware/SF32LB520-3-5-7-HW-Application)
 
 ## SF32LB52X系列
-后缀为字母E、G、J、H的芯片，属于SF32LB52x系列,使用3.3V电源供电。
+后缀为字母E、G、J、H的芯片，属于SF32LB52X系列,使用3.3V电源供电。
 
 [硬件设计指南](/hardware/SF32LB52B-E-G-J-HW-Application)
 
