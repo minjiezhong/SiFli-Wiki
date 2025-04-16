@@ -62,4 +62,70 @@ static void battery_send_event_to_app(event_type_t type)
 b，Hcpu端醒来后，在task中，添加处理该消息的代码，如下：
 <br>![alt text](./assets/system/system005.png)<br>  
 
+## 10.5 MCU进入Boot_Mode的方法
+
+SiFli系列MCU内部ROM已经固化了一个boot代码，MCU在不用烧录任何代码的情况下，上电就会进入boot代码，boot代码已经带了常见的flash存储驱动，通过读取外部存储固定地址Flashtable的配置来决定代码如何跳转，boot代码在读取的flashtable不对的情况下，也会一直在boot_mode代码内，可以通过PC指针的地址，对照芯片手册的`HPSYS地址映射`，来判断是否在boot_mode代码区间，boot代码所在的ROM区间地址通常如下：<br>
+Memory|Address space|Starting Address|Ending Address
+:--|:--|:--|:--
+ROM|64KB|0x0000_0000|0x0000_FFFF
+
+进入boot_mode的用处:<br>
+1，硬件调试，可以在不烧录任何程序的情况下，判断MCU是否运行正常；<br>
+2，在用户程序死机或其他情形导致Jlink或者Uart不通的情况下，进入boot_mdoe模式确保正常下载程序；<br>
+
+### 10.5.1 55/58/56系列MCU进入Boot Mode方法
+<br>![alt text](./assets/system/system006.png)<br>   
+55，58，56系列MCU都有BOOT_MODE脚，BOOT_MODE拉高并且复位或上电，则会进入boot_mode，在Lcpu的默认debug串口会出现下面的log，此串口也是默认uart下载口
+```
+   Serial:c2,Chip:2,Package:0,Rev:0
+    \ | /
+   - SiFli Corporation
+    / | \     build on Mar 20 2022, 1.2.0 build dbebac
+    2020 - 2022 Copyright by SiFli team
+   msh >
+```
+在boot_mode下，用于验证uart下载时，也可以输入help命令验证串口是否通的，如下操作：
+```
+   Serial:c2,Chip:2,Package:0,Rev:0
+    \ | /
+   - SiFli Corporation
+    / | \     build on Mar 20 2022, 1.2.0 build dbebac
+    2020 - 2022 Copyright by SiFli team
+   msh >
+TX:help
+   help
+   RT-Thread shell commands:
+   list_mem 
+   uart 
+   spi_flash 
+   reboot 
+   regop 
+   dump_config 
+   dfu_recv 
+   reset 
+   lcpu 
+   sysinfo 
+   version 
+   console 
+   help 
+   time 
+   free 
+   msh >
+```  
+<br>**注意**<br> 
+BOOT_MODE拉高后的boot_mode的log输出，是来自内部固化ROM代码不依赖外部代码，如果没有此log，请查串口连接和MCU工作条件是否已经满足<br> 
+### 10.5.2 52系列MCU进入Boot Mode方法
+<br>![alt text](./assets/system/system007.png)<br> 
+如上图，需要用到工具`SiFli-SDK\tools\SifliTrace\SifliTrace.exe`串口连接并勾选上BOOT选项，然后重启机器，在52固化的boot代码中会等待2秒， 勾选BOOT选项后工具SifliTrace会发命令让52进入boot_mode，如果只看到`SFBL`的log没有看到后面的2条log，可能是PC的TX到MCU的RX这路uart不通；<br>
+```
+SFBL
+receive boot info, stop it!!!
+enter boot mode flow success!!!
+```
+也可以采用工具`SiFli-SDK\tools\SifliUsartServer.exe`和SifliTrace.exe一起使用，如下图：
+<br>![alt text](./assets/system/system008.png)<br> 
+
+<br>**注意**<br>
+`SFBL`这条log，不依赖于软件，如果没有此log，请查串口连接和MCU工作条件是否已经满足<br>
+
 

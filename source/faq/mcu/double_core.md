@@ -51,10 +51,17 @@ typedef struct
 } ipc_queue_t;
 ```
 ## 14.3 Jlink(SWD)切换到不同核调试
-使用场景：Hcpu已经休眠，但是Lcpu死机，jlink无法连接进行调试<br>
+使用场景：Hcpu已经休眠情况下jlink连接调试Lcpu或者Ozone在线调试Lcpu<br>
+操作方法: 操作hwp_lpsys_cfg中寄存器SWCR的SWSEL位
+- SWSEL
+- 0: SWD connected to HCPU
+- 1: SWD connected to LCPU
 方法1：在Hcpu连接jlink时，执行SDK目录下对应\tools\segger\jlink_lcpu_56x.bat批处理<br>
+55系列调用jlink_lcpu_a0.bat<br>
+55系列调用jlink_lcpu_pro.bat<br>
 方法2：在代码中进行修改<br>
 ```c
+//直接寄存器物理地址操作
 #define _WWORD(reg,value) \
 { \
     volatile uint32_t * p_reg=(uint32_t *) reg; \
@@ -64,6 +71,11 @@ _WWORD(0x4004f000, 0x1);   // 55X Jlink SW Switch to LCPU
 _WWORD(0x4004f000, 0x0);   // 55X Jlink SW Switch to HCPU
 _WWORD(0x5000f000, 0x1);   // 56X，58X Jlink SW Switch to LCPU
 _WWORD(0x5000f000, 0x0);   // 56X，58X Jlink SW Switch to HCPU
+```
+或者指定寄存器操作
+```c
+hwp_lpsys_cfg->SWCR = 1; // Jlink SW Switch to LCPU
+hwp_lpsys_cfg->SWCR = 0; // Jlink SW Switch to HCPU
 ```
 如果Lcpu死机发生在唤醒后比较早的地方，建议添加在Lcpu唤醒的入口处，具体参照 56X standby待机流程，但需要注意需要提前打开GPIO的配置:<br>
 ```c
