@@ -12,7 +12,7 @@ https://www.bilibili.com/video/BV1i3USY8E3S/
 
 https://www.bilibili.com/video/BV1v3USYbEYy/
 
-#### 1.1.3 视频教程网络地址
+#### 1.1.3 视频教程网盘地址
 
 网盘分享的文件：[sifli_flash_driver_generate](https://pan.baidu.com/s/11dVuuK5giQqTr1hQqZ4OVQ?pwd=1234)
 
@@ -498,7 +498,7 @@ NAND_CMD_TABLE_CNT
 
 通过Uart接口，把对应的Flash烧录bin，比如ram_patch_52X_NAND.bin加载52这颗MCU的RAM中指定地址，然后跳转到该RAM地址，再执行烧录外部Nor或者Nand Flash的操作代码。
 
-#### 5.1.12 Jlink下载
+#### 5.1.2 Jlink下载
 
 当Jlink通过SWD接口连接上MCU，并命令行执行：
 
@@ -537,7 +537,7 @@ Loadbin d:\1.bin 0x62000000这个命令时，Jlink.exe会从JLinkDevices.xml配�
 **常见原因：**
 
 1. MCU供电异常，MCU没有跑起来
-2. MCU跑在用户程序中，但是对应的Uart口或者Jlink不同或者MCU死机
+2. MCU跑在用户程序中，但是对应的Uart口或者Jlink不通或者MCU死机
 
 解决方案：
 
@@ -607,7 +607,7 @@ msh >B
 ```c
 HAL_RCC_HCPU_EnableDLL2(288000000);
 
-mpi2_div = **5**;
+mpi2_div = 5;
 
 HAL_RCC_HCPU_ClockSelect(RCC_CLK_MOD_FLASH2, RCC_CLK_FLASH_DLL2);
 ```
