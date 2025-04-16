@@ -1,64 +1,52 @@
-# This is a basic workflow to help you get started with Actions
+name: Build and Upload Documentation
 
-name: bulid
-
-# Controls when the workflow will run
 on:
-  # main和beta分支有push或者pull request事件时触发
   push:
-    branches: [ "main" ,"beta"]
+    branches:
+      - main
+  workflow_dispatch:  # 允许手动触发
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  build-docs:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: publish
-        env:
-            BUILD_CONFIG: ${{ secrets.BUILD_CONFIG }}
-        run: |
-          echo "安装依赖"
-          sudo apt update
-          sudo pip3 install setuptools
-          sudo pip3 install -r requirements.txt
-          echo "开始生成静态网页"
-          sphinx-build -b html ./source ./build -E
-          echo "生成静态网页完成"
-          python3 ./tools/compress_png.py
-          echo "打包build文件夹"
-          tar -zcvf build.tar.gz build
-          echo "打包完成"
-          echo "发布到服务器"
-          chmod +x ./tools/mc
-          export PATH=$PATH:$HOME/work/SiFli-Wiki/SiFli-Wiki/tools
-          mc alias set myminio $BUILD_CONFIG
-          mc cp  ./build.tar.gz myminio/web/${GITHUB_REF##*/}.tar.gz
-          echo "发布完成"
-
-
-
-      - uses: actions/upload-artifact@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          name: build
-          path: build.tar.gz   
-      
-      - name: Webhook
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: Install dependencies
         run: |
-          echo "发送webhook"
-          curl -X POST -H "Content-Type: application/json" -d '{"event": "action", "action": "build", "branch": "${{ github.ref }}"}' ${{ secrets.WEBHOOK_URL }}
-          echo "发送webhook完成"
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Build documentation
+        run: sphinx-build -b html ./source ./build -E
       
+      - name: compress png
+        run: python3 ./tools/compress_png.py
 
+      - name: Archive documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: wiki
+          path: |
+            build
+          retention-days: 7
+      
+      - name: Install COSCMD
+        run: |
+          pip install coscmd
 
+      - name: Configure COSCMD
+        run: |
+          coscmd config -a ${{ secrets.COS_DOCS_SECRET_ID }} -s ${{ secrets.COS_DOCS_SECRET_KEY }} -b ${{ secrets.COS_DOCS_BUCKET }} -r ${{ secrets.COS_DOCS_REGION }}
 
+      - name: Upload to COS
+        run: |
+          coscmd upload -rs --delete --yes ./build/ /
+          echo "Uploaded documentation for wiki to COS successfully."
