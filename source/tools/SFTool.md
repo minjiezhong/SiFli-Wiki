@@ -19,10 +19,12 @@ sftool是一个专为SiFli系列SoC（系统芯片）设计的开源工具，用
 
 
 ### 下载预构建
-#### 可以在GitHub release中下载最新的预构建sftool，我们的命名标准为sftool-v{version}-{target}.zip/tar.xz，请选择适合您系统架构的压缩包下载
+
+可以在GitHub release中下载最新的预构建sftool，我们的命名标准为sftool-v{version}-{target}.zip/tar.xz，请选择适合您系统架构的压缩包下载
+
+[GitHub Release](https://github.com/OpenSiFli/sftool/releases)
+
 URL: https://github.com/OpenSiFli/sftool/releases
-
-
 
 
 
