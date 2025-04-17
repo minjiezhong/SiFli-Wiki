@@ -1,11 +1,12 @@
 # 1 LCD调试常见问题
-## 1.1 LCD屏幕右侧有一个绿条纹，怎么解决?
+## 1.1 LCD屏幕右侧绿条纹
 如下图:<br>
 <br>![alt text](./assets/lcd/lcd001.png)<br> 
 请按下图确认修改:<br>
 <br>![alt text](./assets/lcd/lcd002.png)<br> 
 
-## 1.2 LCD显示花屏，debug方法，如下图:
+## 1.2 LCD显示花屏
+debug方法，如下图:
 <br>![alt text](./assets/lcd/lcd003.png)<br>   
 1， jlink连接后，敲h，让cpu停下来，<br>
 2， cmd窗口到该目录执行\release\tools\crash_dump_analyser\script\save_ram_a0.bat保存内存信息<br>
@@ -37,16 +38,47 @@ Wachdemo工程对应的路径为: example\watch_demo\project\ec-lb551\build\bf0_
 #define LV_DPI 315
 #define LV_FB_LINE_NUM 454
 ```
-## 1.3 TFT的LCD屏，开机或者从睡眠唤醒第一帧花屏
+
+## 1.3 TFT屏开机或唤醒时第一帧花屏
 花屏是开显示时，屏GRAM内数据不对，从开机显示逻辑来看，<br>
 应该是先送好数， 再display_on芯片，再开背光，如果顺序错了，就会导致第一帧花屏， 也可以采用初始化完成后，送黑屏过去，如果屏驱IC支持写寄存器让输出黑屏，优先采用写屏寄存器方式，<br>
 或者采用如下方法:<br>
 参考代码中SPD2012驱动的做法，在打开屏幕之前，先通过LCDC的背景送黑屏的数据过去，清除屏幕内部的GRAM.<br>
 <br>![alt text](./assets/lcd/lcd011.png)<br> 
 
-## 1.4 更换晟和+基合(SH8601Z)的屏后，reset之后不亮屏
-BSP_Power_Up中会有屏上电的动作，由于屏的特殊性，到lcd init显示时lcd充电时间不够，导致lcd驱动不起来，需要再lcd init开始的时候，做个延时。<br>
+## 1.4 初始化读写都正常但不亮屏问题
+每个屏IC，上电后到寄存器初始化之间延时会有不同，BSP_Power_Up函数中屏上电到LCD寄存器初始化init延时不够，会导致初始化时寄存器无法配置进去，导致LCD驱动不起来；<br>
+解决方法：<br>
+再LCD寄存器初始化init开始的时候，根据屏驱IC的要求添加一定延时。<br>
 <br>![alt text](./assets/lcd/lcd012.png)<br>  
+下面列出了屏初始化需要关注的3个延时长度，延时太大会导致屏点亮变慢，延时改小时一定要依据屏IC规格书<br>
+```c
+static void SPD2010_Init_SPI_Mode(LCDC_HandleTypeDef *hlcdc)
+{
+    uint8_t   parameter[14];
+    int i, j;
+
+    memcpy(&hlcdc->Init, &lcdc_int_cfg, sizeof(LCDC_InitTypeDef));
+    HAL_LCDC_Init(hlcdc);
+
+    BSP_LCD_Reset(0);//Reset LCD
+  	rt_thread_delay(1);  //依据屏驱IC规格书配置此延时
+    BSP_LCD_Reset(1);
+
+    /* Wait for 50ms */
+    rt_thread_delay(50); //依据屏驱IC规格书配置此延时
+
+    for (i = 0; i < sizeof(lcd_init_cmds) / MAX_CMD_LEN; i++)
+    {
+        SPD2010_WriteReg_I(hlcdc, lcd_init_cmds[i][0], (uint8_t *)&lcd_init_cmds[i][2], lcd_init_cmds[i][1]);
+		HAL_Delay_us(10);
+    }
+	rt_thread_delay(50); //依据屏驱IC规格书配置此延时
+	
+  SPD2010_WriteReg(hlcdc, 0x29,(uint8_t *)NULL, 0);
+
+}
+```
 
 ## 1.5 如何从Framebuffer 导出来看图像是否正常?
 a，从build目录*.map文件找到buf1_1全局变量的地址，如下图:<br>
@@ -98,18 +130,22 @@ OTA过程出现该assert，因为马达的默认IO是PA44, 这个项目PA44是lc
 rt_thread_mdelay函数，会进行线程切换，切换到Idle进程后，就会睡眠，<br>
 HAL_Delay函数，是死循环，不会切走到Idle进程。<br>
 
-## 1.7 打静电ESD，LCD花屏或者无TE信号输出，重初始化LCD
-a，如果LCD花屏或者死机时，无TE信号输出，<br>
+## 1.7 打静电ESD时LCD花屏和定屏问题
+解决思路：通过屏驱IC的TE输出信号或者寄存器值来判断屏显示是否正常，不正常时重初始化LCD<br>
+1. 如果LCD花屏或者定屏死机时，无TE信号输出，<br>
 解决方案：<br>
 drv_lcd.c文件中，在等待TE超时函数async_send_timeout_handler中：<br>
 采用下面红框这块代码，就能重初始化LCD：<br>
+```c
+    drv_lcd.assert_timeout = 3; //配置刷屏超时情况下是assert、不做操作还是重初始化LCD
+```
 <br>![alt text](./assets/lcd/lcd015.png)<br> 
-b，如果是LCD花屏时，有TE信号输出，需要读取LCD寄存器值，才得知花屏状态。<br>
+2. 如果是LCD花屏时，有TE信号输出，需要读取LCD寄存器值，才得知花屏状态。<br>
 解决方案：<br>
-1，按照上面的方案a，先打开刷屏timeout重初始化LCD代码。<br>
-2，在LCD驱动的XXXX_WriteMultiplePixels送屏函数中，<br>
+- 按照上面的方案1，先打开刷屏timeout重初始化LCD代码。<br>
+- 在LCD驱动的XXXX_WriteMultiplePixels送屏函数中，<br>
 添加读取LCD寄存器值，如果发现寄存器不对，return出去，不进行刷屏，<br>
-这时因为没有执行送屏操作，就会导致刷屏timeout进入async_send_timeout_handler中，重初始化LCD，如下图：<br>
+这时因为没有执行送屏操作，就会导致刷屏进入RT_ETIMEOUT中，依据配置`drv_lcd.assert_timeout`重初始化LCD，如下图：<br>
 做了3次对LCD寄存器的判别，如果3次寄存器值都不对，认为LCD异常，return出去，触发刷屏timeout，重初始化LCD。<br>
 <br>![alt text](./assets/lcd/lcd016.png)<br>  
 ```c
@@ -178,7 +214,7 @@ GPIO模拟SPI读chipid<br>
 ```
 <br>![alt text](./assets/lcd/lcd024.png)<br> 
 
-## 1.10 屏QSPI读写寄存器时动态调整clk的速率
+## 1.10 屏QSPI动态调整读写寄存器CLK速率
 有些屏驱IC，在初始化的时候，对读写寄存器的CLK频率有上限要求，比如不能高于20Mhz, 送屏则可以到50Mhz，可以通过如下方式修改：<br>
 默认送屏频率为.freq = 48000000, //48Mhz<br>
 <br>![alt text](./assets/lcd/lcd025.png)<br> 

@@ -1,6 +1,6 @@
 # 6 Trace32
 ## 6.1 用Trace32恢复Hcpu死机现场
-1，参照 2.5.8 Dump内存方法，dump出内存和编译生成的axf文件放在一个目录内<br>
+1，参照章节[5.8 Dump内存方法](../tools/sifli.md/#58-dump内存方法) Dump内存方法，Dump出内存和编译生成的axf文件放在一个目录内<br>D
 2，运行sdk目录下\tools\crash_dump_analyser\simarm\t32marm.exe<br>
 3，查看Hcpu死机，点击HA按钮（HCPU assertion），如果有些bin不存在（例如有的dump没有PSRAM2），可以勾掉去掉。
 <br>![alt text](./assets/trace32001.png)<br>

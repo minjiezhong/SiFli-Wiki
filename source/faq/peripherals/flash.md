@@ -50,8 +50,26 @@ spi_flash -erase 0x20000 0x20000 2 /*从flash3 十六进制0x20000的地址，�
 PS：编译的时候需要将ec-lb555_lcpu下的build手动删除掉，如果之前已经存在了bin<br> 文件，可能会出现编译不过的情况，编译成功之后请检查<br> \watch\sifli\project\ec-lb555_lcpu\build\watch_l.bin下是否增加了ER_IROM2文件：<br> 
 <br>![alt text](./assets/flash/flash006.png)<br>   
 
-## 3.3 读Flash内SN,MAC接口
+## 3.3 读Flash内SN/MAC接口
+SN和MAC在产线下载版本时写入到设备中，以TLV格式保存，
+TLV 是一种常用的数据编码格式，它由标签（Type）、长度（Length）和值（Value）三部分组成，即按照ID+LEN+DATA排放。<br>
+数据格式可以参考章节：
+[5.6 55X查看芯片工厂校准区OTP/Flash数据方法](../tools/sifli.md/#56-55x查看芯片工厂校准区otpflash数据方法)
+
+type |length| value
+:--|:--|:--
+1byte| 1byte| <=256byte
+
+SN的type编号为：FACTORY_CFG_ID_SN,对应值为2。<br>
+value组成：描述符+序号(8byte) 如：sifli_00000001<br>
+获取sn示例代码：<br>
 ```c
+{
+int res = 0;
+char sn[300] = {0};
+res = rt_flash_config_read(FACTORY_CFG_ID_SN, (uint8_t) *)&sn[0], 256);
+} 
 rt_flash_config_read(FACTORY_CFG_ID_SN, (uint8_t *)mac, sizeof(mac));
+//获取MAC地址方法
 rt_flash_config_read(FACTORY_CFG_ID_MAC, (uint8_t *)&mac[0], 6);
 ```

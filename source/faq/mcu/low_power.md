@@ -58,7 +58,7 @@ list_timer的状态说明，<br>
 第四列"flag"为该定时器是否为激活状态;<br>
 如上图，生效的定时器只有"main"的定时器（延时函数也是一个定时器），唤醒周期为0x4e20（20000ms）。
 
-## 8.2 Hcpu已睡眠， Lcpu不睡眠
+## 8.2 Hcpu已睡眠但Lcpu不睡眠
 Lcpu不进入睡眠的原因，基本同问题## 8.1一样，可以参考## 8.1，此处只讲到几个Lcpu不通过串口命令debug的几个细节：<br>
 a，由于此时Jlink不能连接，可以在Hcpu未睡眠时，执行SDK\tools\segger\jlink_lcpu_a0.bat切换Jlink连接到Lcpu,再进行debug。<br>
 b， 检查是否存在唤醒源，在jlink连接到Lcpu后， mem32 0x4007001c 1 读取WSR寄存器。<br>
@@ -78,25 +78,36 @@ rt_pin_attach_irq(BATT_USB_POW_PIN, PIN_IRQ_MODE_FALLING, battery_device_calback
 ```
 而清唤醒源又在GPIO中断回调函数内，这样就会导致上升沿的唤醒源，会出现不能清掉，导致Lcpu不睡的情况。<br>
 
-## 8.3 充电如何唤醒
-a，把充电检测pin，配置为睡眠后的唤醒源， 在standby模式下， 就能被唤醒，如下：<br>
+## 8.3 关机充电唤醒问题
+参考例程：`SDK\example\rt_device\pm\project`
+注意唤醒分为standby/deep休眠唤醒和hibernate关机唤醒两种情况，
+支持hibernate关机唤醒的IO通常支持休眠唤醒，要查看芯片手册哪些IO支持关机唤醒；
+<br>
+待机唤醒由AON寄存器配置，如下：<br>
+```
+HAL_HPAON_EnableWakeupSrc(HPAON_WAKEUP_SRC_PIN3, AON_PIN_MODE_LOW); //55x PA80 #WKUP_A3
+HAL_LPAON_EnableWakeupSrc(LPAON_WAKEUP_SRC_PIN5, AON_PIN_MODE_NEG_EDGE);//55x PB48 #WKUP_PIN5
+```
+关机唤醒由PMU和RTC寄存器配置，如下：<br>
+```
+HAL_PMU_EnablePinWakeup(5, AON_PIN_MODE_NEG_EDGE); //55x PB48 #WKUP_PIN5
+```
+充电唤醒，关机和待机通常都需要充电唤醒，因此需要AON/PMU唤醒都要配置，参考下面配置方式：<br>
+1. 把充电检测pin，配置为唤醒源， 配置为在hibernate/standby模式下都能被唤醒，如下：<br>
 ```c
+//此函数已包含了配置AON和PMU的两种唤醒方式，要注意看该函数内具体实现
 pm_enable_pin_wakeup(4, AON_PIN_MODE_NEG_EDGE); //4-> 对应为PB47，可以通过GPIO映射表来查找
 ```
 如下图：<br>
 <br>![alt text](./assets/lowp/lowp013.png)<br> 
-或者：<br>
-```c
-HAL_LPAON_EnableWakeupSrc(LPAON_WAKEUP_SRC_PIN4, AON_PIN_MODE_NEG_EDGE);//对应为PB47和下降沿唤醒
-```
-b，设置唤醒pin的中断：<br>
+2. 设置唤醒pin的中断：<br>
 ```c
 #define PIN_CHG_DET (47 + 96) /* PB47 */
     rt_pin_mode(PIN_CHG_DET, PIN_MODE_INPUT); /*设置为输入模式*/
     rt_pin_attach_irq(PIN_CHG_DET, PIN_IRQ_MODE_FALLING, (void *) battery_charger_input_handle,(void *)(rt_uint32_t) PIN_CHG_DET); /*配置PB47为下降沿中断*/
     rt_pin_irq_enable(PIN_CHG_DET, 1); /* 使能中断 */
-```    
-c，注册pin的中断函数，唤醒后，就会进入下面中断函数;<br>
+```
+3. 注册pin的中断函数，唤醒后，就会进入下面中断函数;<br>
 ```c
 void battery_charger_input_handle(void)
 {
@@ -126,8 +137,7 @@ int battery_charger_pin_init(void)
     return 0;
 }
 ```
-
-**注意：**<br>
+<br>**注意：**<br>
 a，唤醒源配置为AON_PIN_MODE_NEG_EDGE或者AON_PIN_MODE_POS_EDGE边沿唤醒模式的话，<br>
 则AON_PIN_MODE_NEG_EDGE 和 PIN_IRQ_MODE_FALLING唤醒触发方式必须要跟pin中断触发方式一致（都是下降沿触发或都是上升沿触发），<br>
 因为清WSR是在pin中断函数HAL_GPIO_EXTI_IRQHandler里面进行的，否则会导致被唤醒一次后WSR寄存器没有清除，无法进入睡眠。<br>

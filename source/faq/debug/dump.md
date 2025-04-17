@@ -1,5 +1,10 @@
-# 2 Dump内存恢复死机现场
-## 2.1 Trace32手动恢复死机现场方法
+# 3 Dump内存恢复死机现场
+## 3.1 Dump内存方法
+参照章节[5.8 Dump内存方法](../tools/sifli.md/#58-dump内存方法)dump死机内存现场<br>
+## 3.2 Trace32自动恢复死机现场方法
+参照章节[6.1 用Trace32恢复Hcpu死机现场](../tools/trace32.md/#61-用trace32恢复hcpu死机现场)<br>
+## 3.3 Trace32手动恢复死机现场方法
+在自动恢复现场不成功时，可以根据死机现场手动填入寄存器值，恢复死机现场<br>
 中断发生时（hardfault也是中断）中断函数：<br>
 ```
 HardFault_Handler->rt_hw_hard_fault_exception->handle_exception

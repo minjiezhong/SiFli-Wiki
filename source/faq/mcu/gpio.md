@@ -407,13 +407,13 @@ HAL_PIN_Set(PAD_PB27, GPIO_B27, PIN_NOPULL, 0);
 HAL_PIN_SetMode(PAD_PA17, 1, PIN_DIGITAL_IO_PULLDOWN);  //sdk版本v2.2.0后，不再需要
 HAL_PIN_SetMode(PAD_PB27, 0, PIN_DIGITAL_IO_PULLUP); //sdk版本v2.2.0后，不再需要
 ```
-HAL_PIN_Set_Analog会把IO的IE位置0，如果只调用的HAL_PIN_Set函数配置，该函数不会操作IE位，此时输入不能用，需要IO恢复成输入口使用，还需调用HAL_PIN_SetMode函数配置，把IE为恢复为1。<br>
+HAL_PIN_Set_Analog会把IO的IE位置0，如果只调用的HAL_PIN_Set函数配置，该函数不会操作IE位，此时输入不能用，需要IO恢复成输入口使用，还需调用HAL_PIN_SetMode函数配置，把IE为恢复为1(sdk版本v2.2.0后，不再需要)。<br>
 
 **注意：**<br>
 sdk版本v2.2.0后，在HAL_PIN_Set函数中，已经添加IE恢复为1操作，不需要再多添加HAL_PIN_SetMode函数
 
 ## 1.11 52X PA22/PA23 32K晶体复用IO, I2C无法输出波形问题
-原因：52X，其他IO的IE默认是1，而32k的两个IO是IE为默认为0，<br>
+原因：<br>52X，其他IO的IE默认是1，而32k的两个IO是IE为默认为0，<br>
 默认的流程，HAL_PIN_Set函数，不会把IE置1，而PA22,23这两个IO，而默认IE是0，所以不能输出波形
 <br>![alt text](./assets/gpio/gpio010.png)<br>   
 解决方法：<br>
@@ -423,3 +423,22 @@ sdk版本v2.2.0后，在HAL_PIN_Set函数中，已经添加IE恢复为1操作，
 **注意：**<br>
 56X的PA55,PA56两个32K IO的IE位默认位1，不存在此问题。<br>
 sdk版本v2.2.0后，在HAL_PIN_Set函数中，已经添加IE恢复为1操作，不需要再多添加HAL_PIN_SetMode函数
+
+## 1.12 PAXX_I2C_UART和PAXX_TIM配置方法
+55，58系列MCU，每个IO都是固定的I2C,UART,PWM输出口，从56，52系列后的MCU，为了增加IO的灵活性，如下图，变成了灵活配置：
+<br>![alt text](./assets/gpio/gpio013.png)<br>  
+因为在HPSYS_CFG，LPSYS_CFG引入了I2CX_PINR，USART1_PINR，GPTIMX_PINR寄存器，如下图:
+<br>![alt text](./assets/gpio/gpio014.png)<br> 
+如上图寄存器内描述：对应的I2C1，I2C2都可以配置到PA00-PA78上来输出，具体PA口可以配置哪几路I2C，UART，TIMER输出，取决于HCPU拥有哪几路I2C，UART和TIMER，注意不能把LCPU才拥有的（例如I2C5,UART5)配置到PA口，同理不能把HCPU才拥有的（例如I2C1，UART1)配置到LCPU的PB口上，详细HCPU拥有哪几路资源，可以查看芯片用户手册，代码中hpsys_cfg.h中HPSYS_CFG_TypeDef，lpsys_cfg.h中LPSYS_CFG_TypeDef，都可以查看到对应的寄存器，另外bf0_pin_const.h文件中MCU可以配置的功能都有列出，如下图：
+<br>![alt text](./assets/gpio/gpio015.png)<br>  
+例如，正确的配置（举例为56系列MCU）:
+```c
+HAL_PIN_Set(PAD_PA32, USART1_RXD, PIN_PULLUP, 1);
+HAL_PIN_Set(PAD_PA32, I2C1_SCL, PIN_PULLUP, 1);
+HAL_PIN_Set(PAD_PA42, GPTIM2_CH4, PIN_NOPULL, 1);//GPTIM2_CH1-GPTIM2_CH4都可以，GPTIM2_CH5不行，因为没有此配置，详情查看对应芯片手册的寄存器:hwp_hpsys_cfg->GPTIM2_PINR
+```
+错误的配置:
+```c
+HAL_PIN_Set(PAD_PA42,USART4_TXD,PIN_NOPULL, 1);//错误，UART4在Lcpu上，不能配置到Hcpu的PA口
+HAL_PIN_Set(PAD_PB37,GPTIM2_CH4,PIN_NOPULL, 0);//错误，GPTIM2在Hcpu上，不能配置到Lcpu的PB口
+
