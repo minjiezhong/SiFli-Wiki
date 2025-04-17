@@ -40,7 +40,7 @@
 
     docs/index
     docs/docs
-    .. board/index
+
 
 
 .. toctree::
@@ -58,6 +58,7 @@
 
     silicon/index
     hardware/index
+    board/index
 
 .. toctree::
     :caption: 软件工具
