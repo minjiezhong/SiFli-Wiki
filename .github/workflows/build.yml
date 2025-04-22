@@ -50,3 +50,14 @@ jobs:
         run: |
           coscmd upload -rs --delete --yes ./build/ /
           echo "Uploaded documentation for wiki to COS successfully."
+      
+      - name: Install TCCLI
+        run: |
+          pip install tccli
+      
+      - name: Purge CDN Cache
+        run: |
+          export TENCENTCLOUD_SECRET_ID=${{ secrets.COS_DOCS_SECRET_ID }}
+          export TENCENTCLOUD_SECRET_KEY=${{ secrets.COS_DOCS_SECRET_KEY }}
+          export TENCENTCLOUD_REGION=${{ secrets.COS_DOCS_REGION }}
+          tccli cdn PurgePathCache --cli-unfold-argument --Paths 'https://wiki.sifli.com/' --FlushType flush
