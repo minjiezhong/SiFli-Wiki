@@ -261,7 +261,7 @@ SF32LB52-DevKit-Nano是基于思澈科技SF32LB52BU56/SF32LB52JUD6芯片的开�
 
 <div align="center"> FPC转接排线 </div>  <br>  <br>  <br>
 
-[参考资料](http://127.0.0.1:19000/web-file/hardware/files/documentation/ProPrj_FPC_22p_to_16p%E8%BD%AF%E6%8E%92%E7%BA%BF.epro?) 
+[参考资料](https://downloads.sifli.com/hardware/files/documentation/ProPrj_FPC_22p_to_16p%E8%BD%AF%E6%8E%92%E7%BA%BF.epro?) 
 
 ### 音频扩展
 
