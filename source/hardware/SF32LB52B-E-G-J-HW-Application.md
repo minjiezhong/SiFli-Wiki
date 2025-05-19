@@ -43,7 +43,7 @@ SF32LB52JUD6，合封16MB OPI-PSRAM
 <div align="center"> 表2-1 封装信息表 </div>
 
 ```{table}
-:align: center
+
 |封装名称|尺寸|管脚间距|
 |:--|:-|:-|
 |QFN68L | 7x7x0.85 mm | 0.35 mm |
@@ -97,7 +97,7 @@ SF32LB52JUD6，合封16MB OPI-PSRAM
 <div align="center"> 表4-1 电源供电要求 </div>
 
 ```{table}
-:align: center
+
 |电源管脚| 最小电压(V) | 典型电压(V) | 最大电压(V) | 最大电流(mA) |   详细描述 |
 |:--|:--|:--|:--|:--|:----------------------------------------------------|
 |PVDD       |2.97   |3.3        |3.63   |150    |PVDD系统电源输入，接10uF电容 
@@ -148,7 +148,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-4 CPU Mode Table </div>
 
 ```{table}
-:align: center
+
 |工作模式|CPU |外设  |SRAM |IO   |LPTIM |唤醒源 |唤醒时间 |
 |:--|:-------|:----|:----|:----|:---- |:---- |:----   |
 |Active |Run |Run |可访问 |可翻转 |Run |- |- |
@@ -163,7 +163,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center">表4-5 Interrupt wake up source Table </div>
 
 ```{table}
-:align: center
+
 |中断源|管脚   |详细描述  |
 |:--|:-------|:--------|
 |LWKUP_PIN0 |PA24 |中断信号0 |
@@ -192,7 +192,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-6 晶体规格要求 </div>
 
 ```{table}
-:align: center
+
 |晶体|晶体规格要求   |详细描述  |
 |:--|:-------|:--------|
 |48MHz |CL≦12pF（推荐值7pF）△F/F0≦±10ppmESR≦30 ohms（推荐值22ohms）|晶振功耗和CL,ESR相关,CL和ESR越小功耗越低，为了最佳功耗性能，建议采用推荐值CL≦7pF，ESR≦22 ohms.晶体旁边预留并联匹配电容,当CL<9pF时，无需焊接电容|
@@ -202,7 +202,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-7 推荐晶体列表 </div>
 
 ```{table}
-:align: center
+
 |型号|厂家   |参数  |
 |:---|:-------|:--------|
 |E1SB48E001G00E  |Hosonic     |F0 = 48.000000MHz，△F/F0 = -6 ~ 8 ppm，CL = 8.8 pF，ESR = 22 ohms Max TOPR = -30 ~ 85℃，Package =（2016 公制）|
@@ -229,7 +229,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-8 LCD driver支持列表 </div>
 
 ```{table}
-:align: center
+
 | 型号   | 厂家  | 分辨率  | 类型   | 接口 |
 | :-- | :-- | :-- | :-- | :-- |
 | RM69090  | Raydium    | 368*448 | Amoled | 3-Line SPI，4-Line  SPI，Dual data SPI，  Quad data SPI，MIPI-DSI |
@@ -252,7 +252,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-9 SPI/QSPI 信号连接方式 </div>
 
 ```{table}
-:align: center
+
 |spi信号|管脚   |详细描述  |
 |:--|:-------|:--------|
 |CSx |PA03 |使能信号 |
@@ -273,7 +273,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-10 并行JDI屏信号连接方式 </div>
 
 ```{table}
-:align: center
+
 
 | JDI信号  | I/O  | 详细描述   |
 |:--|:-------|:--------|
@@ -298,7 +298,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-11 触摸和背光控制连接方式 </div>
 
 ```{table}
-:align: center
+
 | 触摸屏和背光信号 | 管脚 | 详细描述                   |
 | ---------------- | ---- | -------------------------- |
 | Interrupt        | PA43 | 触摸状态中断信号（可唤醒） |
@@ -315,7 +315,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-12 SPI NOR/NAND Flash信号连接 </div>
 
 ```{table}
-:align: center
+
 | Flash 信号 | I/O信号 | 详细描述                                    |
 | ---------- | ------- | ------------------------------------------- |
 | CS#        | PA12    | Chip select, active low.                    |
@@ -330,7 +330,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-13 SD NAND Flash和eMMC信号连接 </div>
 
 ```{table}
-:align: center
+
 | Flash 信号 | I/O信号 | 详细描述 |
 | ---------- | ------- | -------- |
 | SD2_CMD    | PA15    | 命令信号 |
@@ -359,7 +359,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-14 启动选项设置 </div>
 
 ```{table}
-:align: center
+
 |Bootstrap[1] (PA13) |Bootstrap[0] (PA17)    |Boot From ext memory  |
 | ------------ | ------------ | -------------- |
 | L            | L            | SPI NOR Flash  |
@@ -415,7 +415,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-15 音频信号连接方式 </div>
 
 ```{table}
-:align: center
+
 |音频信号 |管脚   |详细描述 |
 |:---|:---|:---|
 |BIAS |MIC_BIAS |麦克风电源       |
@@ -465,7 +465,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center">表4-16 调试口连接方式 </div>
 
 ```{table}
-:align: center
+
 |DBG信号 |管脚   |详细描述 |
 |:---|:---|:---|
 |DBG_UART_RXD |PA18 |Debug UART 接收 |
@@ -753,6 +753,5 @@ TVS 管接地脚尽量避免走长线再连接到地，如图5-28所示。
 |版本 |日期   |发布说明 |
 |:---|:---|:---|
 |0.0.1 |10/2024 |初始版本 |
-| | | |
-| | | |
+
 ```

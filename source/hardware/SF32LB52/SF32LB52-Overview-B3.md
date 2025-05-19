@@ -35,7 +35,7 @@ SF32LB52JUD6，合封16MB OPI-PSRAM
 <div align="center"> 封装信息表 </div>
 
 ```{table}
-:align: center
+
 |封装名称|尺寸|管脚间距|
 |:--|:-|:-|
 |QFN68L | 7x7x0.85 mm | 0.35 mm |

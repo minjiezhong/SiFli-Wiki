@@ -17,7 +17,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> CPU Mode Table </div>
 
 ```{table}
-:align: center
+
 |工作模式|CPU |外设  |SRAM |IO   |LPTIM |唤醒源 |唤醒时间 |
 |:--|:-------|:----|:----|:----|:---- |:---- |:----   |
 |Active |Run |Run |可访问 |可翻转 |Run |- |- |
@@ -30,7 +30,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> Interrupt wake up source Table </div>
 
 ```{table}
-:align: center
+
 |中断源|管脚   |详细描述  |
 |:--|:-------|:--------|
 |LWKUP_PIN0 |PA24 |中断信号0 |
@@ -59,7 +59,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 晶体规格要求 </div>
 
 ```{table}
-:align: center
+
 |晶体|晶体规格要求   |详细描述  |
 |:--|:-------|:--------|
 |48MHz |CL≦12pF（推荐值7pF）△F/F0≦±10ppmESR≦30 ohms（推荐值22ohms）|晶振功耗和CL,ESR相关,CL和ESR越小功耗越低，为了最佳功耗性能，建议采用推荐值CL≦7pF，ESR≦22 ohms.晶体旁边预留并联匹配电容,当CL<9pF时，无需焊接电容|
@@ -69,7 +69,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 推荐晶体列表 </div>
 
 ```{table}
-:align: center
+
 |型号|厂家   |参数  |
 |:---|:-------|:--------|
 |E1SB48E001G00E  |Hosonic     |F0 = 48.000000MHz，△F/F0 = -6 ~ 8 ppm，CL = 8.8 pF，ESR = 22 ohms Max TOPR = -30 ~ 85℃，Package =（2016 公制）|
@@ -100,7 +100,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> SPI/QSPI 信号连接方式 </div>
 
 ```{table}
-:align: center
+
 |spi信号|管脚   |详细描述  |
 |:--|:-------|:--------|
 |CSx |PA03 |使能信号 |
@@ -121,7 +121,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 并行JDI屏信号连接方式 </div>
 
 ```{table}
-:align: center
+
 |spi信号|管脚   |详细描述  |
 |:--|:-------|:--------|
 |CSx |PA03 |使能信号 |
@@ -142,7 +142,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 触摸和背光控制连接方式 </div>
 
 ```{table}
-:align: center
+
 |spi信号|管脚   |详细描述  |
 |:--|:-------|:--------|
 |CSx |PA03 |使能信号 |
@@ -163,7 +163,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> SPI Nor/Nand Flash信号连接 </div>
 
 ```{table}
-:align: center
+
 |spi信号|管脚   |详细描述  |
 |:--|:-------|:--------|
 |CSx |PA03 |使能信号 |
@@ -180,7 +180,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> SD Nand Flash和eMMC信号连接 </div>
 
 ```{table}
-:align: center
+
 |spi信号|管脚   |详细描述  |
 |:--|:-------|:--------|
 |CSx |PA03 |使能信号 |
@@ -205,7 +205,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 启动选项设置 </div>
 
 ```{table}
-:align: center
+
 |Bootstrap[1] (PA13) |Bootstrap[0] (PA17)    |Boot From ext memory  |
 |:----:|:----:|:---|
 |L |L |Spi Nor Flash  |
@@ -257,7 +257,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 音频信号连接方式 </div>
 
 ```{table}
-:align: center
+
 |音频信号 |管脚   |详细描述 |
 |:---|:---|:---|
 |BIAS |MIC_BIAS |麦克风电源       |
@@ -307,7 +307,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 调试口连接方式 </div>
 
 ```{table}
-:align: center
+
 |DBG信号 |管脚   |详细描述 |
 |:---|:---|:---|
 |DBG_UART_RXD |PA18 |Debug UART 接收 |

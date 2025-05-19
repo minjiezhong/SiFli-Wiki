@@ -1,34 +1,7 @@
 # SF32LB52-DevKit-LCD开发板使用指南
 
 
-## 开发板版本信息：
 
-* V1.2.0：采用SF32LB52-MOD-1/A/B模组，即将推出SF32LB52-MOD-1(SF32LB525UC6)
-```{table} 
-:align: center
-|序号 | V1.2.0更新内容 |
-|:-- |:------ |
-|1 | 修改SD卡拔插检查信号输入管脚，改用PA26，和外部Flash2 片选，GPIO LED共用一个IO。   
-```
-* V1.1.0：采用SF32LB52-MOD-A/B模组，目前实物有(-A:SF32LB52BU36和-B:SF32LB52EUB6)
-```{table} 
-:align: center
-|序号 | V1.1.0更新内容 |
-|:-- |:------ |
-|1 | 更新充电芯片原理图库，解决充电芯片5V输出不对的问题。   
-|2 | 去掉MOS管VBUS和VBAT切换电路，后级电路全部由充电芯片的5V输出供电，解决VBUS和VBAT切换不正常问题。 
-|3 | 调整音频PA的放大倍数。
-|4 | 解决Reset按键异常的问题。 
-|5 | 去掉RGBLED电路里的电平转换部分，该电路不满足RGBLED的时序。
-|6 | 升级了模组的管脚定义，新增2个IO，解决-1模组和-A/B模组兼容问题。
-|7 | 更新电源部分，-A/B的AVDD改为LDO供电，解决原DCDC输出纹波大导致RF灵敏度问题。
-|8 | 增加对双flash的支持。
-|9 | 增加SD卡的插拔检查功能，只有-A/B支持该功能。
-|10 | 增加SDIO WiFi功能选项，只有-A支持该功能。
-|11 | 修改定位孔类型，天线背面PCB挖槽。
-|12 | 修改了VBUS输入的EOS保护器件接入位置点。
-```
-* V1.0.0：采用SF32LB52-MOD模组，当前版本
 
 ## 开发板概述
 
@@ -40,14 +13,14 @@ SF32LB52-DevKit-LCD是一款基于SF32LB52x系列芯片模组的开发板，主�
 SF32LB52_DevKit-LCD的外形如{numref}`图 {number} <SF32LB52x_DevKit-LCD_Front_Look>`、{numref}`图 {number} <SF32LB52x_DevKit-LCD_Back_Look>`所示。
 
 ```{figure} assets/SF32LB52x-DevKit-LCD_Front_Look.png
-:align: center
+
 :scale: 20%
 :name: SF32LB52x_DevKit-LCD_Front_Look
 SF32LB52x_DevKit-LCD开发板实物正面照
 ```
 
 ```{figure} assets/SF32LB52x_DevKit-LCD_Back_Look.png
-:align: center
+
 :scale: 20%
 :name: SF32LB52x_DevKit-LCD_Back_Look
 SF32LB52x_DevKit-LCD开发板实物背面照
@@ -79,7 +52,7 @@ SF32LB52x_DevKit-LCD开发板实物背面照
 ### 功能框图
 
 ```{figure} assets/SF32LB52x_DevKit-LCD_Block_Diagram.png
-:align: center
+
 :scale: 110%
 开发板功能框图
 ```
@@ -88,13 +61,13 @@ SF32LB52x_DevKit-LCD开发板实物背面照
 SF32LB52-DevKit-LCD开发板的主板是整个套件的核心，该主板集成了SF32LB52-MOD-N16R8模组，并提供QSPI和MUC8的LCD连接座
 
 ```{figure} assets/52KIT-LCD-T-Notes.png
-:align: center
+
 :scale: 70%
 SF32LB52-DevKit-LCD Board - 正面（点击放大）
 ```
 
 ```{figure} assets/52KIT-LCD-B-Notes.png
-:align: center
+
 :scale: 70%
 SF32LB52-DevKit-LCD Board - 背面（点击放大）
 ```
@@ -148,7 +121,7 @@ SF32LB52-DevKit-LCD的开发板，如何快速设置开发环境，请参考软�
 下表为 SF32LB52-MOD-N16R8 模组管脚的 GPIO 分配列表，用于控制开发板的特定组件或功能。
 
 ```{table} SF32LB52-MOD-N16R8 GPIO分配
-:align: center
+
 :name: SF32LB52-MOD-N16R8-GPIO-LIST
 
 |管脚|	管脚名称           	   |   功能  |
@@ -236,7 +209,7 @@ SF32LB52-DevKit-LCD的开发板，如何快速设置开发环境，请参考软�
 ### 40P排针接口定义
 
 ```{figure} assets/SF32LB52x_DevKit-40p-define.png
-:align: center
+
 :scale: 10%
 :name: SF32LB52x_DevKit-40p-define
 开发板40p排针接口定义（点击放大）
@@ -245,7 +218,6 @@ SF32LB52-DevKit-LCD的开发板，如何快速设置开发环境，请参考软�
 
 
 ```{table} QSPI-FPC-J0102 信号定义
-:align: center
 :name: QSPI-FPC-J0102-GPIO-LIST
 
 |管脚|	管脚名称           	   |   功能  |
@@ -323,8 +295,31 @@ SF32LB52-DevKit-LCD开发板集成MEMS MIC和音频功放芯片。
 - [SF32LB52-DevKit-LCD设计图纸](https://downloads.sifli.com/hardware/files/documentation/SF32LB52-DevKit-LCD_V1.2.0.zip?)
 - [SF32LB52-DevKit-LCD转接板制作指南](SF32LB52-DevKit-LCD-Adapter)
 
-企业微信微盘地址：
-- SF32LB52-DevKit-LCD开发板： \
-硬件文档\1.EVB\4.Butterfli Micro\3.MOD\SF32LB52-Devkit-LCD
-- SF32LB52-MOD模组： \
-硬件文档\1.EVB\4.Butterfli Micro\3.MOD
+
+
+## 开发板版本信息：
+
+* V1.2.0：采用SF32LB52-MOD-1/A/B模组，即将推出SF32LB52-MOD-1(SF32LB525UC6)
+```{table} 
+|序号 | V1.2.0更新内容 |
+|:-- |:------ |
+|1 | 修改SD卡拔插检查信号输入管脚，改用PA26，和外部Flash2 片选，GPIO LED共用一个IO。   
+```
+* V1.1.0：采用SF32LB52-MOD-A/B模组，目前实物有(-A:SF32LB52BU36和-B:SF32LB52EUB6)
+```{table} 
+|序号 | V1.1.0更新内容 |
+|:-- |:------ |
+|1 | 更新充电芯片原理图库，解决充电芯片5V输出不对的问题。   
+|2 | 去掉MOS管VBUS和VBAT切换电路，后级电路全部由充电芯片的5V输出供电，解决VBUS和VBAT切换不正常问题。 
+|3 | 调整音频PA的放大倍数。
+|4 | 解决Reset按键异常的问题。 
+|5 | 去掉RGBLED电路里的电平转换部分，该电路不满足RGBLED的时序。
+|6 | 升级了模组的管脚定义，新增2个IO，解决-1模组和-A/B模组兼容问题。
+|7 | 更新电源部分，-A/B的AVDD改为LDO供电，解决原DCDC输出纹波大导致RF灵敏度问题。
+|8 | 增加对双flash的支持。
+|9 | 增加SD卡的插拔检查功能，只有-A/B支持该功能。
+|10 | 增加SDIO WiFi功能选项，只有-A支持该功能。
+|11 | 修改定位孔类型，天线背面PCB挖槽。
+|12 | 修改了VBUS输入的EOS保护器件接入位置点。
+```
+* V1.0.0：采用SF32LB52-MOD模组，当前版本

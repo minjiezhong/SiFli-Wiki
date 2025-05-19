@@ -80,7 +80,7 @@ html_js_files = [
 
 html_theme_options = {
     "accent_color": "blue",
-    "globaltoc_expand_depth": 1,
+    # "globaltoc_expand_depth": ,
     "github_url": "https://github.com/OpenSiFli",
     "nav_links": [
         {
@@ -90,10 +90,12 @@ html_theme_options = {
         {
             "title": "示例",
             "url": "https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/example/hal/index.html",
+            "external": True,
         },
         {
             "title": "API文档",
             "url": "https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/api/index.html",
+            "external": True,
         },
         {
             "title": "关于我们",

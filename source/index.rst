@@ -25,12 +25,12 @@
         了解如何使用思澈科技的产品，快速上手。
 
     .. grid-item-card:: :octicon:`beaker` 入门指南
-        :link: sdk/index.html
+        :link: https://docs.sifli.com/projects/sdk/latest/sf32lb52x/quickstart/get-started.html
 
         从头开始，上手使用，新老用户都适用。
 
     .. grid-item-card:: :octicon:`browser` API说明
-        :link: https://wiki.sifli.com/sdk/sf32lb52x/api
+        :link: https://docs.sifli.com/projects/sdk/latest/sf32lb52x/api/index.html
 
         详细的API文档，帮助你更好的使用。适合深入开发。
 

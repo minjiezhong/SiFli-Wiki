@@ -90,7 +90,7 @@ SF32LB52-DevKit-Nano是基于思澈科技SF32LB52BU56/SF32LB52JUD6芯片的开�
 <div align="center"> LEFT LCC（J1）管脚描述表 </div>
 
 ```{table}
-:align: center
+
 |管脚|	管脚名称           	   |   复位默认及复用功能  | 上下拉 |
 |:--|:-----------------------|:-----------|------|
 |1 | GND   | 接地                     |  |
@@ -115,7 +115,7 @@ SF32LB52-DevKit-Nano是基于思澈科技SF32LB52BU56/SF32LB52JUD6芯片的开�
 <div align="center"> RIGHT LCC（J2）管脚描述表 </div>
 
 ```{table}
-:align: center
+
 |管脚|	管脚名称           	   |   复位默认及复用功能  | 上下拉 |
 |:--|:-----------------------|:-----------|------|
 |1 | GND   | 接地                     |  |
@@ -143,7 +143,7 @@ SF32LB52-DevKit-Nano是基于思澈科技SF32LB52BU56/SF32LB52JUD6芯片的开�
 <div align="center"> 16p FPC接口信号定义  </div>
 
 ```{table}
-:align: center
+
 |管脚|	管脚名称           	   |   复位默认及复用功能  | 上下拉 |
 |:--|:-----------------------|:-----------|------|
 |1  | GND    | 接地                        |      | 
@@ -184,7 +184,7 @@ SF32LB52-DevKit-Nano是基于思澈科技SF32LB52BU56/SF32LB52JUD6芯片的开�
 <div align="center"> LED灯信号控制表  </div>
 
 ```{table}
-:align: center
+
 |LED编号|	对应GPIO           	   |   描述  |
 |:--|:-----------------------|:-----------|
 |LED1  | PA31    | 低电平亮                 |
@@ -202,7 +202,7 @@ SF32LB52-DevKit-Nano是基于思澈科技SF32LB52BU56/SF32LB52JUD6芯片的开�
 <div align="center"> Flash信号定义  </div>
 
 ```{table}
-:align: center
+
 |管脚|	管脚名称           	   |   复位默认及复用功能  | 上下拉 |
 |:--|:-----------------------|:-----------|------|
 |1  | PA_12 | **PA12**、UART、I2C、GPTIM、MPI2_CS 和SD1_D2    | PU   |
@@ -216,7 +216,7 @@ SF32LB52-DevKit-Nano是基于思澈科技SF32LB52BU56/SF32LB52JUD6芯片的开�
 <div align="center"> 板型和Flash信息对应表  </div>
 
 ```{table}
-:align: center
+
 |开发板型号|	MCU合封规格           	   |   板载规格  |
 |:--|:-----------------------|:-----------|
 |SF32LB52-DevKit-Nano-N4      | 4MB SPI NOR Flash | 无    |
@@ -230,7 +230,7 @@ SF32LB52-DevKit-Nano是基于思澈科技SF32LB52BU56/SF32LB52JUD6芯片的开�
 <div align="center"> 按键信号控制表  </div>
 
 ```{table}
-:align: center
+
 |按键编号|	对应GPIO           	   |   描述  |
 |:--|:-----------------------|:-----------|
 |KEY1  | PA34    | 高电平有效，支持长按10秒复位 |

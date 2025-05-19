@@ -33,7 +33,7 @@ SF32LB527UD6，合封16MB OPI-PSRAM
 
 
 ```{table} 封装信息表
-:align: center
+
 :name: sf32lb52x-B-package-info
 
 |封装名称|	尺寸           	   |   管脚间距  |
@@ -43,7 +43,7 @@ SF32LB527UD6，合封16MB OPI-PSRAM
 ```
 
 ```{figure} assets/sf32lb52x-A-package-layout.png
-:align: center
+
 :scale: 60%
 :name: sf32lb52X-B-package-layout
 SF32LB52x QFN68L 管脚分布
@@ -55,7 +55,7 @@ SF32LB52x QFN68L 管脚分布
 {numref}`图 {number} <sf32lb52X-B-watch-app-diagram-52xU>`是典型的SF32LB520/521/523/525/527运动手表组成框图，主要功能有显示、存储、传感器、震动马达和音频输入和输出。
 
 ```{figure} assets/sf32lb52X-B-watch-app-diagram-52xU.png
-:align: center
+
 :scale: 60%
 :name: sf32lb52X-B-watch-app-diagram-52xU
 SF32LB520/521/523/525/527运动手表组成框图

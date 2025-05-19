@@ -10,14 +10,14 @@ QSPI-LCD转接板可以从22pin的FPC座子转接，也可以从40pin的双排�
 
 
 ```{figure} assets/52Kit-22p-FPC-pin-define.png
-:align: center
+
 :scale: 60%
 :name: sf32lb5x-lcd-board-back
 SF32LB52-DevKit-LCD板22p FPC座信号定义
 ```
 
 ```{table} SF32LB52-DevKit-LCD-22P分配
-:align: center
+
 :name: SF32LB52-DevKit-LCD-22P-LIST
 
 |管脚|	管脚名称           	   |   功能  |
@@ -49,7 +49,7 @@ SF32LB52-DevKit-LCD板22p FPC座信号定义
 SF32LB52-DevKit-LCD开发板的22pin FPC座子，支持MIPI-DBI(8080)和SPI(3/4wire,2/4data)接口，可以通过软件配置IO的MUX来适配数据格式。
 
 ```{figure} assets/52Kit-LED-driver.png
-:align: center
+
 :scale: 50%
 :name: sf32lb5x-lcd-board-back
 SF32LB52-DevKit-LCD板22p FPC座LED driver电路
@@ -68,13 +68,13 @@ SF32LB52-DevKit-LCD开发板提供一路LED驱动，默认驱动电流40mA，可
 ### 40pin 双排针转接方式
 
 ```{figure} assets/52Kit-2x20p-pin-define.png
-:align: center
+
 :scale: 60%
 :name: sf32lb5x-lcd-board-back
 SF32LB52-DevKit-LCD板40pin 双排针信号定义
 ```
 ```{table} SF32LB56-DevKit-LCD-40P信号定义
-:align: center
+
 :name: SF32LB56-DevKit-LCD-40P-LIST
 
 |管脚|	管脚名称           	   |   功能  |
