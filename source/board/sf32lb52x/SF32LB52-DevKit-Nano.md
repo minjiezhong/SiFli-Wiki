@@ -30,7 +30,7 @@ SF32LB52-DevKit-Nano是基于思澈科技SF32LB52BU56/SF32LB52JUD6芯片的开�
     - -R16N16：板载SF32LB52JUD6芯片，配置如下：
     
         - 合封配置为：
-            - 4MB OPI-PSRAM，接口频率144MHz
+            - 16MB OPI-PSRAM，接口频率144MHz
         
         - 板载128Mb QSPI-NOR Flash，接口频率72MHz，STR模式 
 2.	晶体
