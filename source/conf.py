@@ -75,6 +75,7 @@ html_css_files = [
 ]
 html_js_files = [
     'js/baidu.js',
+    'js/chatbot.js',
 ]
 
 
