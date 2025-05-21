@@ -1,12 +1,12 @@
 // docs/source/_static/chatbot.js
 window.difyChatbotConfig = {
-    token: 'Mu1GufSBWxh9YgEJ',
-    baseUrl: 'http://ai.sifli.com:8008'
+    token: 'bfjEKWdbaWBkgcDC',
+    baseUrl: 'https://ai.sifli.com'
 };
 
 const script = document.createElement('script');
-script.src = 'http://ai.sifli.com:8008/embed.min.js';
-script.id = 'Mu1GufSBWxh9YgEJ';
+script.src = 'https://ai.sifli.com/embed.min.js';
+script.id = 'bfjEKWdbaWBkgcDC';
 script.defer = true;
 document.body.appendChild(script);
 
