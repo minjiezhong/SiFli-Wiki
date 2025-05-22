@@ -1,4 +1,4 @@
-# 4 Ozone相关
+# 4 Ozone
 ## 4.1 Ozone debug连接不成功，
 提示:<br>
 ![alt text](./assets/ozone001.png)<br>   

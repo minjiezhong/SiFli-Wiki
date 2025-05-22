@@ -1,4 +1,4 @@
-# 5 SiFli工具
+# 5 SiFli
 ## 5.1 Impeller下载提示失败，是哪里没配置好吗？
 ![alt text](./assets/sifli001.png)<br>
 根本原因: 16M flash， ER_IROM3指定了地址超出16Mflash0x00000-0xFFFFFF的地址范围，<br> 
@@ -13,7 +13,7 @@ b、确保在显示---高级缩放设置中打开如下选项，否则会出现�
 ![alt text](./assets/sifli005.png)<br> 
 c、正常的butterfli.exe工具界面显示如下，如果有显示错乱，请调整分辨率以及显示百分比。<br> 
 ![alt text](./assets/sifli006.png)<br> 
-## 5.3 在console中即finsh shell命令中，如何用regop读写寄存器值?
+## 5.3  console finsh shell命令，如何用regop读写寄存器值?
 ```
 regop unlock 0000 # 先需要解锁
 regop read 40070018 2  # 16进制不能带0x前缀

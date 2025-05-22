@@ -1,5 +1,5 @@
-# 3 KEIL相关
-## 3.1 修改scons生成的project.uvprojx工程默认配置文件
+# 3 KEIL
+## 3.1 修改配置文件
 scons --target=mdk5 命令， 会基于sdk\tools\build\template\template.uvprojx下的工程，生成当前project.<br>
 uvprojx工程， keil打开template.uvprojx修改后，保存退出后， 下次scons --target=mdk5 命令默认的就跟随template.uvprojx工程修改.<br>
 正确使用，可以减少重复工作，提高效率.<br>

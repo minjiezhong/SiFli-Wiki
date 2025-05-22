@@ -9,7 +9,7 @@ Lcpu的log是从uart3 输出，<br>
 Jlink swd打印hcpu的log 修改方法:<br>
 1) 进入到SDK\example\rt_driver\project\ec-lb555目录<br>
 2) menuconfig->Third party packages->选中Segger RTT package
-去 <br>
+ <br>
 ![alt text](./assets/jlink001.png)<br>
 3) menuconfig->RTOS -> RT-Thread Kernel->Kernel Device Object->the devices name for console 改成segger<br>
 ![alt text](./assets/jlink002.png)<br> 

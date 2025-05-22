@@ -1,6 +1,6 @@
 # 1 编译相关
 ## 1.1 如何把axf文件反汇编为asm汇编或bin文件
-用keil的fromelf.exe工具先将需要反汇编的axf文件放在`C:\Keil_v5\ARM\ARMCC\bin`下面，
+用keil的fromelf.exe工具先将需要反汇编的axf文件放在`C:\Keil_v5\ARM\ARMCC\bin`，
 然后cmd窗口敲击命令：
 ```
 c:\Keil_v5\ARM\ARMCC\bin\fromelf.exe lcpu_rom.axf --text -c >lcpu_rom.asm

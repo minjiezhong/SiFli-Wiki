@@ -76,14 +76,13 @@ html_css_files = [
 html_js_files = [
     'js/baidu.js',
     'js/chatbot.js',
+    'js/custom.js',
 ]
-
-
 html_theme_options = {
-    "accent_color": "blue",
+        "accent_color": "blue",
     # "globaltoc_expand_depth": ,
-    "github_url": "https://github.com/OpenSiFli",
-    "nav_links": [
+        "github_url": "https://github.com/OpenSiFli",
+        "nav_links": [
         {
             "title": "用户指南",
             "url": "docs/index",
@@ -103,11 +102,8 @@ html_theme_options = {
             "url": "about/index",
         },
     ],
-
 }
 
-html_baseurl = 'https://wiki.sifli.com/'
-sitemap_url_scheme = "{link}"
 
 myst_enable_extensions = [
     "amsmath",
@@ -126,4 +122,49 @@ myst_enable_extensions = [
     "tasklist",
 ]
 
+html_baseurl = 'https://wiki.sifli.com/'
+sitemap_url_scheme = "{link}"
+sitemap_filename = "sitemap.xml"
+sitemap_locales = []
+
 myst_fence_as_directive = ["mermaid"]
+
+html_context = {
+    "languages": [
+        ("English", "/en/%s.html", "en"),
+        ("中文", "/%s.html", "zh"),
+    ]
+}
+
+def setup(app):
+    global language, html_baseurl, sitemap_filename, sitemap_locales,html_theme_options,html_context
+    language = app.config.language
+    if language == 'en':
+        html_baseurl = 'https://wiki.sifli.com/en/'
+        sitemap_filename = "../sitemap.xml"
+        sitemap_locales = [None]
+        html_theme_options['nav_links'] = [
+        {
+            "title": "User Guide",
+            "url": "docs/index",
+        },
+        {
+            "title": "Examples",
+            "url": "https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/example/hal/index.html",
+            "external": True,
+        },
+        {
+            "title": "API Documentation",
+            "url": "https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/api/index.html",
+            "external": True,
+        },
+        {
+            "title": "About Us",
+            "url": "about/index",
+        },
+    ]
+
+    
+
+
+    

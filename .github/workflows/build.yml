@@ -25,7 +25,11 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Build documentation
-        run: sphinx-build -b html ./source ./build -E
+        run: |
+          cp -r ./source ./en
+          python Translation.py ./source ./en
+          sphinx-build -b html ./source ./build -E
+          sphinx-build -b html -D  language=en ./en ./build/en -E
       
       - name: compress png
         run: python3 ./tools/compress_png.py
