@@ -55,13 +55,14 @@ DPI接口输出的颜色格式
 ***
 
 
-
-```{important}
-
-DPI屏幕对RAM的读取稳定性有要求，所以尽量保证这块RAM只有刷屏操作，没有其他操作（比如一些频繁访问的全局变量、线程栈、或者其他DMA会访问的buffer等），否则可能会导致显示出现异常：包括出现一些黑线、屏幕右侧出现抖动等。
+## 带宽要求
+DPI屏幕的刷屏对framebuffer所在的RAM的读取稳定性有要求，所以尽量保证这块RAM只有刷屏操作，没有其他操作（比如一些频繁访问的全局变量、线程栈、或者其他DMA会访问的buffer等），否则可能会导致显示出现异常：包括出现一些黑线、屏幕右侧出现抖动等。
 
 一般来说SRAM的带宽是足够的，不需要单独指定，但是PSRAM的带宽可能会不满足，所以如果刷屏buffer在PSRAM上时，最好满足前面说的条件。
-```
+
+如图所示，就是buffer放在PSRAM上面，带宽不够时闪现的画面（带宽不够是因为有CPU在填充PSRAM内下一帧的framebuffer）
+![alt text](assets/lcd_dpi_psram_bandwidth_exhausted.png)
+
 
 
 ## DPI_AUX模式的使用限制
