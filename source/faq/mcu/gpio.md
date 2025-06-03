@@ -51,7 +51,7 @@ rt_pin_irq_enable(160,1); //使能中断
 1，DRV层函数不能修改GPIO的Funtion，需要用HAL层函数，默认在芯片上电或者standby醒来过程中，pin初始化BSP_PIN_Init函数内设置;<br>
 2，Hcpu可以完全操作Lcpu的资源，包括PB口，但是Lcpu不能直接读写PA口，否则会出现Hardfault;<br>
 3，采用pin的设备读写操作前，需要rt_pin_mode先设置mode，hal层设置了输入输出也不行;<br>
-4，standby/deep唤醒时，GPIO电平会保持不变（55系列Hcpu会有10ms保持默认上下拉状态），软件会自动恢复到最初的电平状态;<br>
+4，采用RTT层操作GPIO，进入Standby休眠后，IO状态已经做了自动备份和恢复，备份函数`pm_pin_backup();`恢复函数`pm_pin_restore();`,执行`HAL_HPAON_DISABLE_PAD();`后，此时操作GPIO，GPIO对外输出电平也会保持不变，执行`HAL_HPAON_ENABLE_PAD();`后，GPIO和pinmux的寄存器配置就会输出到外部GPIO；Deep休眠GPIO状态会保持，不会变;<br>
 5，RTT层的GPIO操作，也可以参考RTT官网:<br> [PIN设备 (rt-thread.org)](https://www.rt-thread.org/document/site/#/)：
 <br>![alt text](./assets/gpio/gpio001.png)<br> 
 
@@ -82,7 +82,9 @@ value = HAL_GPIO_ReadPin((GPIO_TypeDef *)hwp_gpio1, 48); //读PA48的值：
 value = HAL_GPIO_ReadPin((GPIO_TypeDef *)hwp_gpio2, 48); //读PB48的值：
 ```
 **注意:**<br> 
-HAL层操作GPIO，要参数来区分hcpu和lcpu，因此不能再用DRV层把PB48 当作96+48来操作<br>
+1，HAL层操作GPIO，要参数来区分hcpu和lcpu，因此不能再用DRV层把PB48 当作96+48来操作；<br>
+2，HAL层操作GPIO，进入Standby休眠后，IO状态已经做了自动备份和恢复，备份函数`pm_pin_backup();`恢复函数`pm_pin_restore();`,执行后`HAL_HPAON_DISABLE_PAD();`后GPIO对外输出电平会保持不变，执行`HAL_HPAON_ENABLE_PAD();`后，GPIO和pinmux的寄存器就会输出到外部GPIO；<br>
+
 
 * PBR口操作方法：<br>
 ```c

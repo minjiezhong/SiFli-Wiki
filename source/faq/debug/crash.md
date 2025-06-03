@@ -11,7 +11,11 @@
 <br>![alt text](./assets/crash/crash008.png)<br>
 
 3. 数据导出<br>
-终端死机后，会保存数据到配置的位置，在重启后可以用手机APP`SiFli_BLE`导出，步骤如下：
+终端死机后，会保存数据到配置的位置，在重启后可以用手机APP`SiFli_BLE`导出，SiFli APP的安装包apk和源码可以通过github下载：<br>
+[SiFli APP Demo Release](https://github.com/OpenSiFli/SiFli_OTA_APP/releases/tag/1.0.10)<br>
+[SiFli_OTA_APP Demo](https://github.com/OpenSiFli/SiFli_OTA_APP)
+
+步骤如下：
 <br>![alt text](./assets/crash/crash003.png)![alt text](./assets/crash/crash004.png)![alt text](./assets/crash/crash005.png)![alt text](./assets/crash/crash006.png)![alt text](./assets/crash/crash007.png)<br>
 
 4. 数据解析<br>

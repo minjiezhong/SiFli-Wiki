@@ -90,3 +90,6 @@ Regs-------读寄存器组织<br>
 wreg-------写寄存器<br>
 mem--------读内存<br>
 w4--------写内存<br>
+## 2.5 没有SWD口用SiFliUsartServer连接Jlink方法
+52系列之后MCU没有了SWD接口，如果要用Jlink或者Ozone来debug，可以采用SiFliUsartServer.exe工具，Jlink使用方法如下图设置：
+![alt text](./assets/jlink013.png)<br>  

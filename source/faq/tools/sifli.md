@@ -28,6 +28,28 @@ regop write 40007100 200 # 16进制不能带0x前缀
 msh />crystal_get
 FACTORY_CFG_ID_CRYSTAL read fail with 0
 ```
+对应代码：
+```c
+int32_t crystal_get(int32_t argc, char **argv)
+{
+    int res;
+    uint32_t cal_value;
+
+    res = rt_flash_config_read(FACTORY_CFG_ID_CRYSTAL, (uint8_t *)&cal_value, sizeof(cal_value));
+    if (res <= 0)
+    {
+        rt_kprintf("FACTORY_CFG_ID_CRYSTAL read fail with %d\n", res);
+        return -1;
+    }
+    else
+    {
+        rt_kprintf("Get CRYSTAL cal_value 0x%x\n", cal_value);
+    }
+
+    return 0;
+}
+MSH_CMD_EXPORT(crystal_get, crystal_get);
+```
 2,56x系列solution代码使用otp_factory_re ad读取所有otp分区数据,如下图：<br> 
 ![alt text](./assets/sifli008.png)<br> 
 
