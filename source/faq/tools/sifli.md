@@ -50,7 +50,7 @@ int32_t crystal_get(int32_t argc, char **argv)
 }
 MSH_CMD_EXPORT(crystal_get, crystal_get);
 ```
-2,56x系列solution代码使用otp_factory_re ad读取所有otp分区数据,如下图：<br> 
+2,56x系列solution代码使用otp_factory_read读取所有otp分区数据,如下图：<br> 
 ![alt text](./assets/sifli008.png)<br> 
 
 
@@ -132,9 +132,10 @@ d，otp_read 0 1 /*该命令读取所有的OTP*/<br>
 00> 0xff  0xff  0xff  0xff  
 00> ULOG_WARN: trace loss 97,521
 ```
-2，OTP数据解读：<br> 
-OTP里面的数据是按照ID+LEN+DATA排放。<br> 
-a，ID占用一个字节，在头文件里面定义好了几个ID；LEN占用一个字节，也就限制了一个ID的内容不能超过255字节；
+2，OTP数据解读：<br>
+OTP里面的数据是按照‌TLV格式（Tag-Length-Value）存放的，即对应ID+LEN+DATA存放。<br> 
+‌TLV格式（Tag-Length-Value）是一种常用的数据序列化格式，主要用于数据包或消息的有效载荷编码。‌TLV格式将数据划分为三个主要部分：Tag（标签）、Length（长度）和Value（值）。<br> 
+a，ID占用一个字节，在头文件里面定义好了ID；LEN占用一个字节，也就限制了一个ID的内容不能超过255字节；
 DATA是实际的数据，按照ID自己定义的数据格式存放，OTP不关心实际数据。 <br> 
 各个ID是紧密排放，没有其他同步字，所以查询的时候必然是从头开始，一个ID一个ID的查找。<br> 
 b，修改已经存在的ID数据时，首先要从头开始查找，找到对应的ID，检测长度，如果新设置的长度与之前长度一致，则数据保存到同样位置，
