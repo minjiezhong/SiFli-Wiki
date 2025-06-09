@@ -80,6 +80,12 @@ html_js_files = [
 ]
 html_theme_options = {
         "accent_color": "blue",
+        "announcement": """
+            <div style="text-align: center">
+                SF32LB52芯片黄山派已发布，欢迎访问
+                <a href='https://lckfb.com/activities/lckfb-hspi-sf32lb52-ulp/you-hui'>思澈&立创黄山派</a>。
+            </div>
+        """,
     # "globaltoc_expand_depth": ,
         "github_url": "https://github.com/OpenSiFli",
         "nav_links": [
