@@ -34,6 +34,13 @@
 *   - GraphicsTool
     - 图片/视频转换工具，用于生成思澈平台图形显示素材
     - [GraphicsTool工具包][GraphicsTool]
+*   - Ozone
+    - Segger公司的在线调试工具 [[使用方法](../faq/tools/ozone.md/)]
+    - [Ozone - The J-Link Debugger Windows 64-bit Installer](https://www.segger.cn/downloads/jlink/#Ozone)
+*   - Trace32
+    - Lauterbach公司的离线调试工具 [[使用方法](../faq/tools/trace32.md/)]
+    - [Simulator for ARM/CORTEX/XSCALE
+  simarm.zip](https://repo.lauterbach.com/download_demo.html)
 :::
 
 
