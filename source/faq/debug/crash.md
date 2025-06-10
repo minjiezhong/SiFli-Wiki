@@ -23,4 +23,4 @@
 <br>![alt text](./assets/crash/crash010.png)<br>
 <br>![alt text](./assets/crash/crash009.png)<br>
 分析方法可以参照章节：<br>
-[6.1 用Trace32恢复Hcpu死机现场](../tools/trace32.md/#61-用trace32恢复hcpu死机现场)
+[6.2 用Trace32恢复Hcpu死机现场](../tools/trace32.md#Mark_用Trace32恢复Hcpu死机现场)

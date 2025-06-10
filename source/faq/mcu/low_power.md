@@ -235,7 +235,7 @@ char i;
 MSH_CMD_EXPORT(sleep, forward sleep command); /* 导出到 msh 命令列表中 */
 ```
 3，串口shell，输入sleep standby，允许睡眠，输入sleep off，不允许进入睡眠，输入sleep down 进入hibernate关机模式。<br>
-
+<a name="87_Standby待机和Standby关机IO内部常见的漏电模型"></a>
 ## 8.7  Standby待机和Standby关机IO内部常见的漏电模型
 ### 8.7.1 标准IO口模型
 <br>![alt text](./assets/lowp/lowp023.png)<br> 
@@ -338,7 +338,7 @@ BSP_GPIO_Set(LCD_VCC_EN, 0, 1); //PA31输出低电平
 ```    
 带唤醒功能的IO口，还有唤醒输入另一套输入通道，配置为高阻态，唤醒输入通道还有漏电风险，必须有内部或外部上拉，如下图，不同芯片唤醒源IO不同，需要查看对应的Pin_config文档<br>
 <br>![alt text](./assets/lowp/lowp029.png)<br> 
-
+<a name="88_Hibernate关机常见的唤醒IO内部漏电模型"></a>
 ## 8.8  Hibernate关机常见的唤醒IO内部漏电模型
 ### 8.8.1 Hibernate关机下IO的状态
 	普通IO（不带唤醒功能）<br>

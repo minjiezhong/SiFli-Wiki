@@ -4,7 +4,7 @@
 可以直接在Segger公司官网下载，如果是windows系统，选择windows版本，Ozone版本可以选择最新的
 ![alt text](./assets/ozone013.png)<br> 
 Segger公司的在线调试工具下载地址<br>
-[Ozone - The J-Link Debugger Windows 64-bit Installer](https://www.segger.cn/downloads/jlink/#Ozone) [[调试死机方法](../faq/tools/ozone.md/)]
+[Ozone - The J-Link Debugger Windows 64-bit Installer](https://www.segger.cn/downloads/jlink/#Ozone) [[调试死机方法](../tools/ozone.md#43Ozone单步调试Debug)]
  2. 配置Device、MCU外设寄存器和RT-Thread OS脚本<br> 
  A. 把`SiFli-SDK\tools\flash\jlink_drv\JLinkDevices.xml`文件替换Ozone配置`C:\Users\yourname\AppData\Roaming\SEGGER\JLinkDevices\JLinkDevices.xml`，另外`C:\Users\yourname\AppData\Roaming\SEGGER\JLinkDevices\Devices\`目录下，要创建一个目录SiFli，并把`SiFli-SDK-i\tools\flash\jlink_drv\sf32lb52x\SF32LB52X_*.elf`复制过去，对应目录和文件如下：<br> 
  ![alt text](./assets/ozone016.png)<br>
@@ -35,6 +35,7 @@ C:\Program Files\SEGGER\Ozone\JLinkDevices.xml
 C:\Users\yourname\AppData\Roaming\SEGGER\JLinkDevices.xml
 C:\Users\yourname\AppData\Roaming\SEGGER\JLinkDevices\Devices\SF32LB55X****.elf
 ```
+<a name="43Ozone单步调试Debug"></a>
 ## 4.3 Ozone单步调试Debug
 1， Jlink默认connect会连接到hcpu，如果调试Hcpu，这一步可以跳过，直接debug Hcpu，如果要debug Lcpu，可以在windows cmd命令窗口执行SDK\tools\segger\jlink_lcpu_a0.bat（55），jlink_lcpu_pro.bat（58），jlink_lcpu_56x.bat（56）， 执行该批处理，执行的是\tools\segger\jlink_lcpu_xxx.jlink里面的几条命令:<br>
 ```

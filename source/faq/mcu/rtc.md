@@ -104,7 +104,7 @@ int app_set_default_system_time(void)
     {
         setting_time_t default_time = {0};
         default_time.year = SIFLI_DEFAULT_YEAR;
-        default_time.month = SIFLI_DEFAUL：T_MON;
+        default_time.month = SIFLI_DEFAULT_MON;
         default_time.day = SIFLI_DEFAULT_DAY;
         default_time.hour = SIFLI_DEFAULT_HOUR;
         default_time.min = SIFLI_DEFAULT_MIN;

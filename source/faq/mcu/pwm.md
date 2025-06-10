@@ -97,7 +97,7 @@ Hcpu进入idle线程后，主频会变低，相对应Hcpu的PA31口的PWM频率�
 <br>![alt text](./assets/pwm/pwm008.png)<br>    
 2、设置对应脚为lptim3_pwm模式,比如PB44，常用的引脚为PB43~PB46<br>
 ```c
-HAL_PIN_Set(PAD_PB44, LPTIM3_OUT, PIN_NOPULL, 0)；
+HAL_PIN_Set(PAD_PB44, LPTIM3_OUT, PIN_NOPULL, 0);
 MODIFY_REG(hwp_lpsys_aon->DBGMUX,LPSYS_AON_DBGMUX_PB44_SEL_Msk,                        MAKE_REG_VAL(1,LPSYS_AON_DBGMUX_PB44_SEL_Msk,LPSYS_AON_DBGMUX_PB44_SEL_Pos));
 ```
 3、定义宏PM_WAKEUP_PIN_AS_OUTPUT_IN_SLEEP 让睡眠下也继续输出

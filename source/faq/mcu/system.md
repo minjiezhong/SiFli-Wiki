@@ -23,14 +23,14 @@ Lcpu中，可以供客户调用的函数和变量，都通过symble file的方�
 
 ## 10.2 获取当前重启方式接口
 目前SF32LB55X芯片，可以辨别的启动状态如下:<br> 
-```c
+```
 /** power on mode */
 typedef enum
 {
     PM_COLD_BOOT = 0，  /**< cold boot */
     PM_STANDBY_BOOT,   /**< boot from standby power mode */
     PM_HIBERNATE_BOOT, /**< boot from hibernate mode, system can be woken up by RTC and PIN precisely */
-    PM_SHUTDOWN_BOOT   /**< boot from shutdown mode, system can be woken by RTC and PIN, but wakeup time is not accurate */
+    PM_SHUTDOWN_BOOT,   /**< boot from shutdown mode, system can be woken by RTC and PIN, but wakeup time is not accurate */
 } pm_power_on_mode_t;
 ```
 可以通过调用:<br> 

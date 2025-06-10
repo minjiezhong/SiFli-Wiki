@@ -6,7 +6,7 @@
 <br>![alt text](./assets/trace32018.png)<br>
 Lauterbach公司的离线调试工具下载地址：<br>
 [Simulator for ARM/CORTEX/XSCALE
-  simarm.zip](https://repo.lauterbach.com/download_demo.html) [[使用方法](#62-用trace32恢复hcpu死机现场)]<br>
+  simarm.zip](https://repo.lauterbach.com/download_demo.html) [[使用方法](#Mark_用Trace32恢复Hcpu死机现场)]<br>
 **2. 配置方法**<br>
 打开安装说明文件`SiFli-SDK\tools\crash_dump_analyser\INSTALL.md`
 ```
@@ -20,6 +20,7 @@ Lauterbach公司的离线调试工具下载地址：<br>
 <br>![alt text](./assets/trace32019.png)<br>
 **3. Trace32运行方法** <br>
 该软件免安装，鼠标双击`simarm`目录内`t32marm.exe`可执行文件，就可以打开Trace32<br>
+<a name="Mark_用Trace32恢复Hcpu死机现场"></a>
 ## 6.2 用Trace32恢复Hcpu死机现场
 1，参照章节[5.8 Dump内存方法](../tools/sifli.md#Mark_Dump内存方法) Dump内存方法，Dump出内存和编译生成的axf文件放在一个目录内<br>
 2，运行sdk目录下\tools\crash_dump_analyser\simarm\t32marm.exe<br>
@@ -56,7 +57,7 @@ LR <-> R14
 PC <-> R15
 ```
 <br>![alt text](./assets/trace32007.png)<br> 
-3）还有一种方法，直接从hardfault的现场手动恢复，参考6.6 Trace32手动恢复死机现场方法<br>
+3）还有一种方法，直接从hardfault的现场手动恢复，参考[Trace32手动恢复死机现场方法](../debug/dump.md#33Trace32手动恢复死机现场方法) <br>
 4）在hardfaul`RT_ERROR_HW_EXCEPTION` 死机的情况下，要特别留意出问题的PC汇编指令，要考虑为什么出现异常地址，异常指令，如下图：
 <br>![alt text](./assets/trace32020.png)<br>  
 ## 6.3 用Trace32恢复LCPU死机现场

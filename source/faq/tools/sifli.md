@@ -63,6 +63,7 @@ scons --board=em-lb525 --target=si
 ```
 2，SourceInsight工具新建工程后，可以选择`菜单：project -> Add and Remove Project Files ->Add from list... `导入生成的`si_filelist.txt`进入工程，便于查看代码<br> 
 ![alt text](./assets/sifli009.png)<br> 
+<a name="5655X查看芯片工厂校准区OTP"></a>
 ## 5.6 55X查看芯片工厂校准区OTP/Flash数据方法
 1，可以用于查看ADC，晶体是否校准，是否被覆盖，以及序列号，蓝牙地址，名字等等。<br> 
 下面是操作方法：<br> 

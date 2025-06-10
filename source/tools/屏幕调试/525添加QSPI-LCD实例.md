@@ -85,7 +85,7 @@ config LCD_USING_NV3041A #添加该配置，Kconfig中才能select上
 ![alt text](./assets/em-lb525-lcd-interface.png)<br>
 #### 4.2 飞线连接
 如果新的屏幕模组，排线排列不一致，就需要自己设计排线转接板或者从插针飞线调试。  
-转接板的设计可以参考[SF32LB52-DevKit-LCD转接板制作指南](../../sf32lb52x/SF32LB52-DevKit-LCD-Adapter.md)  
+转接板的设计可以参考[SF32LB52-DevKit-LCD转接板制作指南](../../board/sf32lb52x/SF32LB52-DevKit-LCD-Adapter.md#sf32lb52-devkit-lcd转接板制作指南)  
 ### 5 屏驱动配置
 #### 5.1 默认IO配置
 如果采用的默认IO，此处可以跳过

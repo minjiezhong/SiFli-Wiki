@@ -43,7 +43,7 @@ __ROM_USED int rtthread_startup(void)
 
 ## 2.2 Ozone单步调试配置
 请参考Ozone工具相关章节：<br>
-[Ozone或者keil如何单步debug Lcpu](../tools/ozone.md/#42-ozone或者keil如何单步debug-lcpu)
+[4.3 Ozone单步调试Debug](../tools/ozone.md/#43Ozone单步调试Debug)
 ## 2.3 Keil单步调试配置
 <br>![alt text](./assets/icd/icd001.png)![alt text](./assets/icd/icd002.png)![alt text](./assets/icd/icd003.png)![alt text](./assets/icd/icd004.png)![alt text](./assets/icd/icd005.png)![alt text](./assets/icd/icd006.png)<br>
 - 导入axf文件的方法：<br>

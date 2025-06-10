@@ -54,7 +54,7 @@ PS：编译的时候需要将ec-lb555_lcpu下的build手动删除掉，如果之
 SN和MAC在产线下载版本时写入到设备中，以TLV格式保存，
 TLV 是一种常用的数据编码格式，它由标签（Type）、长度（Length）和值（Value）三部分组成，即按照ID+LEN+DATA排放。<br>
 数据格式可以参考章节：
-[5.6 55X查看芯片工厂校准区OTP/Flash数据方法](../tools/sifli.md/#56-55x查看芯片工厂校准区otpflash数据方法)
+[5.6 55X查看芯片工厂校准区OTP/Flash数据方法](../tools/sifli.md#5655X查看芯片工厂校准区OTP)
 
 type |length| value
 :--|:--|:--

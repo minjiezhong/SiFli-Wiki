@@ -97,7 +97,7 @@ config LCD_USING_NV3052C #添加该配置，Kconfig中才能select上
 如果购买的是匹配的屏幕模组，直接排线连接到插座即可<br>
 ### 4.2 飞线连接
 如果新的屏幕模组，排线排列不一致，就需要自己设计排线转接板或者从插针飞线调试。  
-转接板的设计可以参考[SF32LB52-DevKit-LCD转接板制作指南](../../sf32lb52x/SF32LB52-DevKit-LCD-Adapter.md)  
+转接板的设计可以参考[SF32LB52-DevKit-LCD转接板制作指南](../../board/sf32lb52x/SF32LB52-DevKit-LCD-Adapter.md#qspi-lcd接口转接板)  
 ## 5 屏驱动配置
 ### 5.1 默认IO配置
 如果采用的默认IO，此处可以跳过
