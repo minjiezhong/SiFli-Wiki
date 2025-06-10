@@ -173,6 +173,7 @@ PMU的AON_BG寄存器，会在软件初始化时从EFUSE读取值更新该寄存
 如下，对应0x500ca024寄存器为0x39，不是默认0x18，证明已经校准<br> 
 ![alt text](./assets/sifli012.png)<br>   
 ![alt text](./assets/sifli013.png)<br>   
+<a name="Mark_Dump内存方法"></a>
 ## 5.8 Dump内存方法
 ## 5.8.1 52x，56x用串口dump内存现场方法
 打开`sdk\tools\crash_dump_analyser\script`目录，执行AssertDumpUart.exe，选择对应保存bin的路径，内存配置，芯片型号（支持52x，56x），串口号，点击导出，开始保存内存内容为bin文件，

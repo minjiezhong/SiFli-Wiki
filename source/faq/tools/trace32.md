@@ -1,6 +1,27 @@
 # 6 Trace32
-## 6.1 用Trace32恢复Hcpu死机现场
-1，参照章节[5.8 Dump内存方法](../tools/sifli.md/#58-dump内存方法) Dump内存方法，Dump出内存和编译生成的axf文件放在一个目录内<br>D
+## 6.1 Trace32下载和配置方法
+**1. 下载Trace32** <br>
+可以直接在Lauterbach公司的官网下载，如下图：<br>
+版本选择ARM版本的[simarm.zip](https://repo.lauterbach.com/download_demo.html)，免费版本在线调试和Script长度有限制，SiFli的全系列MCU目前只用到了离线调试功能；
+<br>![alt text](./assets/trace32018.png)<br>
+Lauterbach公司的离线调试工具下载地址：<br>
+[Simulator for ARM/CORTEX/XSCALE
+  simarm.zip](https://repo.lauterbach.com/download_demo.html) [[使用方法](#62-用trace32恢复hcpu死机现场)]<br>
+**2. 配置方法**<br>
+打开安装说明文件`SiFli-SDK\tools\crash_dump_analyser\INSTALL.md`
+```
+# Installation Guide
+
+- Download simarm from the link below: https://www2.lauterbach.com/download/simarm.zip
+- Extract all files in `simarm.zip` to `simarm` folder, `simarm` folder should be in `crash_dump_analyser` folder
+- Replace t32.cmm and t32.men in `simarm` folder with the ones in `patch` folder
+```
+下载的压缩包解压到`SiFli-SDK\tools\crash_dump_analyser\`目录内，再把此目录的`patch`的内容复制到刚解压的`simarm`目录内，如下图：
+<br>![alt text](./assets/trace32019.png)<br>
+**3. Trace32运行方法** <br>
+该软件免安装，鼠标双击`simarm`目录内`t32marm.exe`可执行文件，就可以打开Trace32<br>
+## 6.2 用Trace32恢复Hcpu死机现场
+1，参照章节[5.8 Dump内存方法](../tools/sifli.md#Mark_Dump内存方法) Dump内存方法，Dump出内存和编译生成的axf文件放在一个目录内<br>
 2，运行sdk目录下\tools\crash_dump_analyser\simarm\t32marm.exe<br>
 3，查看Hcpu死机，点击HA按钮（HCPU assertion），如果有些bin不存在（例如有的dump没有PSRAM2），可以勾掉去掉。
 <br>![alt text](./assets/trace32001.png)<br>
@@ -28,14 +49,21 @@ RETURN ADDR: 申请者地址
 1）从Jlink halt的log信息加载现场栈 HR(HCPU Registers)按钮用于恢复没有走到异常处理程序的CPU寄存器 点击按钮后选择导出现场的 log.txt 文件，他将把里面HCPU的16个寄存器回填到trace32
 <br>![alt text](./assets/trace32006.png)<br> 
 2）从log里面打印的16个寄存器中，回填到trace32的register窗口中
+```
+#提示：ARM内核中，寄存器对应关系如下：
+SP <-> R13
+LR <-> R14
+PC <-> R15
+```
 <br>![alt text](./assets/trace32007.png)<br> 
 3）还有一种方法，直接从hardfault的现场手动恢复，参考6.6 Trace32手动恢复死机现场方法<br>
-
-## 6.2 用Trace32恢复LCPU死机现场
+4）在hardfaul`RT_ERROR_HW_EXCEPTION` 死机的情况下，要特别留意出问题的PC汇编指令，要考虑为什么出现异常地址，异常指令，如下图：
+<br>![alt text](./assets/trace32020.png)<br>  
+## 6.3 用Trace32恢复LCPU死机现场
 与HCPU的恢复现场类似，选择LA按钮，按提示操作即可。 需要注意的是LCPU 多了rom axf的同步加载，可以按需要勾选。
 <br>![alt text](./assets/trace32008.png)<br>  
 
-## 6.3 Trace32常用命令
+## 6.4 Trace32常用命令
 1， 菜单：View->List Soure，调出查看源码窗口，或者命令L 10063c或者l 0x10063c， 可以查看PC指针为0x10063c的代码。<br>
 2， 菜单：VarT->View, 或者命令：v.v * ，调出查看变量窗口，可以查找变量，函数，支持*通配符，如如下图：
 <br>![alt text](./assets/trace32009.png)<br>  
@@ -75,7 +103,7 @@ switch_to.cmm
 `(uint16_t *)0x101fa2b9`
 <br>![alt text](./assets/trace32013.png)<br>  
 
-## 6.4 Trace32工程路径重定位
+## 6.5 Trace32工程路径重定位
 1，trace32恢复dump出来的内存文件在不同电脑恢复现场，会出现如下只显示汇编无法显示C语言的情况：<br>
 原因是执行save_ram_a0.bat进行dump内存工程的路径，跟你trace32复现路径工程所在位置不一致。<br>
 <br>![alt text](./assets/trace32014.png)<br>  
