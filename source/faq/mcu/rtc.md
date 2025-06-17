@@ -35,7 +35,24 @@ d， 因此怀疑Vbuck1供电存在问题， 更换DCDC 4.7uH电感，没改善�
 之前支持， 碰到过很多DCDC电感Isat电流不够， 导致的不良现象，
 因此希望硬件工程师， 能够多留意DCDC电感，和滤波电容选型和布局走线.<br>
 
-## 5.2 55X系列MCU的RTC时钟从PB口输出32768方法
+## 5.2 32768晶体的时钟通过IO输出方法
+1. 52/56输出32768时钟方法<br>
+
+52的PA24-PA27,56的PBR0-PBR3为低功耗IO，可以在deep/standby休眠的时候，都可以持续输出32768hz时钟，
+具体配置方法如下：<br>
+```c
+#if defined(SF32LB52X)
+    HAL_PIN_Set(PAD_PA24, PBR_CLK_RTC,  PIN_NOPULL, 1); //output 32768 clk
+    HAL_PIN_Set(PAD_PA25, PBR_CLK_RTC,  PIN_NOPULL, 1); //output 32768 clk
+    HAL_PIN_Set(PAD_PA26, PBR_CLK_RTC,  PIN_NOPULL, 1); //output 32768 clk
+    HAL_PIN_Set(PAD_PA27, PBR_CLK_RTC,  PIN_NOPULL, 1); //output 32768 clk
+#elif defined(SF32LB56X)
+    HAL_PIN_Set(PAD_PBR1, PBR_CLK_LP,  PIN_NOPULL, 0); //output 32768 clk
+    HAL_PIN_Set(PAD_PBR2, PBR_CLK_LP,  PIN_NOPULL, 0); //output 32768 clk
+    HAL_PIN_Set(PAD_PBR3, PBR_CLK_LP,  PIN_NOPULL, 0); //output 32768 clk
+#endif
+```
+2. 55系列PB口输出32768时钟方法<br>
 例如：通过PB01输出32768时钟，具体方法:<br>
 Jlink连接后<br>
 ```
@@ -49,6 +66,8 @@ B，命令输入: w4 0x4004F018 0x8 把LSYSCFG其中的DBGCLKR bit3 CLK_EN置1�
 HAL_PIN_Set(PAD_PB01, DBG_CLK, PIN_NOPULL, 0);
 _WWORD(0x4004F018, 0x8);	// PB01 output 32768 clk
 ```
+**注意：**<br>
+IO输出的32768hz时钟的前提是：板载需要有32768晶体，并且没有打开宏`#define LXT_DISABLE 1`<br>
 
 ## 5.3 省32768晶体方案采用内部RC时钟方法
 1，开启方法：<br>
@@ -117,7 +136,7 @@ int app_set_default_system_time(void)
 ```
 
 
-## 5.76 省32768晶体方案（内部RC10K时钟）走时不准调整方法
+## 5.6 省32768晶体方案（内部RC10K时钟）走时不准调整方法
 1，确保48Mhz的已校准，保证48M晶体的精度；<br>
 2，可以调整校准的补偿，方法如下：<br>
 ```c
