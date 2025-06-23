@@ -73,3 +73,53 @@ rt_flash_config_read(FACTORY_CFG_ID_SN, (uint8_t *)mac, sizeof(mac));
 //获取MAC地址方法
 rt_flash_config_read(FACTORY_CFG_ID_MAC, (uint8_t *)&mac[0], 6);
 ```
+<a name="34Flash下载驱动对应关系"></a>
+## 3.4 Flash下载驱动对应关系
+
+**Uart下载驱动文件** <br>
+Uart下载驱动文件为*.bin文件，如下：<br>
+ram_patch_52X.bin --对应52X内部或者外挂Nor Flash的驱动<br>
+ram_patch_52X_NAND.bin  --对应52X外部Nand Flash/串口波特率低于6M时用的驱动<br>
+ram_patch_52X_NAND_6M.bin --对应52X外部Nand Flash/串口波特率等于6M时用的驱动<br>
+ram_patch_52X_NAND_8M.bin --对应52X外部Nand Flash/串口波特率等于8M时用的驱动<br>
+ram_patch_52X_NAND_NOBBM.bin -- 对应52X外部Nand Flash不用BBM（不建立坏块管理区Bad Block Manage）的驱动<br>
+ram_patch_52X_SD.bin --对应sdio接口的sd-nand/sd-emmc的下载驱动<br>
+- IImpeller下载选择和bin的对应关系见`Impeller.ini`内配置
+```ini
+[UART_DRIVER]
+SF32LB55X=ram_patch.bin
+SF32LB55X_SD=ram_patch_SD.bin
+SF32LB56X=ram_patch_56X.bin
+SF32LB56X_NAND=ram_patch_56X_NAND.bin
+SF32LB56X_SD=ram_patch_56X_SD.bin
+SF32LB52X=ram_patch_52X.bin
+SF32LB52X_NAND=ram_patch_52X_NAND.bin
+SF32LB52X_SD=ram_patch_52X_SD.bin
+SF32LB58X_NAND=ram_patch_58X_NAND.bin
+SF32LB58X=ram_patch_58X.bin
+SF32LB58X_SD=ram_patch_58X_SD.bin
+
+[UART_DRIVER_8M]
+SF32LB56X_NAND=ram_patch_56X_NAND_8M.bin
+SF32LB52X_NAND=ram_patch_52X_NAND_8M.bin
+SF32LB58X_NAND=ram_patch_58X_NAND_8M.bin
+```
+**Jlink下载驱动文件** <br>
+Jlink下载驱动文件为*.elf文件<br>
+位于Jlink的安装目录`C:\Program Files\SEGGER\JLink\Devices\SiFli`或`C:\Users\yourname\AppData\Roaming\SEGGER\JLinkDevices\Devices\SiFli`，打开`cmd.exe`命令行窗口，输入`jlink.exe`，即为Windows系统变量配置用到的Jlink，Impeller用的为该默认Jlink版本
+- Jlink烧录驱动对应关系见配置文件`JLinkDevices.xml`<br>
+```xml
+  <Device>
+    <ChipInfo Vendor="SiFli" Name="SF32LB52X_NOR" Core="JLINK_CORE_CORTEX_M33" WorkRAMAddr="0x20000000" WorkRAMSize="0x60000" />
+    <FlashBankInfo Name="Internal Flash1" BaseAddr="0x10000000" MaxSize="0x8000000"  Loader="Devices/SiFli/SF32LB52X_INT_FLASH1.elf" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1"/>
+    <FlashBankInfo Name="External Flash2" BaseAddr="0x12000000" MaxSize="0x8000000" Loader="Devices/SiFli/SF32LB52X_EXT_FLASH2.elf" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1"/>
+  </Device>
+ 
+  <Device>
+    <ChipInfo Vendor="SiFli" Name="SF32LB52X_NAND" Core="JLINK_CORE_CORTEX_M33" WorkRAMAddr="0x20000000" WorkRAMSize="0x80000" />
+    <FlashBankInfo Name="External Nand2" BaseAddr="0x62000000" MaxSize="0x3e000000" Loader="Devices/SiFli/SF32LB52X_EXT_NAND2.elf" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1"/>
+  </Device>
+```
+**uart_download.bat下载驱动**<br>
+在SDK中运行批处理文件`uart_download.bat`时，用的下载Flash驱动为`
+\tools\uart_download\ImgDownUart.exe`文件，该串口驱动是集成在`ImgDownUart.exe`中，目前的版本驱动是没有飞离出来，烧录驱动没法自行修改

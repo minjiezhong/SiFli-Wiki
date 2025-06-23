@@ -22,7 +22,9 @@ https://www.bilibili.com/video/BV1v3USYbEYy/
 
 #### 1.2.1 驱动Bin或者elf修改
 
-下载最新的[Impeller.exe](https://downloads.sifli.com//tools/Impeller_COMMON.7z)工具，里面包含了Flash驱动生成工具UartburnEx.exe
+下载最新的[Impeller.exe](https://downloads.sifli.com//tools/Impeller_COMMON.7z)工具，里面包含了Flash驱动生成工具UartburnEx.exe<br>
+- Impeller工具中烧录驱动对应关系，查看
+[3.4 Flash下载驱动对应关系](../../faq/peripherals/flash.md/#34Flash下载驱动对应关系)
 
 填好Flash的chipid和Flash配置参数，填入到UartburnEx.exe如下界面中，如果在下载时，要新增一个IO口或者通过SF30147电源芯片给Flash供电，也可以添加
 

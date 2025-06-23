@@ -48,3 +48,5 @@ volatile uint32_t flash_dev_id=0xffffffff;
 ```c
 __attribute__ ( (noinline) ) uint8_t _pm_enter_sleep(struct rt_pm *pm)
 ```
+## 1.8 源文件文件编译为Lib方法
+部分客户为了保密的需要或其他原因不愿意公开源码，需要编译出lib库提供给客户使用，SDK中提供了打包成Lib的例程`example\misc\generate_lib`，具体操作方法参加项目目录下`README.md`文档
