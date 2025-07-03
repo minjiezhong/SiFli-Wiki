@@ -277,10 +277,9 @@ SF32LB52-DevKit-Nano是基于思澈科技SF32LB52BU56/SF32LB52JUD6芯片的开�
 
 ## 5. 样品获取
 
-联系思澈科技的FAE，获取开发板。
-- [芯板坊](https://shop599532105.taobao.com/)
-- [findboard](https://findboard.tmall.com/index.htm?spm=a1z10.1-b-s.w5002-25221334624.2.55277c93jgSpbu)
-- [我爱开发板](https://shop580004668.taobao.com/index.htm?spm=a1z10.1-c-s.w5002-21838939070.2.668378e4fyt7U6)
+零售样品与小批量可直接在[淘宝](https://sifli.taobao.com/)购买，批量客户可发邮件到sales@sifli.com或淘宝找客服获取销售联系方式。
+参与开源可以免费申请样品，可加入QQ群674699679进行交流。
+
 
 ## 6. 相关文档
 

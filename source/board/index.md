@@ -10,5 +10,6 @@ sf32lb52x/SF32LB52-DevKit-LCD-Adapter
 <!-- sf32lb52x/SF32LB52-DevKit-ULP -->
 sf32lb52x/SF32LB52-黄山派
 sf32lb52x/SF32LB52-DevKit-Nano
+sf32lb56x/SF32LB56-DevKit-LCD
 
 ```
