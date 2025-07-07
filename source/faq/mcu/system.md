@@ -84,7 +84,7 @@ ROM|64KB|0x0000_0000|0x0000_FFFF
     2020 - 2022 Copyright by SiFli team
    msh >
 ```
-在boot_mode下，用于验证uart下载时，也可以输入help命令验证串口是否通的，如下操作：
+在boot_mode下，进行uart下载前，可以输入help命令验证串口是否通的，如下操作：
 ```
    Serial:c2,Chip:2,Package:0,Rev:0
     \ | /
