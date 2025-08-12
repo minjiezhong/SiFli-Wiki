@@ -72,11 +72,13 @@ html_favicon = './_static/logo_favicon.png'
 
 html_css_files = [
     'custom.css',
+    'lightbox.css',
 ]
 html_js_files = [
     'js/baidu.js',
     'js/chatbot.js',
     'js/custom.js',
+    'js/lightbox.js',
 ]
 html_theme_options = {
         "accent_color": "blue",
