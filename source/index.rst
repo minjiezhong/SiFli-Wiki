@@ -52,6 +52,7 @@
     API 文档 <https://docs.sifli.com/projects/sdk/latest/sf32lb52x/api/index.html>
     faq/index
     appnote/index
+    application/index
 
 .. toctree::
     :caption: 硬件开发
