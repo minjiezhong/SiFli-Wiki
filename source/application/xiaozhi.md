@@ -12,7 +12,7 @@ AI小智是思澈芯片的AI语音助手解决方案，提供了语音识别、�
 
 
 ## 相关文档
-
+- [小智百科](https://docs.sifli.com/projects/xiaozhi/)
 - [快速入门](https://docs.sifli.com/projects/xiaozhi/get-started/)
 - [源码构建](https://docs.sifli.com/projects/xiaozhi/source-build/)
 - [自定义功能](https://docs.sifli.com/projects/xiaozhi/custom/)
