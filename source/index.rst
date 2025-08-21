@@ -62,6 +62,7 @@
     silicon/index
     hardware/index
     board/index
+    module/index
 
 .. toctree::
     :caption: 软件工具
