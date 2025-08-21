@@ -136,7 +136,12 @@ html_context = {
     "languages": [
         ("English", "/en/%s.html", "en"),
         ("中文", "/%s.html", "zh"),
-    ]
+    ],
+    "source_type": "github",
+    "source_user": "OpenSiFli",
+    "source_repo": "SiFli-Wiki",
+    "source_version": "main",  # Optional
+    "source_docs_path": "/source/",  # Optional
 }
 
 def setup(app):
