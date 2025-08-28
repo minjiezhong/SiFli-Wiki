@@ -51,7 +51,8 @@ static LCDC_InitTypeDef lcdc_int_cfg_dsi =
                 .AutomaticClockLaneControl = DSI_AUTO_CLK_LANE_CTRL_ENABLE,
                 .NumberOfLanes = DSI_ONE_DATA_LANE,/* DSI Data Lane数量 */
 /*
- lp模式下的时钟分频比，不用做更改
+ lp模式下的时钟分频比，不用做更改。
+ escape clk  = dsi_phy_clk / 2(DDR) / 8 / TXEscapeCkdiv
 */                
                 .TXEscapeCkdiv = 0x4,
             },
