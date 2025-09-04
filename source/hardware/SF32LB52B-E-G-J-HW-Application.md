@@ -43,7 +43,7 @@ SF32LB52JUD6，合封16MB OPI-PSRAM
 <div align="center"> 表2-1 封装信息表 </div>
 
 ```{table}
-
+:align: center
 |封装名称|尺寸|管脚间距|
 |:--|:-|:-|
 |QFN68L | 7x7x0.85 mm | 0.35 mm |
@@ -97,7 +97,7 @@ SF32LB52JUD6，合封16MB OPI-PSRAM
 <div align="center"> 表4-1 电源供电要求 </div>
 
 ```{table}
-
+:align: center
 |电源管脚| 最小电压(V) | 典型电压(V) | 最大电压(V) | 最大电流(mA) |   详细描述 |
 |:--|:--|:--|:--|:--|:----------------------------------------------------|
 |PVDD       |2.97   |3.3        |3.63   |150    |PVDD系统电源输入，接10uF电容 
@@ -118,7 +118,8 @@ SF32LB52JUD6，合封16MB OPI-PSRAM
 {SUP}`(1)`
 * SF32LB52BU36，需要外供1.8V或3.3V
 * SF32LB52BU56，需要外供3.3V
-* SF32LB52E/G/JUx6，PVDD=1.8V时，内部LDO无法使用，需要外供1.8V；PVDD=3.3V时，内部LDO直接供电，无需外供
+* SF32LB52DUB6，需要外供1.8V
+* SF32LB52E/G/JUx6，内部LDO直接供电，无需外供
 :::
 :::{important}
 系统使用Hibernate mode时，VDD_SIP供电要关闭，否则合封存储的I/O上会有漏电风险。VDD_SIP的电源控制信号请使用专用的PA21引脚。
@@ -148,7 +149,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-4 CPU Mode Table </div>
 
 ```{table}
-
+:align: center
 |工作模式|CPU |外设  |SRAM |IO   |LPTIM |唤醒源 |唤醒时间 |
 |:--|:-------|:----|:----|:----|:---- |:---- |:----   |
 |Active |Run |Run |可访问 |可翻转 |Run |- |- |
@@ -163,7 +164,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center">表4-5 Interrupt wake up source Table </div>
 
 ```{table}
-
+:align: center
 |中断源|管脚   |详细描述  |
 |:--|:-------|:--------|
 |LWKUP_PIN0 |PA24 |中断信号0 |
@@ -192,7 +193,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-6 晶体规格要求 </div>
 
 ```{table}
-
+:align: center
 |晶体|晶体规格要求   |详细描述  |
 |:--|:-------|:--------|
 |48MHz |CL≦12pF（推荐值7pF）△F/F0≦±10ppmESR≦30 ohms（推荐值22ohms）|晶振功耗和CL,ESR相关,CL和ESR越小功耗越低，为了最佳功耗性能，建议采用推荐值CL≦7pF，ESR≦22 ohms.晶体旁边预留并联匹配电容,当CL<9pF时，无需焊接电容|
@@ -202,7 +203,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-7 推荐晶体列表 </div>
 
 ```{table}
-
+:align: center
 |型号|厂家   |参数  |
 |:---|:-------|:--------|
 |E1SB48E001G00E  |Hosonic     |F0 = 48.000000MHz，△F/F0 = -6 ~ 8 ppm，CL = 8.8 pF，ESR = 22 ohms Max TOPR = -30 ~ 85℃，Package =（2016 公制）|
@@ -229,7 +230,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-8 LCD driver支持列表 </div>
 
 ```{table}
-
+:align: center
 | 型号   | 厂家  | 分辨率  | 类型   | 接口 |
 | :-- | :-- | :-- | :-- | :-- |
 | RM69090  | Raydium    | 368*448 | Amoled | 3-Line SPI，4-Line  SPI，Dual data SPI，  Quad data SPI，MIPI-DSI |
@@ -252,7 +253,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-9 SPI/QSPI 信号连接方式 </div>
 
 ```{table}
-
+:align: center
 |spi信号|管脚   |详细描述  |
 |:--|:-------|:--------|
 |CSx |PA03 |使能信号 |
@@ -273,7 +274,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-10 并行JDI屏信号连接方式 </div>
 
 ```{table}
-
+:align: center
 
 | JDI信号  | I/O  | 详细描述   |
 |:--|:-------|:--------|
@@ -291,6 +292,54 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 | JDI_B2   | PA02 | Blue image data (even pixels)                        |
 ```
 
+#### EPD显示接口
+
+芯片支持8bit 并口EPD显示屏接口，如下表所示。
+
+```{table}
+:align: center
+
+| EDP信号  | I/O  | 详细描述   |
+|:--|:-------|:--------|
+| CLK          | PA04 | Clock source driver                    |
+| CKV/CPV      | GPIO | Clock gate driver                      |
+| SPH          | PA06 | Start pulse source driver              |
+| SPV/STV      | GPIO | Start pulse gate driver                |
+| LE           | GPIO | Latch enable source driver             |
+| OE           | GPIO | Output enable source driver            |
+| D0           | PA07 | Data signal source driver bit0         |
+| D1           | PA08 | Data signal source driver bit1         |
+| D2           | PA37 | Data signal source driver bit2         |
+| D3           | PA39 | Data signal source driver bit3         |
+| D4           | PA40 | Data signal source driver bit4         |
+| D5           | PA41 | Data signal source driver bit5         |
+| D6           | PA42 | Data signal source driver bit6         |
+| D7           | PA43 | Data signal source driver bit7         |
+| GMODE        | GPIO | Output mode selection gate driver      |
+| VPOS         | TPS  | Positive power supply source driver    |
+| VNEG         | TPS  | Negative power supply source driver    |
+| VGH          | TPS  | Positive power supply gate driver      |
+| VGL          | TPS  | Negative power supply gate driver      |
+| VCOM         | TPS  | Common connection                      |
+| TPS_WAKEUP   | GPIO | TPS pmic wake up                       |
+| TPS_PWRUP    | GPIO | TPS pmic power up                      |
+| TPS_SDA      | I2C  | TPS pmic I2C sda                       |
+| TPS_SCL      | I2C  | TPS pmic I2C scl                       |
+| TPS_PWRCOM   | GPIO | TPS pmic VCOM_CTRL,vcom enable         |
+| TPS_GOOD     | GPIO | TPS pmic power good output             |
+
+```
+:::{note}
+
+上表中，I/O列里
+- 标记'PA**'的是必须这样分配IO
+- 标记GPIO是可以任意分配IO
+- 标记TPS是指TPS pmic芯片输出到屏的IO
+- 标记I2C是指需要分配I2C功能的IO
+
+:::
+
+
 #### 触摸和背光接口
 
 芯片支持I2C格式的触摸屏控制接口和触摸状态中断输入，同时支持1路PWM信号来控制背光电源的使能和亮度，如下表所示。
@@ -298,7 +347,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-11 触摸和背光控制连接方式 </div>
 
 ```{table}
-
+:align: center
 | 触摸屏和背光信号 | 管脚 | 详细描述                   |
 | ---------------- | ---- | -------------------------- |
 | Interrupt        | PA43 | 触摸状态中断信号（可唤醒） |
@@ -315,7 +364,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-12 SPI NOR/NAND Flash信号连接 </div>
 
 ```{table}
-
+:align: center
 | Flash 信号 | I/O信号 | 详细描述                                    |
 | ---------- | ------- | ------------------------------------------- |
 | CS#        | PA12    | Chip select, active low.                    |
@@ -330,7 +379,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-13 SD NAND Flash和eMMC信号连接 </div>
 
 ```{table}
-
+:align: center
 | Flash 信号 | I/O信号 | 详细描述 |
 | ---------- | ------- | -------- |
 | SD2_CMD    | PA15    | 命令信号 |
@@ -340,7 +389,13 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 | SD2_D2     | PA12    | 数据2    |
 | SD2_D3     | PA13    | 数据3    |
 ```
-
+:::{important}
+- NOR Flash: 外部不用加上拉电阻
+- Nand Flash: PA17(Hold#)加上拉电阻
+- SD Nand Flash: PA13(D3)和PA15(CMD)加上拉电阻
+- eMMC: PA17(D1)、PA13(D3)和PA15(CMD)加上拉电阻
+- 上拉电阻推荐7.5K
+:::
 
 #### 启动设置
 
@@ -359,7 +414,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-14 启动选项设置 </div>
 
 ```{table}
-
+:align: center
 |Bootstrap[1] (PA13) |Bootstrap[0] (PA17)    |Boot From ext memory  |
 | ------------ | ------------ | -------------- |
 | L            | L            | SPI NOR Flash  |
@@ -378,6 +433,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <!-- eMMC只有B3支持，A3要删除 -->
 - eMMC芯片有VCC和VCCQ两种电源域，方式1：可以2个电源一起做控制，关机功耗低，但eMMC在sleep时恢复慢，CPU平均功耗高；方式2：可以单独控制VCC，VCCQ常供不断电，关机功耗比方式1高，但eMMC在sleep时恢复快，CPU平均功耗比方式1低。
 - **所有和启动有关的存储器的电源开关的使能脚必须用PA21控制。**
+- MPI外接32MB及以上容量的NOR Flash时，Flash必须用PA21控制可以断电，使得Flash在MCU重启或进入Hibernate时可以退出4BYTE Mode，否则ROM会认不出Flash。外接16MB及以下容量的NOR Flash时，Flash可以常供电。
 - 参考设计中，PA13和PA17都预留了上拉电阻位置，根据存储介质类型选择上拉电阻，电阻推荐7.5K。
 :::
 
@@ -415,7 +471,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center"> 表4-15 音频信号连接方式 </div>
 
 ```{table}
-
+:align: center
 |音频信号 |管脚   |详细描述 |
 |:---|:---|:---|
 |BIAS |MIC_BIAS |麦克风电源       |
@@ -465,7 +521,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 <div align="center">表4-16 调试口连接方式 </div>
 
 ```{table}
-
+:align: center
 |DBG信号 |管脚   |详细描述 |
 |:---|:---|:---|
 |DBG_UART_RXD |PA18 |Debug UART 接收 |
@@ -743,6 +799,13 @@ USB 充电线测试点必须放置在TVS 管前面，电池座TVS 管 放置在�
 <div align="center"> 图5-28 TVS走线参考 </div>   <br>  <br>  <br>
 
 TVS 管接地脚尽量避免走长线再连接到地，如图5-28所示。
+
+## 相关文档
+
+- [SF32LB52x芯片技术规格书](https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?)
+- [SF32LB52x用户手册](https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?)
+- [SF32LB52-硬件参考设计包](https://downloads.sifli.com/hardware/files/documentation/SF32LB52-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83%E8%AE%BE%E8%AE%A1-20250619.zip?)
+
 
 ## 修订历史
 
