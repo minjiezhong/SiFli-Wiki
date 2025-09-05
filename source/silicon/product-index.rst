@@ -46,7 +46,7 @@ SF32LB52x - 锂电池供电版本
 
       **最佳实践**
       
-      * 小智AI聊天机器人 (`快速入门 <https://docs.sifli.com/projects/xiaozhi/get-started/>`__ | `个性化定制 <https://docs.sifli.com/projects/xiaozhi/custom>`__）
+      * 小智AI聊天机器人 (`快速入门 <https://docs.sifli.com/projects/xiaozhi/get-started/>`__ | `个性化定制 <https://docs.sifli.com/projects/xiaozhi/custom/>`__）
 
 
 SF32LB52X - 3.3V供电版本
@@ -81,7 +81,7 @@ SF32LB52X - 3.3V供电版本
 
       **最佳实践**
       
-      * 小智AI聊天机器人 (`快速入门 <https://docs.sifli.com/projects/xiaozhi/get-started/>`__ | `个性化定制 <https://docs.sifli.com/projects/xiaozhi/custom>`__）
+      * 小智AI聊天机器人 (`快速入门 <https://docs.sifli.com/projects/xiaozhi/get-started/>`__ | `个性化定制 <https://docs.sifli.com/projects/xiaozhi/custom/>`__）
 
 
 
