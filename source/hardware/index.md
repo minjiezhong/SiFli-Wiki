@@ -7,7 +7,8 @@
 [硬件设计指南](/hardware/SF32LB520-3-5-7-HW-Application)
 
 ## SF32LB52X系列
-后缀为字母E、G、J、H的芯片，属于SF32LB52X系列,使用3.3V电源供电。
+后缀为字母B、E、G、J的芯片，属于SF32LB52X系列,使用3.3V电源供电。
+后缀为字母D的芯片，属于SF32LB52X系列,使用1.8V电源供电。
 
 [硬件设计指南](/hardware/SF32LB52B-E-G-J-HW-Application)
 
