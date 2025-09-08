@@ -577,7 +577,10 @@ SF32LB58x系列芯片支持多路PWM输出，可以用做振动马达的驱动�
 
 <div align="center"> 图2.14 振动马达电路图 </div>  <br> <br> <br>
  
-
+:::{important}
+如果软件打开了`#define BSP PM FREQ SCALING 1`的HCPU主频降频功能宏定义,HCPU进入idle线程后，主频会变低，相对应Hcpu的PA口的PWM频率也会变化，
+所以推荐使用PB接口来输出PWM信号。
+:::
 
 ### PBR接口说明
 

@@ -135,7 +135,7 @@ SF32LB56xU供电规格：
 | MIC_BIAS         |     1.4     |      -      |     2.8     |      -       | MIC电源输出                                                |
 | AVDD33_ANA       |    3.15     |     3.3     |    3.45     |      50      | 模拟电源+射频PA电源输入                                      |
 | AVDD33_AUD       |    3.15     |     3.3     |    3.45     |      50      | 模拟音频电源                                                |
-| VDDIO1           |    1.71     |     1.8     |     2.0     |      -       | 内部大核合封存储器电源输入                                    |
+| VDDIO1           |    1.71     |     1.8     |    1.98     |      -       | 内部大核合封存储器电源输入                                    |
 | VDDIO2           |    1.71     |     1.8     |    3.45     |      -       | PA GPIO(PA5~11除外)电源输入                                 |
 | VDDIO3           |    1.71     |     1.8     |    3.45     |      -       | PA5~11电源输入                                              |
 | VDDIO4           |    1.71     |     1.8     |    3.45     |      -       | PB GPIO和内部小核合封Flash电源输入                            |
@@ -569,6 +569,11 @@ SF32LB56xU系列芯片支持多路PWM输出，可以用做振动马达的驱动�
 <img src="assets/56xU/sf32lb56xU-VIB-diagram.png" width="80%" align="center" /> 
 
 <div align="center"> 图4-17 振动马达电路示意图 </div>  <br>  <br>  <br>
+
+:::{important}
+如果软件打开了`#define BSP PM FREQ SCALING 1`的HCPU主频降频功能宏定义,HCPU进入idle线程后，主频会变低，相对应Hcpu的PA口的PWM频率也会变化，
+所以推荐使用PB接口来输出PWM信号。
+:::
 
 ### 音频接口
 
