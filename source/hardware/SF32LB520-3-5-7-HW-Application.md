@@ -51,7 +51,7 @@ SF32LB527UD6，合封16MB OPI-PSRAM
 ```
 
 
-<img src="assets/52xA/SF32LB52x-A-package-layout.png" width="80%" align="center" />  
+<img src="assets/52xA/sf32lb52x-A-package-layout.png" width="80%" align="center" />  
 
 <div align="center"> 图2-1 QFN68L管脚分布 </div>  <br> <br> <br>
 
