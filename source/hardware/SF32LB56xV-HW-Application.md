@@ -139,9 +139,9 @@ SF32LB56xV供电规格：
 | VDDIOA           |    1.71     |     1.8     |    3.45     |      -       | PA12-PA78 I/O电源输入                                     |
 | VDDIOA2          |    1.71     |     1.8     |    3.45     |      -       | PA0-PA11 I/O电源输入                                      |
 | VDDIOB           |    1.71     |     1.8     |    3.45     |      -       | PB I/O电源输入                                            |
-| VDDIOSA          |    1.71     |     1.8     |    3.45     |      -       | SIPA电源输入                                              |
-| VDDIOSB          |    1.71     |     1.8     |    3.45     |      -       | SIPB电源输入    
-| VDDIOSC          |    1.71     |     1.8     |    3.45     |      -       | SIPC电源输入 |                                        
+| VDDIOSA          |    1.71     |     1.8     |    1.98     |      -       | SIPA电源输入                                              |
+| VDDIOSB          |    1.71     |     1.8     |    1.98     |      -       | SIPB电源输入    
+| VDDIOSC          |    1.71     |     1.8     |    1.98     |      -       | SIPC电源输入 |                                        
 ```
 
 SF32LB56xV系列芯片电源管脚外接电容推荐值如表4-2所示。
@@ -630,6 +630,11 @@ SF32LB56xV系列芯片支持多路PWM输出，可以用做振动马达的驱动�
 <img src="assets/56xV/sf32lb56xV-VIB-diagram.png" width="80%" align="center" /> 
 
 <div align="center"> 图4-12 振动马达电路示意图 </div>  <br>  <br>  <br>
+
+:::{important}
+如果软件打开了`#define BSP PM FREQ SCALING 1`的HCPU主频降频功能宏定义,HCPU进入idle线程后，主频会变低，相对应Hcpu的PA口的PWM频率也会变化，
+所以推荐使用PB接口来输出PWM信号。
+:::
 
 ### 音频接口
 
