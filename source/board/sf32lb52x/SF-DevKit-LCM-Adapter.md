@@ -541,7 +541,7 @@ AMOLED屏一般自带PMIC芯片，给面板提供VGH、VGL和VCOM电压，屏驱
 
 <div align="center"> SF32LB58-DevKit-LCD开发板安装方式</div>  <br>  <br>  <br>
 
-[转接板参考设计资料](http://10.23.10.196:19000/web-file/hardware/files/documentation/SFLCM1p85-A-390-450-Adapter_V1.0.epro?)
+[转接板参考设计资料](https://downloads.sifli.com/hardware/files/documentation/SFLCM1p85-A-390-450-Adapter_V1.0.epro?)
 
 ### 4.3inch TFT Module
 （敬请期待）
