@@ -215,7 +215,7 @@ L(电感值) = 4.7uH ± 20%，DCR(直流阻抗) ≦ 0.4 ohm，Isat(饱和电流)
 :::
 
 详细的物料认证信息，请参考：
-[SIFLI-MCU-AVL-认证表](../hardware/index)
+[SIFLI-MCU-AVL-认证表](index)
 
 ### 射频
 
