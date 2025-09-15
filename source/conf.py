@@ -84,8 +84,8 @@ html_theme_options = {
         "accent_color": "blue",
         "announcement": """
             <div style="text-align: center">
-                SF32LB52芯片黄山派已发布，欢迎访问
-                <a href='https://lckfb.com/activities/lckfb-hspi-sf32lb52-ulp/you-hui'>思澈&立创黄山派</a>。
+                思澈 Solution 全面开放：一套产品级方案，加速从原型到量产
+                <a href='https://docs.sifli.com/projects/solution/0.introduction/index.html'>Solution文档</a>。
             </div>
         """,
     # "globaltoc_expand_depth": ,
@@ -97,7 +97,12 @@ html_theme_options = {
         },
         {
             "title": "API文档",
-            "url": "https://docs.sifli.com/projects/sdk/v2.3/sf32lb52x/api/index.html",
+            "url": "https://docs.sifli.com/projects/sdk/latest/sf32lb52x/index.html",
+            "external": True,
+        },
+                {
+            "title": "Solution文档",
+            "url": "https://docs.sifli.com/projects/solution/0.introduction/index.html",
             "external": True,
         },
         {

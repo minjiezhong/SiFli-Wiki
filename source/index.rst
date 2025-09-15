@@ -50,6 +50,7 @@
 
     SDK 编程指南  <https://docs.sifli.com/projects/sdk/latest/sf32lb52x/index.html>
     API 文档 <https://docs.sifli.com/projects/sdk/latest/sf32lb52x/api/index.html>
+    Solution 编程指南 <https://docs.sifli.com/projects/solution/0.introduction/index.html>
     faq/index
     appnote/index
     application/index
