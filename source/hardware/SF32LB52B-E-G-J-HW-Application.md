@@ -70,7 +70,7 @@ SF32LB52JUD6，合封16MB OPI-PSRAM
 :::{Note} 
 
    - 大小核双CPU架构，同时兼顾高性能和低功耗设计要求
-   - 片内集成充电管理和PMU模块
+   - 片内集成PMU模块
    - 支持QSPI接口的TFT或AMOLED显示屏，最高支持512*512分辨率
    - 支持PWM背光控制
    - 支持外接QSPI NOR/NAND Flash和SD NAND Flash存储芯片
