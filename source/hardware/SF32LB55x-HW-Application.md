@@ -213,11 +213,10 @@ SF32LB55x系列芯片需要外部提供2个时钟源，48MHz主晶体和32.768KH
 
 ```{table}
 :align: center
-| 时钟管脚               | 晶体规格要求                                                 | 详细描述                                                     |
-| ---------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| XTAL48M_XO  XTAL48M_XI | 连接到48MHz的基频晶体。  晶体要求：  CL≦12pF（推荐值7pF）  △F/F0≦±10ppm  ESR≦30 ohms（推荐值22ohms） | 晶振功耗和CL,ESR相关,CL和ESR越小功耗越低，为了最佳功耗性能，建议采用推荐值CL≦7pF，ESR≦22 ohms.  晶体旁边预留并联匹配电容,当CL<9pF时，无需焊接电容. |
-| XTAL32K_XO  XTAL32K_XI | 连接到32.768KHz的基频晶体。  晶体要求：  CL≦12.5pF（推荐值7pF）  △F/F0≦±20ppm  ESR≦80k ohms（推荐值38Kohms） | 晶振功耗和CL,ESR相关,CL和ESR越小功耗越低，为了最佳功耗性能，建议采用推荐值CL≦9pF，ESR≦40K ohms. |
-| AVSS                   | 连接到地                                                     | BGA封装管脚，QFN封装无此管脚                                  |
+|晶体|晶体规格要求   |详细描述  |
+|:--|:-------|:--------|
+|48MHz |7pF≦CL≦12pF（推荐值8.8pF） △F/F0≦±10ppm ESR≦30 ohms（推荐值22ohms）|晶振功耗和CL,ESR相关,CL和ESR越小功耗越低，为了最佳功耗性能，建议采用CL和ESR在要求范围内相对较小值的物料。晶体旁边预留并联匹配电容,当CL<9pF时，无需焊接电容|
+|32.768KHz |CL≦12.5pF（推荐值7pF）△F/F0≦±20ppm ESR≦80k ohms（推荐值38Kohms）|晶振功耗和CL,ESR相关,CL和ESR越小功耗越低，为了最佳功耗性能，建议采用CL和ESR在要求范围内相对较小值的物料。晶体旁边预留并联匹配电容,当CL<12.5pF时，无需焊接电容|
 ```
 
  **晶体推荐**
@@ -700,7 +699,8 @@ UARTx的RXD信号不能悬空，软件初始化时设置为内部上拉方式。
 Sifli提供脱机下载器来完成产线程序的烧录和晶体校准。
 
 :::{note}
-硬件设计时，请注意至少预留测试点：VBAT、GND、VDDIOA、VDDIOB、RSTN、Mode、SWDIO、SWCLK、RXD1、TXD1、RXD3、TXD3 和 PB08或PB24。
+硬件设计时，请注意至少预留测试点：VBAT、GND、VDDIOA、VDDIOB、RSTN、Mode、SWDIO、SWCLK、RXD1、TXD1、RXD3和TXD3。
+产线生产需要测试点：VBAT、GND、boot_mode、VDDIOB、RXD3、TXD3。
 :::
 
 ## PCB设计指导
