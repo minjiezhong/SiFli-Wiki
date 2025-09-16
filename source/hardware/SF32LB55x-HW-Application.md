@@ -222,7 +222,8 @@ SF32LB55x系列芯片需要外部提供2个时钟源，48MHz主晶体和32.768KH
 
  **晶体推荐**
 
-[认证物料](认证物料)
+详细的物料认证信息，请参考：
+[SIFLI-MCU-AVL-认证表](index)
 
 ### 射频
 
@@ -420,6 +421,9 @@ SF32LB55x系列芯片支持2路 SDIO 接口来连接 eMMC或Micro SD设备，信
 | DATA2      | GPIO17 | PA51          | Data 2                                      |
 | DATA3      | GPIO17 | PA55          | Data 3                                      |
 ```
+
+详细的物料认证信息，请参考：
+[SIFLI-MCU-AVL-认证表](index)
 
 ### 显示
 
