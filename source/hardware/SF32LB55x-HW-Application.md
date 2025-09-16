@@ -32,19 +32,19 @@ SF32LB55x 的封装信息如表2-1所示。
 ```
 ### QFN68L封装
 
-<img src="assets/55x/SF32LB55x-QFN68-Leadmap.png" alt="QFN68L管脚分布" width="80%" align="center" />
+<img src="assets/55x/SF32LB55x-QFN68-Leadmap.svg" alt="QFN68L管脚分布" width="100%" align="center" />
 
 <div align="center"> 图2-1 QFN68L管脚分布 </div>  <br> <br> <br>
 
 ### BGA125封装
 
-<img src="assets/55x/SF32LB55x-BGA125-Ballmap.png" alt="BGA125管脚分布" width="80%" align="center" />
+<img src="assets/55x/SF32LB55x-BGA125-Ballmap.svg" alt="BGA125管脚分布" width="100%" align="center" />
 
 <div align="center"> 图2-2 BGA125管脚分布 </div>  <br> <br> <br>
 
 ### BGA145封装
 
-<img src="assets/55x/SF32LB55x-BGA145-Ballmap.png" alt="BGA145管脚分布" width="80%" align="center" />
+<img src="assets/55x/SF32LB55x-BGA145-Ballmap.svg" alt="BGA145管脚分布" width="100%" align="center" />
 
 <div align="center"> 图2-3 BGA145管脚分布 </div>  <br> <br> <br>
 
@@ -54,11 +54,11 @@ BGA169封装有两种Ballmap，分别对应SF32LB557V8N6（已经EOL）和SF32LB
 
 SF32LB557VD3A6与SF32LB557V8N6相比，有6个Ballshi NC。
 
-<img src="assets/55x/SF32LB55x-BGA169-1-Ballmap.png" alt="SF32LB557V8N6 BGA169管脚分布" width="80%" align="center" />
+<img src="assets/55x/SF32LB55x-BGA169-1-Ballmap.svg" alt="SF32LB557V8N6 BGA169管脚分布" width="100%" align="center" />
 
 <div align="center"> 图2-4 SF32LB557V8N6 BGA169管脚分布 </div>  <br> <br> <br>
 
-<img src="assets/55x/SF32LB55x-BGA169-2-Ballmap.svg" alt="SF32LB557VD3A6 BGA169管脚分布" width="80%" align="center" />
+<img src="assets/55x/SF32LB55x-BGA169-2-Ballmap.svg" alt="SF32LB557VD3A6 BGA169管脚分布" width="100%" align="center" />
 
 <div align="center"> 图2-5 SF32LB557VD3A6 BGA169管脚分布 </div>  <br> <br> <br>
 
