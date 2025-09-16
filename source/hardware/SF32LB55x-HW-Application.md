@@ -58,7 +58,7 @@ SF32LB557VD3A6与SF32LB557V8N6相比，有6个Ballshi NC。
 
 <div align="center"> 图2-4 SF32LB557V8N6 BGA169管脚分布 </div>  <br> <br> <br>
 
-<img src="assets/55x/SF32LB55x-BGA169-2-Ballmap.png" alt="SF32LB557VD3A6 BGA169管脚分布" width="80%" align="center" />
+<img src="assets/55x/SF32LB55x-BGA169-2-Ballmap.svg" alt="SF32LB557VD3A6 BGA169管脚分布" width="80%" align="center" />
 
 <div align="center"> 图2-5 SF32LB557VD3A6 BGA169管脚分布 </div>  <br> <br> <br>
 
