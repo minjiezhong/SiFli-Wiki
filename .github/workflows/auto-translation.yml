@@ -1,0 +1,125 @@
+name: Auto Translation
+
+on:
+  push:
+    branches:
+      - main
+      - en
+    paths:
+      - 'source/**/*.rst'
+      - 'source/**/*.md'
+  workflow_dispatch:
+    inputs:
+      source_branch:
+        description: '源分支'
+        required: true
+        default: 'main'
+        type: choice
+        options:
+          - main
+          - en
+      target_branch:
+        description: '目标分支'
+        required: true
+        default: 'en'
+        type: choice
+        options:
+          - main
+          - en
+
+jobs:
+  auto-translate:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 获取完整历史记录
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai GitPython
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Determine translation direction
+        id: direction
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "source_branch=${{ github.event.inputs.source_branch }}" >> $GITHUB_OUTPUT
+            echo "target_branch=${{ github.event.inputs.target_branch }}" >> $GITHUB_OUTPUT
+            if [ "${{ github.event.inputs.source_branch }}" = "main" ]; then
+              echo "target_lang=en" >> $GITHUB_OUTPUT
+            else
+              echo "target_lang=zh" >> $GITHUB_OUTPUT
+            fi
+          else
+            if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+              echo "source_branch=main" >> $GITHUB_OUTPUT
+              echo "target_branch=en" >> $GITHUB_OUTPUT
+              echo "target_lang=en" >> $GITHUB_OUTPUT
+            else
+              echo "source_branch=en" >> $GITHUB_OUTPUT
+              echo "target_branch=main" >> $GITHUB_OUTPUT
+              echo "target_lang=zh" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Run auto translation
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python auto_translation.py \
+            --source-branch "${{ steps.direction.outputs.source_branch }}" \
+            --target-branch "${{ steps.direction.outputs.target_branch }}" \
+            --target-lang "${{ steps.direction.outputs.target_lang }}"
+
+      - name: Create Pull Request
+        if: success()
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: auto-translation-${{ steps.direction.outputs.target_branch }}
+          title: '🤖 Auto Translation: ${{ steps.direction.outputs.source_branch }} → ${{ steps.direction.outputs.target_branch }}'
+          body: |
+            ## 自动翻译 PR
+            
+            此PR由GitHub Actions自动生成，包含以下翻译更新：
+            
+            - **源分支**: `${{ steps.direction.outputs.source_branch }}`
+            - **目标分支**: `${{ steps.direction.outputs.target_branch }}`
+            - **翻译方向**: `${{ steps.direction.outputs.target_lang == 'en' && '中文 → 英文' || '英文 → 中文' }}`
+            - **触发事件**: ${{ github.event_name }}
+            
+            ### 更改说明
+            - 自动检测源分支中的文档变更
+            - 使用AI翻译更新的内容
+            - 保持文档格式和技术术语准确性
+            
+            ### 注意事项
+            请仔细审查翻译内容的准确性，特别是：
+            - 技术术语的翻译
+            - 代码示例和API引用
+            - 格式是否保持正确
+            
+            ---
+            *此PR由 [auto-translation workflow](.github/workflows/auto-translation.yml) 自动创建*
+          delete-branch: true
+          reviewers: |
+            ${{ github.actor }}
+          labels: |
+            🤖 auto-translation
+            📚 documentation
