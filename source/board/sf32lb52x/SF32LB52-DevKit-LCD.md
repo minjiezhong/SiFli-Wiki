@@ -289,9 +289,9 @@ SF32LB52-DevKit-LCD开发板集成MEMS MIC和音频功放芯片。
 
 ## 相关文档
 
-- [SF32LB52x芯片技术规格书](https://downloads.sifli.com/silicon/DS0052-SF32LB52x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V2p4.pdf?)
-- [SF32LB52x用户手册](https://downloads.sifli.com/silicon/UM0052-SF32LB52x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V0p3.pdf?)
-- [SF32LB52-MOD-1技术规格书](https://downloads.sifli.com/silicon/DS5203-SF32LB52-MOD-1%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p1.pdf?)
+- [SF32LB52x芯片技术规格书](https://wiki.sifli.com/silicon/index.html)
+- [SF32LB52x用户手册](https://wiki.sifli.com/silicon/index.html)
+- [SF32LB52-MOD-1技术规格书](https://wiki.sifli.com/silicon/index.html)
 - [SF32LB52-MOD-1设计图纸](https://downloads.sifli.com/hardware/files/documentation/SF32LB52-MOD-1-V1.0.0.zip?)
 - [SF32LB52-DevKit-LCD设计图纸](https://downloads.sifli.com/hardware/files/documentation/SF32LB52-DevKit-LCD_V1.2.0.zip?)
 - [SF32LB52-DevKit-LCD转接板制作指南](SF32LB52-DevKit-LCD-Adapter)
