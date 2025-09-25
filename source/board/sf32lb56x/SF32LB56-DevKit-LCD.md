@@ -302,9 +302,9 @@ SF32LB56-DevKit-LCD开发板通过USB Type-C接口供电，板上2个USB Type-C�
 
 ## 相关文档
 
-- [SF32LB56x芯片技术规格书](https://downloads.sifli.com/user%20manual/DS5601-SF32LB56x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p9p2.pdf)
-- [SF32LB56x用户手册](https://downloads.sifli.com/user%20manual/UM5601-SF32LB56x-%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C%20V1p0p2.pdf)
-- [SF32LB56-MOD技术规格书](https://downloads.sifli.com/silicon/DS5602-SF32LB56-MOD%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V0p2.pdf)
+- [SF32LB56x芯片技术规格书](/source/silicon/index)
+- [SF32LB56x用户手册](/source/silicon/index)
+- [SF32LB56-MOD技术规格书](/source/silicon/index)
 - [SF32LB56-MOD设计图纸](https://downloads.sifli.com/hardware/SF32LB56-MOD-V1.2.0.zip)
 - [SF32LB56-DevKit-LCD设计图纸](https://downloads.sifli.com/hardware/SF32LB56-DevKit-LCD_V1.1.0.zip)
 

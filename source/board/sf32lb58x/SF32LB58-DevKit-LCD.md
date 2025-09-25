@@ -651,15 +651,9 @@ SF32LB58-MOD模组内置CAN控制器，开发板引出CAN接口，需要外接CA
 
 ## 相关文档
 
-- [SF32LB58x芯片技术规格书](http://10.23.10.196:19000/web-file/silicon/DS0058-SF32LB58x-%E8%8A%AF%E7%89%87%E6%8A%80%E6%9C%AF%E8%A7%84%E6%A0%BC%E4%B9%A6%20V1p6.pdf?)
-- [SF32LB58x用户手册]()
-- [SF32LB58-MOD技术规格书]()
-- [SF32LB58-MOD设计图纸](http://10.23.10.196:19000/web-file/hardware/files/documentation/SF32LB58-MOD-V1.0.1.zip?)
-- [SF32LB58-DevKit-LCD设计图纸](http://10.23.10.196:19000/web-file/hardware/files/documentation/SF32LB58-DevKit-LCD_V1.0.1.zip?)
-
-
-企业微信微盘地址：
-- SF32LB58-DevKit-LCD开发板： \
-硬件文档\1.EVB\4.Butterfli Pro\MOD\SF32LB58-Devkit-LCD
-- SF32LB58-MOD模组： \
-硬件文档\1.EVB\4.Butterfli Pro\MOD\SF32LB58-MOD
+- [SF32LB58x芯片技术规格书](/source/silicon/index)
+- [SF32LB58x用户手册](/source/silicon/index)
+- [SF32LB58-MOD技术规格书](/source/silicon/index)
+- [SF32LB58-MOD设计图纸](https://downloads.sifli.com/hardware/SF32LB58-MOD-V1.0.1.zip?)
+- [SF32LB58-DevKit-LCD设计图纸](https://downloads.sifli.com/hardware/SF32LB58-DevKit-LCD-V1.0.1.zip?)
+- [SF32LB58-DevKit-LCD设计图纸-LCEDA工程](https://downloads.sifli.com/hardware/ProPrj_SF32LB58-DevKit-LCD_2025-09-24.epro?)
