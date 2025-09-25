@@ -1,23 +1,20 @@
 # SF32LB58-DevKit-LCD开发板使用指南
 
-（本开发板目前供内部试用，未来将经修改完善后将对外发布）
-
 ## 模组版本信息：
 
-* V1.0.1：SF32LB58-MOD-N16R32N1和SF32LB58-MOD-A128R32N1，采用SF32LB586VDD36芯片，即将推出
+* V1.0.1：SF32LB58-MOD-N16R32N1和SF32LB58-MOD-A128R32N1，采用SF32LB586VDD36芯片，当前版本
 ```{table} 
 :align: center
 |序号 | V1.0.1更新内容 |
 |:-- |:------ |
 |1 | 修改eMMC电源控制IO，存储颗粒的VCC和VCCQ电源控制IO由PA80修改为：PA74控制VCC，PA80控制VCCQ。增加电阻R0115。   
 ```
-* V1.0.0：SF32LB58-MOD-N16R32N1，采用SF32LB586VDD36芯片，当前版本
+* V1.0.0：SF32LB58-MOD-N16R32N1，采用SF32LB586VDD36芯片
 
 
 ## 开发板版本信息：
 
-* V1.0.1：采用SF32LB58-MOD-N16R32N1-V1.0.1和SF32LB58-MOD-A128R32N1-V1.0.1模组，内部焊接SF32LB586VDD36芯片，即将推出
-* V1.0.1：采用SF32LB58-MOD-N16R32N1-V1.0.0模组，内部焊接SF32LB586VDD36芯片，当前版本
+* V1.0.1：采用SF32LB58-MOD-N16R32N1-V1.0.1和SF32LB58-MOD-A128R32N1-V1.0.1模组，内部焊接SF32LB586VDD36芯片，当前版本
 ```{table} 
 :align: center
 |序号 | V1.0.1更新内容 |
@@ -31,7 +28,6 @@
 * V1.0.0：采用SF32LB58-MOD-N16R32N1-V1.0.0模组，内部焊接SF32LB587VEE56芯片，初始版本
 
 ## 开发板概述
-
 
 SF32LB58-DevKit-LCD是一款基于SF32LB58-MOD模组的开发板，主要用于开发基于`DSI`，`DPI`和`QSPI`接口显示屏的各种应用。
 
@@ -50,12 +46,13 @@ SF32LB58-DevKit-LCD是一款基于SF32LB58-MOD模组的开发板，主要用于�
 
 ### 特性列表
 该开发板具有以下特性：
-1.	模组：板载基于SF32LB58x芯片的SF32LB58-MOD-N16R32N1模组，模组配置如下：
+1.	模组：板载基于SF32LB58x芯片的SF32LB58-MOD-N16R32N1或SF32LB58-MOD-A128R32N1模组，模组配置如下：
     - 标配SF32LB586VDD36芯片，内置合封配置为：
-        - 16MB HPI-PSRAM，接口频率144MHz（正式发布可能会改变）
-        - 16MB HPI-PSRAM，接口频率144MHz（正式发布可能会改变）
-        - 1MB  QSPI-NOR Flash，接口频率48MHz（正式发布可能会改变）
-    - 16MB QSPI-NOR Flash，接口频率72MHz，STR模式（正式发布可能会改变）
+        - 16MB HPI-PSRAM，接口频率144MHz
+        - 16MB HPI-PSRAM，接口频率144MHz
+        - 1MB  QSPI-NOR Flash，接口频率48MHz
+    - 16MB QSPI-NOR Flash，接口频率72MHz，STR模式（SF32LB58-MOD-N16R32N1版本）
+    - 128MB QSPI-Nand Flash，接口频率72MHz，STR模式（SF32LB58-MOD-A128R32N1版本）
     - 48MHz晶体
     - 32.768KHz晶体
     - IPEX天线座
