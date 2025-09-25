@@ -658,9 +658,9 @@ SF32LB58-MOD模组内置CAN控制器，开发板引出CAN接口，需要外接CA
 
 ## 相关文档
 
-- [SF32LB58x芯片技术规格书](/source/silicon/index)
-- [SF32LB58x用户手册](/source/silicon/index)
-- [SF32LB58-MOD技术规格书](/source/silicon/index)
+- [SF32LB58x芯片技术规格书](https://wiki.sifli.com/silicon/index.html)
+- [SF32LB58x用户手册](https://wiki.sifli.com/silicon/index.html)
+- [SF32LB58-MOD技术规格书](https://wiki.sifli.com/silicon/index.html)
 - [SF32LB58-MOD设计图纸](https://downloads.sifli.com/hardware/files/documentation/SF32LB58-MOD-V1.0.1.zip?)
 - [SF32LB58-DevKit-LCD设计图纸](https://downloads.sifli.com/hardware/files/documentation/SF32LB58-DevKit-LCD-V1.0.1.zip?)
 - [SF32LB58-DevKit-LCD设计图纸-LCEDA工程](https://downloads.sifli.com/hardware/files/documentation/ProPrj_SF32LB58-DevKit-LCD_2025-09-24.epro?)
