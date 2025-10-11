@@ -181,20 +181,15 @@ class AutoTranslator:
             # 恢复到原分支
             subprocess.run(["git", "checkout", current_branch], check=False)
 
-    def apply_translations_to_branch(self, translated_files, target_branch):
-        """将翻译结果应用到目标分支"""
+    def apply_translations_in_place(self, translated_files, target_branch):
+        """在当前工作目录中应用翻译结果，不进行Git操作"""
         if not translated_files:
             return False
             
         try:
-            # 切换到目标分支
-            subprocess.run(["git", "checkout", target_branch], check=True)
+            print(f"在当前工作目录应用翻译结果...")
             
-            # 创建新的分支用于PR
-            pr_branch = f"auto-translation-{target_branch}"
-            subprocess.run(["git", "checkout", "-b", pr_branch], check=True)
-            
-            # 应用翻译
+            # 直接在当前目录应用翻译
             for file_info in translated_files:
                 file_path = file_info['path']
                 content = file_info['content']
@@ -208,21 +203,11 @@ class AutoTranslator:
                 
                 print(f"已更新文件: {file_path}")
             
-            # 提交更改
-            subprocess.run(["git", "add", "."], check=True)
-            subprocess.run([
-                "git", "commit", "-m", 
-                f"Auto-translation: Update {len(translated_files)} files"
-            ], check=True)
+            print(f"翻译应用完成，共更新 {len(translated_files)} 个文件")
+            return True
             
-            # 推送分支
-            subprocess.run(["git", "push", "origin", pr_branch], check=True)
-            
-            print(f"已创建并推送分支: {pr_branch}")
-            return pr_branch
-            
-        except subprocess.CalledProcessError as e:
-            print(f"应用翻译到分支失败: {e}")
+        except Exception as e:
+            print(f"应用翻译失败: {e}")
             return False
 
 def main():
@@ -245,17 +230,18 @@ def main():
         )
         
         if translated_files:
-            # 应用翻译到目标分支
-            pr_branch = translator.apply_translations_to_branch(
+            # 在当前工作目录应用翻译
+            success = translator.apply_translations_in_place(
                 translated_files, 
                 args.target_branch
             )
             
-            if pr_branch:
-                print(f"\n翻译完成！已创建分支 {pr_branch}")
-                print("请在GitHub上创建PR将更改合并到目标分支")
+            if success:
+                print(f"\n翻译完成！已在工作目录更新 {len(translated_files)} 个文件")
+                print("文件将由GitHub Actions处理并创建PR")
             else:
                 print("应用翻译失败")
+                sys.exit(1)
         else:
             print("没有需要翻译的文件")
             
