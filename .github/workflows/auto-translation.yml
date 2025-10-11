@@ -50,6 +50,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install openai GitPython
 
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install gh
+
       - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
@@ -88,38 +93,80 @@ jobs:
             --target-lang "${{ steps.direction.outputs.target_lang }}"
 
       - name: Create Pull Request
-        if: success()
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: auto-translation-${{ steps.direction.outputs.target_branch }}
-          title: '🤖 Auto Translation: ${{ steps.direction.outputs.source_branch }} → ${{ steps.direction.outputs.target_branch }}'
-          body: |
-            ## 自动翻译 PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 检查是否存在翻译分支
+          PR_BRANCH="auto-translation-${{ steps.direction.outputs.target_branch }}"
+          
+          if git ls-remote --heads origin "$PR_BRANCH" | grep -q "$PR_BRANCH"; then
+            echo "创建 Pull Request: $PR_BRANCH -> ${{ steps.direction.outputs.target_branch }}"
             
-            此PR由GitHub Actions自动生成，包含以下翻译更新：
+            # 检查是否已存在相同的 PR
+            EXISTING_PR=$(gh pr list --base "${{ steps.direction.outputs.target_branch }}" --head "$PR_BRANCH" --json number --jq '.[0].number // empty')
             
-            - **源分支**: `${{ steps.direction.outputs.source_branch }}`
-            - **目标分支**: `${{ steps.direction.outputs.target_branch }}`
-            - **翻译方向**: `${{ steps.direction.outputs.target_lang == 'en' && '中文 → 英文' || '英文 → 中文' }}`
-            - **触发事件**: ${{ github.event_name }}
-            
-            ### 更改说明
-            - 自动检测源分支中的文档变更
-            - 使用AI翻译更新的内容
-            - 保持文档格式和技术术语准确性
-            
-            ### 注意事项
-            请仔细审查翻译内容的准确性，特别是：
-            - 技术术语的翻译
-            - 代码示例和API引用
-            - 格式是否保持正确
-            
-            ---
-            *此PR由 [auto-translation workflow](.github/workflows/auto-translation.yml) 自动创建*
-          delete-branch: true
-          reviewers: |
-            ${{ github.actor }}
-          labels: |
-            🤖 auto-translation
-            📚 documentation
+            if [ -n "$EXISTING_PR" ]; then
+              echo "PR #$EXISTING_PR 已存在，更新PR描述"
+              gh pr edit "$EXISTING_PR" --body "$(cat << 'EOF'
+          ## 自动翻译 PR
+          
+          此PR由GitHub Actions自动生成，包含以下翻译更新：
+          
+          - **源分支**: \`${{ steps.direction.outputs.source_branch }}\`
+          - **目标分支**: \`${{ steps.direction.outputs.target_branch }}\`
+          - **翻译方向**: ${{ steps.direction.outputs.target_lang == 'en' && '中文 → 英文' || '英文 → 中文' }}
+          - **触发事件**: ${{ github.event_name }}
+          - **运行时间**: $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          
+          ### 更改说明
+          - 自动检测源分支中的文档变更
+          - 使用AI翻译更新的内容
+          - 保持文档格式和技术术语准确性
+          
+          ### 注意事项
+          请仔细审查翻译内容的准确性，特别是：
+          - 技术术语的翻译
+          - 代码示例和API引用
+          - 格式是否保持正确
+          
+          ---
+          *此PR由 [auto-translation workflow](.github/workflows/auto-translation.yml) 自动创建*
+          EOF
+          )"
+            else
+              echo "创建新的 Pull Request"
+              gh pr create \
+                --title "🤖 Auto Translation: ${{ steps.direction.outputs.source_branch }} → ${{ steps.direction.outputs.target_branch }}" \
+                --body "$(cat << 'EOF'
+          ## 自动翻译 PR
+          
+          此PR由GitHub Actions自动生成，包含以下翻译更新：
+          
+          - **源分支**: \`${{ steps.direction.outputs.source_branch }}\`
+          - **目标分支**: \`${{ steps.direction.outputs.target_branch }}\`
+          - **翻译方向**: ${{ steps.direction.outputs.target_lang == 'en' && '中文 → 英文' || '英文 → 中文' }}
+          - **触发事件**: ${{ github.event_name }}
+          - **运行时间**: $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          
+          ### 更改说明
+          - 自动检测源分支中的文档变更
+          - 使用AI翻译更新的内容
+          - 保持文档格式和技术术语准确性
+          
+          ### 注意事项
+          请仔细审查翻译内容的准确性，特别是：
+          - 技术术语的翻译
+          - 代码示例和API引用
+          - 格式是否保持正确
+          
+          ---
+          *此PR由 [auto-translation workflow](.github/workflows/auto-translation.yml) 自动创建*
+          EOF
+          )" \
+                --base "${{ steps.direction.outputs.target_branch }}" \
+                --head "$PR_BRANCH" \
+                --label "🤖 auto-translation,📚 documentation"
+            fi
+          else
+            echo "没有发现翻译分支 $PR_BRANCH，可能没有需要翻译的文件"
+          fi
