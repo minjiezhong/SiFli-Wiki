@@ -54,6 +54,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install openai GitPython
 
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install gh
+
       - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
@@ -103,41 +108,83 @@ jobs:
             echo "没有发现文件变更"
           fi
 
-      - name: Create Pull Request
+      - name: Commit and push changes
         if: steps.check_changes.outputs.has_changes == 'true'
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: ${{ steps.direction.outputs.target_branch }}
-          branch: auto-translation-${{ steps.direction.outputs.target_branch }}-${{ github.run_number }}
-          title: '🤖 Auto Translation: ${{ steps.direction.outputs.source_branch }} → ${{ steps.direction.outputs.target_branch }}'
-          body: |
-            ## 自动翻译 PR
-            
-            此PR由GitHub Actions自动生成，包含以下翻译更新：
-            
-            - **源分支**: `${{ steps.direction.outputs.source_branch }}`
-            - **目标分支**: `${{ steps.direction.outputs.target_branch }}`
-            - **翻译方向**: ${{ steps.direction.outputs.target_lang == 'en' && '中文 → 英文' || '英文 → 中文' }}
-            - **触发事件**: ${{ github.event_name }}
-            - **运行时间**: ${{ github.run_id }}
-            
-            ### 更改说明
-            - 自动检测源分支中的文档变更
-            - 使用AI翻译更新的内容
-            - 保持文档格式和技术术语准确性
-            
-            ### 注意事项
-            请仔细审查翻译内容的准确性，特别是：
-            - 技术术语的翻译
-            - 代码示例和API引用
-            - 格式是否保持正确
-            
-            ---
-            *此PR由 [auto-translation workflow](.github/workflows/auto-translation.yml) 自动创建*
-          delete-branch: true
-          reviewers: |
-            ${{ github.actor }}
-          labels: |
-            🤖 auto-translation
-            📚 documentation
+        run: |
+          BRANCH_NAME="auto-translation-${{ steps.direction.outputs.target_branch }}-${{ github.run_number }}"
+          
+          # 切换到目标分支
+          git checkout ${{ steps.direction.outputs.target_branch }}
+          
+          # 创建新分支
+          git checkout -b "$BRANCH_NAME"
+          
+          # 提交更改
+          git add -A
+          git commit -m "🤖 Auto Translation: ${{ steps.direction.outputs.source_branch }} → ${{ steps.direction.outputs.target_branch }}
+
+          自动翻译更新:
+          - 源分支: ${{ steps.direction.outputs.source_branch }}
+          - 目标分支: ${{ steps.direction.outputs.target_branch }}
+          - 翻译方向: ${{ steps.direction.outputs.target_lang == 'en' && '中文 → 英文' || '英文 → 中文' }}
+          - 运行ID: ${{ github.run_id }}
+          
+          此提交由 auto-translation workflow 自动生成"
+          
+          # 推送分支
+          git push origin "$BRANCH_NAME"
+          
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+      - name: Create Pull Request with GitHub CLI
+        if: steps.check_changes.outputs.has_changes == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          # 尝试创建PR
+          PR_BODY="## 自动翻译 PR
+
+          此PR由GitHub Actions自动生成，包含以下翻译更新：
+
+          - **源分支**: \`${{ steps.direction.outputs.source_branch }}\`
+          - **目标分支**: \`${{ steps.direction.outputs.target_branch }}\`
+          - **翻译方向**: ${{ steps.direction.outputs.target_lang == 'en' && '中文 → 英文' || '英文 → 中文' }}
+          - **触发事件**: ${{ github.event_name }}
+          - **运行ID**: ${{ github.run_id }}
+
+          ### 更改说明
+          - 自动检测源分支中的文档变更
+          - 使用AI翻译更新的内容
+          - 保持文档格式和技术术语准确性
+
+          ### 注意事项
+          请仔细审查翻译内容的准确性，特别是：
+          - 技术术语的翻译
+          - 代码示例和API引用
+          - 格式是否保持正确
+
+          ---
+          *此PR由 [auto-translation workflow](.github/workflows/auto-translation.yml) 自动创建*"
+
+          # 检查是否已存在PR
+          EXISTING_PR=$(gh pr list --base "${{ steps.direction.outputs.target_branch }}" --head "$BRANCH_NAME" --json number --jq '.[0].number // empty' 2>/dev/null || echo "")
+          
+          if [ -n "$EXISTING_PR" ]; then
+            echo "更新已存在的PR #$EXISTING_PR"
+            gh pr edit "$EXISTING_PR" --body "$PR_BODY"
+          else
+            echo "创建新的Pull Request"
+            gh pr create \
+              --title "🤖 Auto Translation: ${{ steps.direction.outputs.source_branch }} → ${{ steps.direction.outputs.target_branch }}" \
+              --body "$PR_BODY" \
+              --base "${{ steps.direction.outputs.target_branch }}" \
+              --head "$BRANCH_NAME" \
+              --label "🤖 auto-translation,📚 documentation" || {
+              echo "❌ 无法创建PR，可能需要配置PAT_TOKEN secret"
+              echo "� 请手动创建PR："
+              echo "   源分支: $BRANCH_NAME"
+              echo "   目标分支: ${{ steps.direction.outputs.target_branch }}"
+              echo "   🔗 https://github.com/${{ github.repository }}/compare/${{ steps.direction.outputs.target_branch }}...$BRANCH_NAME"
+              exit 1
+            }
+          fi
