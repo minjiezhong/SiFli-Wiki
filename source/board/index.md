@@ -95,7 +95,7 @@
 ```{grid-item-card} SF32LB58-DevKit系列
 :class-card: board-card coming-soon
 
-基于SF32LB58芯片的下一代开发板，敬请期待
+基于SF32LB58芯片的下一代开发板
 
 **主要特性：**
 - ✓ 更强的性能
