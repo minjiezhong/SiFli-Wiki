@@ -93,7 +93,7 @@
 :gutter: 3
 
 ```{grid-item-card} SF32LB58-DevKit系列
-:class-card: board-card coming-soon
+:class-card: board-card
 
 基于SF32LB58芯片的下一代开发板
 
