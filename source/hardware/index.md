@@ -13,19 +13,19 @@
 [硬件设计指南](/hardware/SF32LB52B-E-G-J-HW-Application)
 
 
-## SF32LB56XU系列
+## SF32LB56xU系列
 
 后缀为U的为QFN68L封装
 
 [硬件设计指南](/hardware/SF32LB56xU-HW-Application)
 
-## SF32LB56XV系列
+## SF32LB56xV系列
 
 后缀为V的是BGA封装，引脚更多
 
 [硬件设计指南](/hardware/SF32LB56xV-HW-Application)
 
-## SF32LB58X系列
+## SF32LB58x系列
 
 [硬件设计指南](/hardware/SF32LB58x-HW-Application)
 
