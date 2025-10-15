@@ -403,17 +403,17 @@ SF32LB56xV系列芯片支持 3/4-wire SPI和Quad-SPI 接口来连接LCD显示屏
 
 ```{table}
 :align: center
-| SPI信号      | I/O  | 详细描述                                                  |
-| ------- | ---- | --------------------------------------------------------- |
+| SPI信号      | I/O  | 详细描述                                             |
+| ------- | ---- | -------------------------------------------------------- |
 | CSX     | PA36 | 使能信号                                                  |
 | WRX_SCL | PA37 | 时钟信号                                                  |
-| DCX     | PA39 | 4-wire SPI 模式下的数据/命令信号  Quad-SPI 模式下的数据1  |
-| SDI_RDX | PA38 | 3/4-wire SPI 模式下的数据输入信号  Quad-SPI 模式下的数据0 |
-| SDO     | PA38 | 3/4-wire SPI 模式下的数据输出信号  请和SDI_RDX短接到一起  |
+| DCX     | PA39 | 4-wire SPI 模式下的数据/命令信号  Quad-SPI 模式下的数据1    |
+| SDI_RDX | PA38 | 3/4-wire SPI 模式下的数据输入信号  Quad-SPI 模式下的数据0   |
+| SDO     | PA38 | 3/4-wire SPI 模式下的数据输出信号  请和SDI_RDX短接到一起    |
 | D[0]    | PA40 | Quad-SPI 模式下的数据2                                    |
 | D[1]    | PA41 | Quad-SPI 模式下的数据3                                    |
 | REST    | PA43 | 复位显示屏信号                                            |
-| TE      | PA33 | Tearing effect to MCU frame signal                        |
+| TE      | PA33 | Tearing effect to MCU frame signal                       |
 ```
 
 #### MCU8080显示接口
@@ -431,7 +431,7 @@ SF32LB56xV系列芯片支持 MCU8080 接口来连接LCD显示屏，如表4-10所
 | DCX     | PA39 | Display  data / command selection   |
 | RDX     | PA38 | Reads  strobe signal to write data  |
 | D[0]    | PA40 | Data 0                              |
-| D[1]    | PA1  | Data 1                              |
+| D[1]    | PA41 | Data 1                              |
 | D[2]    | PA28 | Data 2                              |
 | D[3]    | PA29 | Data 3                              |
 | D[4]    | PA30 | Data 4                              |
@@ -461,7 +461,7 @@ SF32LB56xV系列芯片支持DPI接口来连接LCD显示屏，如表4-11所示。
 | R0      | PA14 | 像素信号                               |
 | R1      | PA13 | 像素信号                               |
 | R2      | PA16 | 像素信号                               |
-| R3      | PA15 | 像素信号                               |
+| R3      | PA24 | 像素信号                               |
 | R4      | PA19 | 像素信号                               |
 | R5      | PA21 | 像素信号                               |
 | R6      | PA23 | 像素信号                               |
