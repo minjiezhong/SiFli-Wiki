@@ -33,6 +33,10 @@
 
 [SIFLI-MCU-AVL-认证表](https://downloads.sifli.com/hardware/files/documentation/SIFLI-MCU-AVL-%E8%AE%A4%E8%AF%81%E8%A1%A8-V0.2-20250716.xlsx?)
 
+## EDA工具库文件
+
+[原理图和PCB库](https://downloads.sifli.com/hardware/files/documentation/ProPrj_sifli-iclib_2025-10-17.epro?)
+
 ```{toctree}
 :hidden:
 
