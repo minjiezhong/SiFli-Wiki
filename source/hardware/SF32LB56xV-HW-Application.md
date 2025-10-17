@@ -308,6 +308,7 @@ SF32LB56xV系列芯片HCPU和LCPU都支持表4-4中的多种工作模式。
   * 需要将MPI1,MPI2上的存储设备设置为低功耗模式来降低功耗。
 - 使用Hibernate mode作为关机：
   * 由于GPIO的电平无法保持，VDDIOSA和VDDIOSB的供电需要关闭，避免合封存储器的IO上漏电。
+  * VDDIOSA和VDDIOSB的供电开关的控制信号使用PBR0。
 - VDDIOSC需要常供电，进入Hibernate mode前使NOR Flash进入deep power down mode。
 :::
 
