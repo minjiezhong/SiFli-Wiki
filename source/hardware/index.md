@@ -35,7 +35,11 @@
 
 ## EDA工具库文件
 
-[原理图和PCB库](https://downloads.sifli.com/hardware/files/documentation/ProPrj_sifli-iclib_2025-10-17.epro?)
+[嘉立创库](https://downloads.sifli.com/hardware/files/documentation/ProPrj_sifli-iclib_2025-10-17.epro?)
+[PADS库](https://downloads.sifli.com/hardware/files/documentation/PADS-SIFLI-IC.ZIP?)
+[Orcad库](https://downloads.sifli.com/hardware/files/documentation/OrCAD-SIFLI-IC.OLB?)
+[Kicad库](https://github.com/OpenSiFli/kicad-libraries)
+
 
 ```{toctree}
 :hidden:
