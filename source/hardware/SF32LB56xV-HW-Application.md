@@ -160,7 +160,9 @@ SF32LB56xV系列芯片电源管脚外接电容推荐值如表4-2所示。
 | VDD_RTC          | 1uF           | 靠近管脚的地方至少放置1颗1uF电容.              |
 | AVDD_BRF         | 4.7uF         | 靠近管脚的地方至少放置1颗4.7uF电容.            |
 | AVDD33_ANA       | 4.7uF         | 靠近管脚的地方至少放置1颗4.7uF电容.            |
+| GPADC_VREFP      | 4.7uF         | 靠近管脚的地方至少放置1颗4.7uF颗电容.          |
 | AVDD33_AUD       | 4.7uF         | 靠近管脚的地方至少放置1颗4.7uF颗电容.          |
+| AUD_VREF         | 1uF           | 靠近管脚的地方至少放置1颗1uF颗电容.            |
 | MIC_BIAS         | 1uF           | 靠近管脚的地方至少放置1颗1uF电容.              |
 | VDDIOA           | 1uF           | 靠近管脚的地方至少放置1颗1uF电容.              |
 | VDDIOA2          | 1uF           | 靠近管脚的地方至少放置1颗1uF电容.              |
@@ -299,6 +301,15 @@ SF32LB56xV系列芯片HCPU和LCPU都支持表4-4中的多种工作模式。
 | Hibernate rtc | Reset | Reset | 数据不保留                        | 高阻     | Reset | RTC/按键                                  | > 2ms            |
 | Hibernate pin | Reset | Reset | 数据不保留                        | 高阻     | Reset | 按键                                      | > 2ms            |
 ```
+
+:::{attention}
+- 使用Standby mode作为关机：
+  * 由于GPIO的电平可以保持，VDDIOSA和VDDIOSB可以常供电，合封的存储器IO上不会漏电。
+  * 需要将MPI1,MPI2上的存储设备设置为低功耗模式来降低功耗。
+- 使用Hibernate mode作为关机：
+  * 由于GPIO的电平无法保持，VDDIOSA和VDDIOSB的供电需要关闭，避免合封存储器的IO上漏电。
+- VDDIOSC需要常供电，进入Hibernate mode前使NOR Flash进入deep power down mode。
+:::
 
 如表4-5所示，全系列芯片支持14个可唤醒中断源，可以唤醒大核或小核CPU。
 
@@ -718,16 +729,18 @@ SF32LB56xV系列芯片支持任意管脚GPTIM功能映射，所有的PA接口都
 
 SF32LB56xV系列芯片支持Arm®标准的SWD调试接口，可以连接到EDA工具上进行单步运行调试。如图4-18所示，连接SEEGER® J-Link® 工具时需要把调试工具的电源修改为外置接口输入，通过SF32LB56xV电路板给J-Link工具供电。
 
-SF32LB56xV系列有1路SWD进行调试信息输出，具体请参考表4-20。
+SF32LB56xV系列有1路SWD进行调试信息输出，有1路默认的UART口用来下载和打印log，具体请参考表4-20。
 
 <div align="center"> 表4-20 调试口连接方式 </div>
 
 ```{table}
 :align: center
-| SWD信号 | 管脚 | 详细描述      |
-| ------- | ---- | ------------- |
-| SWCLK   | PB15 | JLINK时钟信号 |
-| SWDIO   | PB13 | JLINK数据信号 |
+| 信号         | 管脚 | 详细描述                       |
+| ----------- | ---- | ----------------------------- |
+| SWCLK       | PB15 | JLINK时钟信号，调试接口         |
+| SWDIO       | PB13 | JLINK数据信号，调试接口         |
+| UART4_RXD   | PB16 | 串口接收信号，下载和打印log接口  |
+| UART4_TXD   | PB17 | 串口发送信号，下载和打印log接口  |
 ```
 
 <img src="assets/56xV/sf32lb56xV-SCH-SWD.png" width="80%" align="center" /> 
