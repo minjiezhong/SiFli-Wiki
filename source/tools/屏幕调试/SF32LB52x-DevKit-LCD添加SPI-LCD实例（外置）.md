@@ -38,6 +38,7 @@ endif
 2）修改`proj.conf`文件  <br>
 * 在`project\proj.conf`中添加`# CONFIG_BSP_USING_BUILTIN_LCD is not set`，用来使用外置屏驱，关闭SDK内部屏驱。<br>
 如果想单独某个板子使用外置屏驱，或者使用内置屏驱，需要再project目录下新建文件例如`sf32lb52-lcd_n16r8/proj.conf` 其中添加`# CONFIG_BSP_USING_BUILTIN_LCD is not set`或`CONFIG_BSP_USING_BUILTIN_LCD=y`
+
 3） 复制驱动  <br>
 SDK内屏驱动位于`sdk\customer\peripherals`内，复制一份其他`spi`接口的驱动放在新创建的屏驱文件夹`sdk-demo`中并更名为`qspi_gc9107`<br>
 #### 2.2 Menuconfig添加gc9107_Multi_screen
